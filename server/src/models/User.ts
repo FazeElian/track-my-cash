@@ -53,7 +53,7 @@ class User extends Model {
     @Column({
         type: DataType.STRING(6)
     })
-    declare token: string
+    declare code: string
 
     @Default(false)
     @Column({
