@@ -7,10 +7,12 @@ import {
     AllowNull,
     ForeignKey,
     BelongsTo,
+    HasMany,
 } from "sequelize-typescript";
 
 // Models
 import User from "./User";
+import Transaction from "./Transaction";
 
 @Table({
     tableName: "categories"
@@ -56,6 +58,13 @@ class Category extends Model {
     })
     declare monthlyBudget: number
 
+    // Relationship with <Transactions[]>
+    @HasMany(() => Transaction, {
+        onUpdate: "SET NULL",
+        onDelete: "SET NULL"
+    })
+    declare transactions: Transaction[]
+    
     // Relationship with <User>
     @ForeignKey(() => User)
     declare userId : number
