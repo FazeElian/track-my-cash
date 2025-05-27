@@ -80,7 +80,7 @@ export class AuthController {
     }
 
     static getUser = async (req: Request, res: Response) => {
-        
+        res.json(req.user);
     }
 
     // Confirm Account with code
@@ -101,19 +101,89 @@ export class AuthController {
         res.status(200).json("Gracias por verificar tu correo electrónico. Ya puedes iniciar sesión.");
     }
 
+    // Send code to reset password
     static forgotPassword = async (req: Request, res: Response) => {
-        
+        const { email } = req.body;
+
+        // Check if the user already exists
+        const user = await User.findOne({ where: { email } });
+        if(!user) {
+            const error = new Error("No encontramos ninguna cuenta asociada a la dirección de correo electrónico que ingresaste. Por favor, compruébalo y vuelve a intentarlo.");
+            res.status(404).json({ error: error.message });
+            return;
+        }
+
+        // Generate new code to reset password
+        user.code = generateCode();
+        await user.save();
+
+        // Send mail to reset password
+        await AuthEmail.sendForgotPasswordEmail({
+            email: user.email,
+            userName: user.userName,
+            code: user.code
+        });
+
+        res.status(200).json("¡Listo! Te enviamos un correo electrónico para restablecer tu contraseña. Revisa tu bandeja de entrada y sigue los pasos para restablecerla.")
     }
 
+    // Validate code sent to reset password
     static validateCode = async (req: Request, res: Response) => {
-        
+        const { code } = req.body;
+
+        // Check if the code exists
+        const existingCode = await User.findOne({ where: { code } });
+        if(!existingCode) {
+            const error = new Error("Código no válido");
+            res.status(404).json({ error: error.message });
+            return;
+        }
+
+        res.status(200).json("El código se verificó correctamente. Ya puedes configurar tu nueva contraseña.");
     }
 
+    // Reset password
     static resetPasswordWithCode = async (req: Request, res: Response) => {
-        
+        const { code } = req.params;
+        const { password } = req.body;
+
+        // Check if the code exists
+        const user = await User.findOne({ where: { code } });
+        if(!user) {
+            const error = new Error("Código no válido desde controlador");
+            res.status(404).json({ error: error.message });
+            return;
+        }
+
+        // New password
+        user.password = await hashPassword(password);
+        user.code = null;
+
+        await user.save();
+
+        res.status(200).json("Tu contraseña se ha restablecido correctamente. Ya puedes iniciar sesión con tu nueva contraseña.");
     }
 
+    // Update password - change password
     static updatePassword = async (req: Request, res: Response) => {
-        
+        const { currentPassword, newPassword } = req.body;
+        const { id } = req.user;
+
+        // Find user
+        const user = await User.findByPk(id);
+
+        // Check if previous password is correct
+        const isPasswordCorrect = await checkPassword(currentPassword, user.password);
+        if (!isPasswordCorrect) {
+            const error = new Error("La contraseña que ingresaste es incorrecta");
+            res.status(401).json({ error: error.message });
+            return;
+        }
+
+        // New password hashing
+        user.password = await hashPassword(newPassword)
+        await user.save();
+
+        res.status(200).json("Contraseña actualizada con éxito");
     }
 }
