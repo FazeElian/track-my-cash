@@ -7,6 +7,7 @@ import User from "../models/User";
 import { checkPassword, hashPassword } from "../utils/auth";
 import { generateCode } from "../utils/code";
 import { generateJWT } from "../middleware/jwt";
+import { AuthEmail } from "../emails/AuthEmail";
 
 export class AuthController {
     // Create new account
@@ -31,6 +32,13 @@ export class AuthController {
 
             // Save changes
             await user.save()
+
+            // Send email to confirm account
+            await AuthEmail.sendConfirmationEmail({
+                userName: user.userName,
+                email: user.email,
+                code: user.code
+            })
 
             res.status(201).json("Has creado tu cuenta con éxito.")
         } catch (error) {
@@ -75,8 +83,22 @@ export class AuthController {
         
     }
 
+    // Confirm Account with code
     static confirmAccount = async (req: Request, res: Response) => {
-        
+        const { code } = req.body;
+
+        const user = await User.findOne({ where: { code } })
+        if (!user) {
+            const error = new Error("Código no válido");
+            res.status(409).json({ error: error.message });
+            return;
+        }
+
+        user.confirmed = true;
+        user.code = null;
+        await user.save();
+
+        res.status(200).json("Gracias por verificar tu correo electrónico. Ya puedes iniciar sesión.");
     }
 
     static forgotPassword = async (req: Request, res: Response) => {

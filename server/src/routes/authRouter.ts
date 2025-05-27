@@ -36,4 +36,13 @@ router.post("/login",
     AuthController.login
 );
 
+router.post("/confirm-account",
+    body("code")
+        .notEmpty()
+        .isLength({ min: 6, max: 6  })
+        .withMessage("Código no válido"),
+    handleInputErrors,
+    AuthController.confirmAccount
+)
+
 export default router;
