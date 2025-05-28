@@ -21,18 +21,6 @@
         font-weight: 500;
     }
 
-        .banner-top h1 b {
-            color: transparent;
-            background: linear-gradient(
-                90deg, var(--color-blue), 
-                var(--color-dark-green), var(--color-blue)
-            );
-            background-size: 200% 100%;
-            background-position: 100% 50%;
-            -webkit-background-clip: text;
-            animation: gradientMovement 10s ease infinite;
-        }
-
     .banner-top p {
         width: 57ch;
         color: var(--color-dark-blue);

@@ -17,7 +17,39 @@ body {
     --color-gray: #F0F1F5;
     --color-dark-green: #2EA662;
     --color-green: #24BF67;
+    --color-light-green: #DCFCE7;
+    --color-light-greenblue:#CFFAF0;
+    --color-greenblue: #19937B;
+    --color-purple: #7E3DD9;
+    --color-light-purple: #F1E9FF;
     --color-dark-blue: #213440;
     --color-blue: #3D90D9;
+    --color-light-blue: #DDE9FF;
+    --color-orange: #D35724;
+    --color-light-orange: #FFE6D3;
     font-family: "Lexend", sans-serif;
+}
+
+.txt-animated-gradient-blue-green {
+    color: transparent;
+    background: linear-gradient(
+        90deg, var(--color-blue), 
+        var(--color-dark-green), var(--color-blue)
+    );
+    background-size: 200% 100%;
+    background-position: 100% 50%;
+    -webkit-background-clip: text;
+    animation: gradientMovement 10s ease infinite;
+}
+
+@keyframes gradientMovement {
+    0% {
+        background-position: 200% 0%;
+    }
+    50% {
+        background-position: -200% 0%;
+    }
+    100% {
+        background-position: 200% 0%;
+    }
 }

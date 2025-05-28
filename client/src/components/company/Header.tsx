@@ -1,10 +1,10 @@
 import { Link, Outlet } from "react-router-dom";
 
 // Styles for this component
-import "@/assets/css/components/company/Header.css";
+import "../../assets/css/components/company/Header.css";
 
 // Logo
-import Logo from "@/assets/img/Logo.webp";
+import Logo from "../../assets/img/Logo.webp";
 
 // React icons
 import { IoIosMenu } from "react-icons/io";
