@@ -1,0 +1,23 @@
+/* Lexend font */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* Variables */
+:root {
+    --color-white: #F8F8F8;
+    --color-gray: #F0F1F5;
+    --color-dark-green: #2EA662;
+    --color-green: #24BF67;
+    --color-dark-blue: #213440;
+    --color-blue: #3D90D9;
+    font-family: "Lexend", sans-serif;
+}
