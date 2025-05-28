@@ -1,48 +1,10 @@
+// Components for this view
+import { BannerTop } from "../components/company/BannerTop"
+
 const HomeView = () => {
     return (
         <main className="">
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
-            <h1>Home View</h1>
+            <BannerTop />
         </main>
     )
 }
