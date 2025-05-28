@@ -2,6 +2,7 @@
 import { BannerTop } from "../components/company/BannerTop"
 import { Features } from "../components/company/Features"
 import { DetailFeature } from "../components/company/DetailFeature"
+import { CallToAction } from "../components/company/CallToAction"
 
 const HomeView = () => {
     return (
@@ -9,6 +10,7 @@ const HomeView = () => {
             <BannerTop />
             <Features />
             <DetailFeature />
+            <CallToAction />
         </main>
     )
 }

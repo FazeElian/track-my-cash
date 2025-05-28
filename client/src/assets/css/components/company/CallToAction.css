@@ -1,0 +1,96 @@
+/* Global styles */
+@import "../../Global.css";
+
+.call-to-action {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    padding: 5rem 4rem 5rem;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-green);
+    margin-top: 5rem;
+    text-align: center;
+}
+
+    .call-to-action h2 {
+        color: var(--color-white);
+        font-size: 40px;
+        text-transform: capitalize;
+        font-weight: 500;
+    }
+
+    .call-to-action p {
+        color: var(--color-white);
+        font-size: 18px;
+        margin-top: 12px;
+    }
+
+    .btn-call-to-action {
+        display: flex;
+        width: auto;
+        height: auto;
+        padding: 1rem 2rem 1rem;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--color-white);
+        background-color: var(--color-white);
+        margin-top: 2rem;
+        text-decoration: none;
+        color: var(--color-green);
+        font-size: 17px;
+        border-radius: 8px;
+        transition: .2s ease-in-out;
+    }
+
+        .btn-call-to-action:hover {
+            border: 2px solid var(--color-light-green);
+            background-color: var(--color-light-green);
+            transition: .2s ease-in;
+        }
+
+/* Responsive 1440px */
+@media (max-width: 1440px) {
+    .call-to-action {
+        padding: 4.5rem 4rem 4.5rem;
+    }
+
+    .call-to-action h2 {
+        font-size: 35px;
+    }
+
+    .call-to-action p,
+    .btn-call-to-action {
+        font-size: 16px;
+    }
+}
+
+/* Responsive 1024px */
+@media (max-width: 1024px) {
+    .call-to-action h2 {
+        font-size: 30px;
+    }
+
+    .call-to-action p,
+    .btn-call-to-action {
+        font-size: 15px;
+    }
+
+    .btn-call-to-action {
+        padding: 12px 25px 12px;
+    }
+
+    .call-to-action {
+        padding: 4rem 3rem 4rem;
+        margin-top: 2rem;
+    }
+}
+
+/* Responsive 425px */
+@media (max-width: 425px) {
+    .call-to-action {
+        padding: 4rem 2rem 4rem;
+        margin-top: 0;
+    }
+}
