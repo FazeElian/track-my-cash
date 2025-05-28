@@ -3,6 +3,7 @@ import { BannerTop } from "../components/company/BannerTop"
 import { Features } from "../components/company/Features"
 import { DetailFeature } from "../components/company/DetailFeature"
 import { CallToAction } from "../components/company/CallToAction"
+import { Footer } from "../components/company/Footer"
 
 const HomeView = () => {
     return (
@@ -11,6 +12,7 @@ const HomeView = () => {
             <Features />
             <DetailFeature />
             <CallToAction />
+            <Footer />
         </main>
     )
 }

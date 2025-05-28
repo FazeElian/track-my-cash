@@ -1,0 +1,43 @@
+/* Global styles */
+@import "../../Global.css";
+
+.footer {
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding: 22px;
+    font-size: 17px;
+    align-items: center;
+    gap: 4px;
+    border-top: 2px solid var(--color-white);
+    background-color: var(--color-green);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-weight: 500;
+}
+
+    .footer a {
+        display: flex;
+        text-decoration: none;
+        color: var(--color-white);
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+/* Responsive 1440px */
+@media (max-width: 1440px) {
+    .footer {
+        font-size: 16px;
+    }
+}
+
+/* Responsive 480px */
+@media (max-width: 480px) {
+    .footer {
+        flex-direction: column;
+    }
+}
