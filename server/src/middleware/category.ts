@@ -47,8 +47,8 @@ export const validateIfCategoryExists = async (req: Request, res: Response, next
 
 export const validateCategoryInput = async (req: Request, res: Response, next: NextFunction) => {
     await body("name")
-        .notEmpty().withMessage("El nombre de categoría es un dato obligatorio.")
-        .isLength({ min: 4 }).withMessage("El nombre de usuario debe tener al menos 4 caracteres.")
+        .notEmpty().withMessage("El nombre de la categoría es un dato obligatorio.")
+        .isLength({ min: 4 }).withMessage("El nombre de la categoría debe tener al menos 4 caracteres.")
         .run(req),
     await body("type")
         .isString().withMessage("Tipo de categoría no válido")
