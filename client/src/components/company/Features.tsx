@@ -41,4 +41,4 @@ const Features = () => {
     )
 }
 
-export default Features
+export { Features };
