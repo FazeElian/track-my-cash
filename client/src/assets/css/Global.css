@@ -15,6 +15,7 @@ body {
 :root {
     --color-white: #FFF;
     --color-gray: #F0F1F5;
+    --color-gray2: #A7A7A7;
     --color-dark-green: #2EA662;
     --color-green: #24BF67;
     --color-light-green: #DCFCE7;
@@ -43,6 +44,10 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--color-green);
     box-shadow: inset 0 0 2px var(--color-dark-blue);
     border-radius: 5px;
+}
+
+.font-lexend {
+    font-family: "Lexend", sans-serif;
 }
 
 .txt-animated-gradient-blue-green {

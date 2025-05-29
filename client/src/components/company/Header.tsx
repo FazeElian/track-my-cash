@@ -29,13 +29,13 @@ const Header = () => {
                             Características
                         </Link>
                         <Link
-                            to="/"
+                            to="/auth/login"
                             className="item-auth-nav-header item-auth-login-nav-header item-nav-header"
                         >
                             Iniciar sesión
                         </Link>
                         <Link
-                            to="/"
+                            to="/auth/register"
                             className="item-auth-nav-header item-auth-register-nav-header item-nav-header"
                         >
                             Crear mi cuenta
