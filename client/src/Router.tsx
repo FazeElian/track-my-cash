@@ -1,18 +1,19 @@
 import {  Route, Routes } from "react-router-dom"
+import { lazy } from "react"
 
 // Header component for company landing page
 import { Header } from "./components/company/Header"
 
 // Home view
-import HomeView from "./views/HomeView"
+const HomeView = lazy(() => import("./views/HomeView"))
 
 // Users module views
-import RegisterView from "./views/auth/RegisterView"
-import LoginView from "./views/auth/LoginView"
-import ForgotPasswordView from "./views/auth/ForgotPasswordView"
-import ConfirmAccountView from "./views/auth/ConfirmAccountView"
-import ValidateCodeView from "./views/auth/ValidateCodeView"
-import ResetPasswordView from "./views/auth/ResetPasswordView"
+const RegisterView = lazy(() => import("./views/auth/RegisterView"))
+const LoginView = lazy(() => import("./views/auth/LoginView"))
+const ForgotPasswordView = lazy(() => import("./views/auth/ForgotPasswordView"))
+const ConfirmAccountView = lazy(() => import("./views/auth/ConfirmAccountView"))
+const ValidateCodeView = lazy(() => import("./views/auth/ValidateCodeView"))
+const ResetPasswordView = lazy(() => import("./views/auth/ResetPasswordView"))
 
 export default function Router() {
   return (
