@@ -3,14 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 // Types
-import type { ConfirmUserAccount, ForgotPassword, LoginUser, RegisterUser } from "../../lib/types/modules/user.type";
+import type {
+    ConfirmUserAccount,
+    ForgotPassword,
+    LoginUser,
+    RegisterUser,
+    ResetPassword,
+    ValidateCode
+} from "../../lib/types/modules/user.type";
 
 // API Calls
 import {
     registerUser,
     login,
     confirmAccount,
-    forgotPassword
+    forgotPassword,
+    validateCode,
+    resetPassword
 } from "./api";
 
 // Register user mutation
@@ -95,6 +104,55 @@ export const useForgotPasswordMutation = () => {
 
     return useMutation({
         mutationFn: (data: ForgotPassword) => forgotPassword(data),
+        onSuccess: (response) => {
+            // Sucess toast
+            toast.success(response)
+
+            // Invalidate queries
+            queryClient.invalidateQueries({
+                queryKey: ["users"]
+            })
+        },
+        onError: (error: Error) => {
+            const message = error.message;
+            toast.error(message);
+        },
+    })
+}
+
+// Forgot password
+export const useValidateCodeMutation = () => {
+    // Query client
+    const queryClient = new QueryClient()
+
+    // Redirection
+    const redirect = useNavigate()
+
+    return useMutation({
+        mutationFn: (data: ValidateCode) => validateCode(data),
+        onSuccess: (code) => {
+            // Redirection
+            redirect(`/auth/reset-password/${code}`)
+
+            // Invalidate queries
+            queryClient.invalidateQueries({
+                queryKey: ["users"]
+            })
+        },
+        onError: (error: Error) => {
+            const message = error.message;
+            toast.error(message);
+        },
+    })
+}
+
+// Reset Password
+export const useResetPasswordMutation = (code: string) => {
+    // Query client
+    const queryClient = new QueryClient()
+
+    return useMutation({
+        mutationFn: (data: ResetPassword) => resetPassword(data, code),
         onSuccess: (response) => {
             // Sucess toast
             toast.success(response)

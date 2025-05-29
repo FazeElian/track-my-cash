@@ -139,7 +139,7 @@ export class AuthController {
             return;
         }
 
-        res.status(200).json("El código se verificó correctamente. Ya puedes configurar tu nueva contraseña.");
+        res.status(200).json({ code: Number(code) });
     }
 
     // Reset password
@@ -150,7 +150,7 @@ export class AuthController {
         // Check if the code exists
         const user = await User.findOne({ where: { code } });
         if(!user) {
-            const error = new Error("Código no válido desde controlador");
+            const error = new Error("Código para reestablecer contraseña no válido");
             res.status(404).json({ error: error.message });
             return;
         }

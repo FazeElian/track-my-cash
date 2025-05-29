@@ -4,7 +4,7 @@ import { isAxiosError } from "axios";
 import { api } from "../../config/axios";
 
 // Types
-import type { ConfirmUserAccount, ForgotPassword, LoginUser, RegisterUser } from "../../lib/types/modules/user.type";
+import type { ConfirmUserAccount, ForgotPassword, LoginUser, RegisterUser, ResetPassword, ValidateCode } from "../../lib/types/modules/user.type";
 
 export async function registerUser (userData: RegisterUser) {
     try {
@@ -48,6 +48,32 @@ export async function confirmAccount (userData: ConfirmUserAccount) {
 export async function forgotPassword (userData: ForgotPassword) {
     try {
         const { data } = await api.post("/auth/forgot-password", userData);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
+
+export async function validateCode (userData: ValidateCode) {
+    try {
+        const { data } = await api.post("/auth/validate-code", userData);
+        return data.code;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
+
+export async function resetPassword (userData: ResetPassword, code: string) {
+    try {
+        const { data } = await api.post(`/auth/reset-password/${code}`, userData);
         return data;
     } catch (error) {
         if (isAxiosError(error) && error.response) {
