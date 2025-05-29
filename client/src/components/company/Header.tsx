@@ -1,4 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
+import { Link as LinkScroll } from "react-scroll"
 
 // Styles for this component
 import "../../assets/css/components/company/Header.css";
@@ -22,12 +23,15 @@ const Header = () => {
                         >
                             Inicio
                         </Link>
-                        <Link
-                            to="/"
+                        <LinkScroll
+                            to="features"
                             className="item-nav-header"
+                            smooth={true}
+                            duration={400}
+                            offset={-150}
                         >
                             Características
-                        </Link>
+                        </LinkScroll>
                         <Link
                             to="/auth/login"
                             className="item-auth-nav-header item-auth-login-nav-header item-nav-header"

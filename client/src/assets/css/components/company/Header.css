@@ -44,6 +44,7 @@
             text-decoration: none;
             border-bottom: 2px solid var(--color-white);
             transition: .3s ease-in-out;
+            cursor: pointer;
         }
 
             .item-nav-header:hover {

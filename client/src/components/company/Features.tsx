@@ -1,3 +1,5 @@
+import { Element } from "react-scroll"
+
 // Styles for this component
 import "../../assets/css/components/company/Features.css";
 
@@ -12,7 +14,7 @@ import { motion } from 'framer-motion';
 
 const Features = () => {
     return (
-        <section className="features">
+        <Element name="features" className="features">
             <div className="top-features">
                 <h1 className="txt-animated-gradient-blue-green">Todo lo que necesitas para gestionar tu dinero</h1>
                 <p>
@@ -37,7 +39,7 @@ const Features = () => {
                     </motion.li>
                 ))}
             </ul>
-        </section>
+        </Element>
     )
 }
 
