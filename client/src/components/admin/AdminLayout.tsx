@@ -1,0 +1,99 @@
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { useState } from "react";
+
+// Styles for this component
+import "../../assets/css/components/admin/AdminLayout.css";
+
+// Logo
+import Logo from "../../assets/img/Logo.webp";
+
+// React icons
+import { TbLayoutDashboard } from "react-icons/tb";
+import { IoMdSwap, IoIosArrowUp, IoIosMenu } from "react-icons/io";
+import { BiCategoryAlt } from "react-icons/bi";
+import { IoNotificationsOutline } from "react-icons/io5";
+
+const AdminLayout = () => {
+    const [sideBar, setSideBar] = useState(false)
+
+    const handleSideBar = () => {
+        setSideBar(!sideBar)
+    }
+
+    const location = useLocation();
+
+    return (
+        <>
+            <aside className="side-bar">
+                <div className="top-side-bar">
+                    <img src={Logo} alt="Track my cash logo" />
+                    <button
+                        className="btn-side-bar"
+                        type="button"
+                        onClick={handleSideBar}
+                    >
+                        <IoIosMenu />
+                    </button>
+                </div>
+                <nav className={`nav-side-bar ${sideBar ? "active" : ""}`}>
+                    <ul className="nav-list-side-bar">
+                        <Link
+                            to="/admin/dashboard"
+                            className={`item-nav-list-side-bar
+                                ${location.pathname === "/admin/dashboard" ? "item-active-nav-list-side-bar" : ""}
+                            `}
+                            onClick={() => setSideBar(false)}
+                        >
+                            <TbLayoutDashboard />
+                            Panel
+                        </Link>
+                        <Link
+                            to="/admin/transactions"
+                            className={`item-nav-list-side-bar
+                                ${location.pathname === "/admin/transactions" ? "item-active-nav-list-side-bar" : ""}
+                            `}
+                            onClick={() => setSideBar(false)}
+                        >
+                            <IoMdSwap />
+                            Movimientos
+                        </Link>
+                        <Link
+                            to="/admin/categories"
+                            className={`item-nav-list-side-bar
+                                ${location.pathname === "/admin/categories" ? "item-active-nav-list-side-bar" : ""}
+                            `}
+                            onClick={() => setSideBar(false)}
+                        >
+                            <BiCategoryAlt />
+                            Categorías
+                        </Link>
+                        <Link
+                            to="/admin/notifications"
+                            className={`item-nav-list-side-bar
+                                ${location.pathname === "/admin/notifications" ? "item-active-nav-list-side-bar" : ""}
+                            `}
+                            onClick={() => setSideBar(false)}
+                        >
+                            <IoNotificationsOutline />
+                            Notificaciones
+                        </Link>
+                    </ul>
+                    <div className="user-side-bar">
+                        <button className="btn-user-side-bar">
+                            <img src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png" alt="" />
+                            <div className="txt-user-side-var font-lexend">
+                                <h1>Username</h1>
+                                <h2>mail@gmail.com</h2>
+                            </div>
+                            <IoIosArrowUp />
+                        </button>
+                    </div>
+                </nav>
+            </aside>
+            
+            <Outlet />
+        </>
+    )
+}
+
+export { AdminLayout };

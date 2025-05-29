@@ -50,6 +50,15 @@ body::-webkit-scrollbar-thumb {
     font-family: "Lexend", sans-serif;
 }
 
+.content-page--admin {
+    display: flex;
+    width: auto;
+    margin-left: 320px;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
 .txt-animated-gradient-blue-green {
     color: transparent;
     background: linear-gradient(
@@ -71,5 +80,20 @@ body::-webkit-scrollbar-thumb {
     }
     100% {
         background-position: 200% 0%;
+    }
+}
+
+/* Responsive 1440px */
+@media (max-width: 1440px) {
+    .content-page--admin {
+        margin-left: 300px;
+    }
+}
+
+/* Responsive 1024px */
+@media (max-width: 1024px) {
+    .content-page--admin {
+        margin-left: 0;
+        height: 200px;
     }
 }
