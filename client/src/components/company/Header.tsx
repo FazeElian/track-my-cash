@@ -11,6 +11,7 @@ import Logo from "../../assets/img/Logo.webp";
 // React icons
 import { IoIosMenu } from "react-icons/io";
 import { FiHome } from "react-icons/fi";
+import { RiFunctionLine } from "react-icons/ri";
 
 const Header = () => {
     const [menu, setMenu] = useState(false)
@@ -56,7 +57,7 @@ const Header = () => {
                             offset={-150}
                             onClick={() => setMenu(false)}
                         >
-                            <FiHome />
+                            <RiFunctionLine />
                             Características
                         </LinkScroll>
                         <Link
