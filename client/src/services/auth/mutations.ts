@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 // Types
-import type { ConfirmUserAccount, LoginUser, RegisterUser } from "../../lib/types/modules/user.type";
+import type { ConfirmUserAccount, ForgotPassword, LoginUser, RegisterUser } from "../../lib/types/modules/user.type";
 
 // API Calls
 import {
     registerUser,
     login,
-    confirmAccount
+    confirmAccount,
+    forgotPassword
 } from "./api";
 
 // Register user mutation
@@ -71,6 +72,29 @@ export const useConfirmAccountMutation = () => {
 
     return useMutation({
         mutationFn: (data: ConfirmUserAccount) => confirmAccount(data),
+        onSuccess: (response) => {
+            // Sucess toast
+            toast.success(response)
+
+            // Invalidate queries
+            queryClient.invalidateQueries({
+                queryKey: ["users"]
+            })
+        },
+        onError: (error: Error) => {
+            const message = error.message;
+            toast.error(message);
+        },
+    })
+}
+
+// Forgot password
+export const useForgotPasswordMutation = () => {
+    // Query client
+    const queryClient = new QueryClient()
+
+    return useMutation({
+        mutationFn: (data: ForgotPassword) => forgotPassword(data),
         onSuccess: (response) => {
             // Sucess toast
             toast.success(response)

@@ -4,7 +4,7 @@ import { isAxiosError } from "axios";
 import { api } from "../../config/axios";
 
 // Types
-import type { ConfirmUserAccount, LoginUser, RegisterUser } from "../../lib/types/modules/user.type";
+import type { ConfirmUserAccount, ForgotPassword, LoginUser, RegisterUser } from "../../lib/types/modules/user.type";
 
 export async function registerUser (userData: RegisterUser) {
     try {
@@ -35,6 +35,19 @@ export async function login (userData: LoginUser) {
 export async function confirmAccount (userData: ConfirmUserAccount) {
     try {
         const { data } = await api.post("/auth/confirm-account", userData);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
+
+export async function forgotPassword (userData: ForgotPassword) {
+    try {
+        const { data } = await api.post("/auth/forgot-password", userData);
         return data;
     } catch (error) {
         if (isAxiosError(error) && error.response) {
