@@ -9,3 +9,4 @@ export type User = {
 }
 
 export type RegisterUser = Pick<User, "userName" | "email" | "password">
+export type LoginUser = Pick<User, "email" | "password">
