@@ -151,6 +151,14 @@
             text-decoration: underline;
         }
 
+.message-error-validation {
+    display: flex;
+    width: 100%;
+    color: red;
+    font-size: 15px;
+    text-align: left;
+}
+
 /* Responsive 1440px */
 @media (max-width: 1440px) {
     .form-users {
