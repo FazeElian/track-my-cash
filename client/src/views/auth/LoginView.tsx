@@ -12,7 +12,7 @@ import Logo from "../../assets/img/Logo.webp";
 import { useLoginMutation } from "../../services/auth/mutations";
 
 // Type
-import type { LoginUser } from "../../lib/types/modules/user.type";
+import type { LoginUser } from "../../lib/types/services/user.type";
 
 // Error message component for fields validation
 import { ErrorMessageValidation } from "../../components/company/ErrorMessageValidation";

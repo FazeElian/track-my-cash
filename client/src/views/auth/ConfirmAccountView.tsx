@@ -11,7 +11,7 @@ import Logo from "../../assets/img/Logo.webp";
 import { useConfirmAccountMutation } from "../../services/auth/mutations";
 
 // Type
-import type { ConfirmUserAccount } from "../../lib/types/modules/user.type";
+import type { ConfirmUserAccount } from "../../lib/types/services/user.type";
 
 // Error message component for fields validation
 import { ErrorMessageValidation } from "../../components/company/ErrorMessageValidation";

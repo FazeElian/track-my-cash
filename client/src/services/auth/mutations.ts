@@ -10,7 +10,7 @@ import type {
     RegisterUser,
     ResetPassword,
     ValidateCode
-} from "../../lib/types/modules/user.type";
+} from "../../lib/types/services/user.type";
 
 // API Calls
 import {

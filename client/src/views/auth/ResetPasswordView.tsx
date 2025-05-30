@@ -12,7 +12,7 @@ import Logo from "../../assets/img/Logo.webp";
 import { useResetPasswordMutation } from "../../services/auth/mutations";
 
 // Type
-import type { ResetPassword } from "../../lib/types/modules/user.type";
+import type { ResetPassword } from "../../lib/types/services/user.type";
 
 // Error message component for fields validation
 import { ErrorMessageValidation } from "../../components/company/ErrorMessageValidation";
