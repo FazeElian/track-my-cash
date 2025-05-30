@@ -12,15 +12,23 @@ import { TbLayoutDashboard } from "react-icons/tb";
 import { IoMdSwap, IoIosArrowUp, IoIosMenu } from "react-icons/io";
 import { BiCategoryAlt } from "react-icons/bi";
 import { IoNotificationsOutline } from "react-icons/io5";
+import { MdOutlineLogout } from "react-icons/md";
 
 // Query
 import { useGetAuthenticatedUser } from "../../services/auth/queries";
+
+// Type
 import type { User } from "../../lib/types/services/user.type";
 
 // Loadint component
 import Loading from "./Loading";
 
 const AdminLayout = () => {
+    const logOut = () => {
+        localStorage.removeItem("AUTH_TOKEN");
+        navigate("/auth/login/");
+    }
+
     const [sideBar, setSideBar] = useState(false)
 
     const handleSideBar = () => {
@@ -99,6 +107,14 @@ const AdminLayout = () => {
                                 <IoNotificationsOutline />
                                 Notificaciones
                             </Link>
+                            <button
+                                type="button"
+                                className="item-nav-list-side-bar item-logout-list-side-bar font-lexend"
+                                onClick={logOut}
+                            >
+                                <MdOutlineLogout />
+                                Cerrar Sesión
+                            </button>
                         </ul>
                         <div className="user-side-bar">
                             <button className="btn-user-side-bar">

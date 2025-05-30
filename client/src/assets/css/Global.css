@@ -27,6 +27,8 @@ body {
     --color-blue: #3D90D9;
     --color-light-blue: #DDE9FF;
     --color-orange: #D35724;
+    --color-red: #D43724;
+    --color-light-red: #F9C1BA;
     --color-light-orange: #FFE6D3;
     font-family: "Lexend", sans-serif;
 }

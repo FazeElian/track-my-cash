@@ -81,6 +81,16 @@
                     height: 24px;
                 }
 
+                .item-logout-list-side-bar {
+                    color: var(--color-red) !important;
+                    cursor: pointer;
+                }
+
+                    .item-logout-list-side-bar:hover {
+                        color: var(--color-red) !important;
+                        background-color: var(--color-light-red);
+                    }
+
     .user-side-bar {
         display: flex;
         width: 100%;
