@@ -17,6 +17,9 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { useGetAuthenticatedUser } from "../../services/auth/queries";
 import type { User } from "../../lib/types/services/user.type";
 
+// Loadint component
+import Loading from "./Loading";
+
 const AdminLayout = () => {
     const [sideBar, setSideBar] = useState(false)
 
@@ -31,7 +34,7 @@ const AdminLayout = () => {
     const userResult = useGetAuthenticatedUser();
 
     if (userResult === "Loading") {
-        return <div>Cargando...</div>;
+        return <Loading />;
     }
 
     if (userResult === "Not Authenticated") {

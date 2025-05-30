@@ -1,9 +1,12 @@
 import {  Route, Routes } from "react-router-dom"
-import { lazy } from "react"
+import { lazy, Suspense } from "react"
 
 // Base components
 import { Header } from "./components/company/Header"
 import { AdminLayout } from "./components/admin/AdminLayout"
+
+// Loading component
+import Loading from "./components/admin/Loading"
 
 // Home view
 const HomeView = lazy(() => import("./views/HomeView"))
@@ -25,28 +28,30 @@ const ProfileView = lazy(() => import("./views/admin/ProfileView"))
 
 export default function Router() {
   return (
-    <Routes>
-      {/* Index */}
-      <Route element={<Header />}>
-        <Route index element={<HomeView />} />
-      </Route>
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        {/* Index */}
+        <Route element={<Header />}>
+          <Route index element={<HomeView />} />
+        </Route>
 
-      {/* Users */}
-      <Route path="/auth/register" element={<RegisterView />} />
-      <Route path="/auth/login" element={<LoginView />} />
-      <Route path="/auth/forgot-password" element={<ForgotPasswordView />} />
-      <Route path="/auth/confirm-account" element={<ConfirmAccountView />} />
-      <Route path="/auth/validate-code" element={<ValidateCodeView />} />
-      <Route path="/auth/reset-password/:code" element={<ResetPasswordView />} />
+        {/* Users */}
+        <Route path="/auth/register" element={<RegisterView />} />
+        <Route path="/auth/login" element={<LoginView />} />
+        <Route path="/auth/forgot-password" element={<ForgotPasswordView />} />
+        <Route path="/auth/confirm-account" element={<ConfirmAccountView />} />
+        <Route path="/auth/validate-code" element={<ValidateCodeView />} />
+        <Route path="/auth/reset-password/:code" element={<ResetPasswordView />} />
 
-      {/* Admin */}
-      <Route path="/admin/*" element={<AdminLayout />}>
-        <Route index path="dashboard" element={<DashboardView />} />
-        <Route path="categories" element={<CategoriesView />} />
-        <Route path="transactions" element={<TransactionsView />} />
-        <Route path="notifications" element={<NotificationsView />} />
-        <Route path="profile" element={<ProfileView />} />
-      </Route>
-    </Routes>
+        {/* Admin */}
+        <Route path="/admin/*" element={<AdminLayout />}>
+          <Route index path="dashboard" element={<DashboardView />} />
+          <Route path="categories" element={<CategoriesView />} />
+          <Route path="transactions" element={<TransactionsView />} />
+          <Route path="notifications" element={<NotificationsView />} />
+          <Route path="profile" element={<ProfileView />} />
+        </Route>
+      </Routes>
+    </Suspense>
   )
 }
