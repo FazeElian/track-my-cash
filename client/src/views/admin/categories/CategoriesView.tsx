@@ -1,4 +1,5 @@
 // Components for this view
+import { SearchBar } from "../../../components/admin/SearchBar";
 import { TopViewModule } from "../../../components/admin/TopTitle"
 
 // React icons
@@ -12,6 +13,11 @@ const CategoriesView = () => {
                 icon={BiCategoryAlt}
                 txtBtnAdd="Añadir categoría"
                 txtBtnAddShort="Añadir"
+            />
+            <SearchBar
+                titleModule="Categorías"
+                searchName="categories"
+                placeholder="Buscar categoría por nombre"
             />
         </main>
     )

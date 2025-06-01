@@ -58,6 +58,11 @@ body::-webkit-scrollbar-thumb {
     margin-left: 320px;
     height: auto;
     padding: 4rem 5rem 4rem;
+    flex-direction: column;
+}
+
+option {
+    cursor: pointer;
 }
 
 .txt-animated-gradient-blue-green {
