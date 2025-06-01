@@ -1,6 +1,7 @@
 // Components for this view
 import { SearchBar } from "../../../components/admin/SearchBar";
 import { TopViewModule } from "../../../components/admin/TopTitle"
+import { CategoriesGallery } from "./CategoriesGallery";
 
 // React icons
 import { BiCategoryAlt } from "react-icons/bi";
@@ -19,6 +20,7 @@ const CategoriesView = () => {
                 searchName="categories"
                 placeholder="Buscar categoría por nombre"
             />
+            <CategoriesGallery />
         </main>
     )
 }
