@@ -56,9 +56,8 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     width: auto;
     margin-left: 320px;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
+    height: auto;
+    padding: 4rem 5rem 4rem;
 }
 
 .txt-animated-gradient-blue-green {
@@ -89,6 +88,7 @@ body::-webkit-scrollbar-thumb {
 @media (max-width: 1440px) {
     .content-page--admin {
         margin-left: 300px;
+        padding: 3.5rem 4rem 3.5rem;
     }
 }
 
@@ -96,6 +96,13 @@ body::-webkit-scrollbar-thumb {
 @media (max-width: 1024px) {
     .content-page--admin {
         margin-left: 0;
-        height: 200px;
+        padding: 2.5rem 3rem 2.5rem;
+    }
+}
+
+/* Responsive 425px */
+@media (max-width: 425px) {
+    .content-page--admin {
+        padding: 37px;
     }
 }
