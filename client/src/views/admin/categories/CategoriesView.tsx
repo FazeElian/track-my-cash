@@ -48,7 +48,12 @@ const CategoriesView = () => {
             <CategoriesGallery />
 
             {/* Modal form */}
-            {isOpen && <NewCategoryForm modalRef={formRef} />}
+            {isOpen && 
+                <NewCategoryForm
+                    modalRef={formRef}
+                    onClose={() => setIsOpen(false)}
+                />
+            }
         </main>
     )
 }

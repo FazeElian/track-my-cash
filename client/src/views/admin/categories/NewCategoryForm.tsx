@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 // Styles for component
 import "../../../assets/css/components/admin/Forms.css";
@@ -7,11 +8,43 @@ import "../../../assets/css/components/admin/Forms.css";
 import { Icons } from "../../../lib/lists/Icons";
 import { Colors } from "../../../lib/lists/Colors";
 
-// Type
-import type { ModalFormPropsType } from "../../../lib/types/modal-form.type";
+// Mutation
+import { useAddCategoryMutation } from "../../../services/categories/mutations";
 
-const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef }) => {
+// Types
+import type { ModalFormPropsType } from "../../../lib/types/modal-form.type";
+import type { AddCategory } from "../../../lib/types/services/category.type";
+
+// Error message component for fields validation
+import { ErrorMessageValidation } from "../../../components/company/ErrorMessageValidation";
+
+const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
     const [color, setColor] = useState(Colors[0]);
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<AddCategory> ({
+        defaultValues: {
+            name: "",
+            type: "",
+            icon: "",
+            monthlyBudget: 0
+        }
+    });
+
+    // Mutation
+    const registerMutation = useAddCategoryMutation()
+    const handleAddCategory = (formData: AddCategory) => {
+        const categoryData = {
+            ...formData,
+            color: color.value
+        }
+        
+        registerMutation.mutate(categoryData, {
+            onSuccess: () => {
+                reset()
+                onClose()
+            }
+        });
+    }
 
     return (
         <section className="modal-form-module">
@@ -20,17 +53,33 @@ const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef }) => {
                 ref={modalRef}
                 action=""
                 method="POST"
+                onSubmit={handleSubmit(handleAddCategory)}
             >
                 <h1>Añadir categoría</h1>
                 <div className="form-group">
                     <label htmlFor="name">Nombre de la categoría</label>
                     <input
                         className="font-lexend"
-                        name="name"
                         id="name"
                         type="text"
                         placeholder="Ingresa el nombre de la categoría"
+                        {...register("name", {
+                            required: "El nombre de la categoría es un dato obligatorio.",
+                            pattern: {
+                                value: /^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s-]+$/,
+                                message: "Solo se permiten letras, números y guiones."
+                            },
+                            maxLength: {
+                                value: 50,
+                                message: "El nombre no puede superar los 50 caracteres"
+                            }
+                        })}
                     />
+                    {errors.name && 
+                        <ErrorMessageValidation>
+                            { errors.name?.message }
+                        </ErrorMessageValidation>
+                    }
                 </div>
                 <div className="form-double-group">
                     <div className="item-form-double-group form-group">
@@ -38,31 +87,54 @@ const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef }) => {
                         <select
                             className="font-lexend"
                             id="type"
-                            name="type"
-                            defaultValue="Expense"
+                            defaultValue=""
+                            {...register("type", {
+                                required: "El tipo de categoría es obligatorio.",
+                                validate: value => value !== "" || "El tipo de categoría es obligatorio",
+                            })}
                         >
+                            <option value="" disabled>
+                                Selecciona un tipo
+                            </option>
                             <option value="Expense" key="Expense">
-                                Gasto
+                                Gastos
                             </option>
                             <option value="Income" key="Income">
-                                Ingreso
+                                Ingresos
                             </option>
                         </select>
+
+                        {errors.type && 
+                            <ErrorMessageValidation>
+                                { errors.type?.message }
+                            </ErrorMessageValidation>
+                        }
                     </div>
                     <div className="item-form-double-group form-group">
                         <label htmlFor="name">Icono</label>
                         <select
                             className="font-lexend"
                             id="icon"
-                            name="icon"
-                            defaultValue="homeIcon"
+                            defaultValue=""
+                            {...register("icon", {
+                                required: "El icono para la categoría es obligatorio.",
+                                validate: value => value !== "" || "El icono para la categoría es obligatorio",
+                            })}
                         >
+                            <option value="" disabled>
+                                Selecciona un icono
+                            </option>
                             {Icons.map((icon) => (
                                 <option value={icon.value} key={icon.id}>
                                     {icon.content}
                                 </option>
                             ))}
                         </select>
+                        {errors.icon && 
+                            <ErrorMessageValidation>
+                                { errors.icon?.message }
+                            </ErrorMessageValidation>
+                        }
                     </div>
                 </div>
                 <div className="form-group">
@@ -82,11 +154,15 @@ const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef }) => {
                     <label htmlFor="monthlyBudget">Presupuesto mensual (opcional)</label>
                     <input
                         className="font-lexend"
-                        name="monthlyBudget"
                         id="monthlyBudget"
                         type="number"
                         placeholder="0"
                     />
+                    {errors.monthlyBudget && 
+                        <ErrorMessageValidation>
+                            { errors.monthlyBudget?.message }
+                        </ErrorMessageValidation>
+                    }
                 </div>
                 <button
                     type="submit"

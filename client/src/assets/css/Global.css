@@ -65,6 +65,14 @@ option {
     cursor: pointer;
 }
 
+.message-error-validation {
+    display: flex;
+    width: 100%;
+    color: red;
+    font-size: 15px;
+    text-align: left;
+}
+
 .txt-animated-gradient-blue-green {
     color: transparent;
     background: linear-gradient(

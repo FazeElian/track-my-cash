@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Toaster } from "sonner";
 
 // Styles for this component
 import "../../assets/css/components/admin/AdminLayout.css";
@@ -129,6 +130,7 @@ const AdminLayout = () => {
                     </nav>
                 </aside>
                 
+                <Toaster position="top-center" richColors />
                 <Outlet />
             </>
         )
