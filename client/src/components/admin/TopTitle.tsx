@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 // Styles for this component
 import "../../assets/css/components/admin/TopViewModule.css";
 
@@ -23,11 +21,14 @@ const TopViewModule : React.FC<TopViewModuleType> = (props) => {
                         </div>
                     </div>
                     <div className="actions-top-title-view-module">
-                        <Link to="new" className="btn-actions-top-title-view-module font-lexend">
+                        <button
+                            className="btn-actions-top-title-view-module font-lexend"
+                            onClick={props.btnAddOnClick}
+                        >
                             <IoMdAdd />
                             <h2>{props.txtBtnAddShort}</h2>
                             {props.txtBtnAdd}
-                        </Link>
+                        </button>
                     </div>
                 </div>
                 <div className="quick-stats-top-title-view-module">
@@ -41,10 +42,13 @@ const TopViewModule : React.FC<TopViewModuleType> = (props) => {
                         10 de gastos
                     </div>
                 </div>
-                <Link to="new" className="btn-add-mobile btn-actions-top-title-view-module font-lexend">
+                <button
+                    className="btn-add-mobile btn-actions-top-title-view-module font-lexend"
+                    onClick={props.btnAddOnClick}
+                >
                     <IoMdAdd />
                     {props.txtBtnAdd}
-                </Link>
+                </button>
             </div>
         </>
     )

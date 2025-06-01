@@ -3,4 +3,5 @@ export type TopViewModuleType = {
     icon: React.ComponentType
     txtBtnAdd: string
     txtBtnAddShort: string
+    btnAddOnClick: () => void
 }

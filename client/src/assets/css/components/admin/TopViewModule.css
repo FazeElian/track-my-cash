@@ -68,6 +68,7 @@
             text-decoration: none;
             gap: 6px;
             transition: .2s ease-in-out;
+            cursor: pointer;
         }
 
             .btn-add-mobile {
