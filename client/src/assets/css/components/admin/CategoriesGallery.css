@@ -6,7 +6,8 @@
     height: auto;
     margin-top: 1.5rem;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 2%;
 }
 
     .item-categories-gallery {
@@ -38,10 +39,38 @@
                 padding: 1rem;
                 align-items: center;
                 justify-content: center;
-                background-color: var(--color-light-purple);
                 border-radius: 40%;
-                color: var(--color-purple) !important;
             }
+
+                .icon-blue-top-item-categories-gallery,
+                .icon-blue-top-item-categories-gallery svg {
+                    background-color: var(--color-light-blue);
+                    color: var(--color-blue);
+                }
+
+                .icon-green-top-item-categories-gallery,
+                .icon-green-top-item-categories-gallery svg {
+                    background-color: var(--color-light-green);
+                    color: var(--color-green);
+                }
+
+                .icon-purple-top-item-categories-gallery,
+                .icon-purple-top-item-categories-gallery svg {
+                    background-color: var(--color-light-purple);
+                    color: var(--color-purple);
+                }
+
+                .icon-orange-top-item-categories-gallery,
+                .icon-orange-top-item-categories-gallery svg {
+                    background-color: var(--color-light-orange);
+                    color: var(--color-orange);
+                }
+
+                .icon-red-top-item-categories-gallery,
+                .icon-red-top-item-categories-gallery svg {
+                    background-color: var(--color-light-red);
+                    color: var(--color-red);
+                }
 
                 .icon-top-item-categories-gallery svg {
                     width: 25px;

@@ -4,7 +4,20 @@ import { isAxiosError } from "axios";
 import { api } from "../../config/axios";
 
 // Types
-import type { AddCategory } from "../../lib/types/services/category.type";
+import type { AddCategory, Category } from "../../lib/types/services/category.type";
+
+export async function getAllCategories () {
+    try {
+        const { data } = await api.get<Category[]>("/admin/categories/");
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
 
 export async function addCategory (categoryData: AddCategory) {
     try {

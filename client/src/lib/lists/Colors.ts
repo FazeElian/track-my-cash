@@ -24,4 +24,13 @@ export const Colors = [
         value: "Red",
         colorCode: "#D43724"
     },
-]
+];
+
+export const colorClassMap: Record<string, string> = {
+    Blue: "icon-blue-top-item-categories-gallery",
+    Red: "icon-red-top-item-categories-gallery",
+    Green: "icon-green-top-item-categories-gallery",
+    Yellow: "icon-yellow-top-item-categories-gallery",
+    Orange: "icon-orange-top-item-categories-gallery",
+    Purple: "icon-purple-top-item-categories-gallery",
+};

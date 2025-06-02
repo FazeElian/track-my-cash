@@ -1,3 +1,11 @@
+// Icons for category
+import { FaCarSide, FaPlaneDeparture } from "react-icons/fa";
+import { FaBurger, FaGift } from "react-icons/fa6";
+import { IoHome, IoGameController } from "react-icons/io5";
+import { IoIosPricetag } from "react-icons/io";
+import { BsCapsule } from "react-icons/bs";
+import { RiBookShelfFill } from "react-icons/ri";
+
 export const Icons = [
     {
         id: 1,
@@ -49,4 +57,16 @@ export const Icons = [
         value: "otherIcon",
         content: "🔖 Otro"
     },
-]
+];
+
+export const iconsMap: Record<string, React.ComponentType> = {
+    carIcon: FaCarSide,
+    foodIcon: FaBurger,
+    homeIcon: IoHome,
+    healthIcon: BsCapsule,
+    educationIcon: RiBookShelfFill,
+    travelIcon: FaPlaneDeparture,
+    entertaimentIcon: IoGameController,
+    giftIcon: FaGift,
+    otherIcon: IoIosPricetag
+};

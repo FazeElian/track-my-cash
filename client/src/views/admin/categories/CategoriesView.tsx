@@ -1,5 +1,6 @@
-// Components for this view
 import { useEffect, useRef, useState } from "react";
+
+// Components for this view
 import { SearchBar } from "../../../components/admin/SearchBar";
 import { TopViewModule } from "../../../components/admin/TopTitle"
 import { CategoriesGallery } from "./CategoriesGallery";
@@ -22,6 +23,10 @@ const CategoriesView = () => {
 
         if (isOpen) {
             document.addEventListener("mousedown", handleClickOutside);
+
+            // Remove scroll on body
+            document.body.classList.add("no-scroll");
+            return () => document.body.classList.remove("no-scroll");
         } else {
             document.removeEventListener("mousedown", handleClickOutside);
         }

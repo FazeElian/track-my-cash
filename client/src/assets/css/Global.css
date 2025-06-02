@@ -85,6 +85,10 @@ option {
     animation: gradientMovement 10s ease infinite;
 }
 
+.no-scroll {
+    overflow: hidden;
+}
+
 @keyframes gradientMovement {
     0% {
         background-position: 200% 0%;
