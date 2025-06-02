@@ -15,11 +15,17 @@ export const useAddCategoryMutation = () => {
     // Query client
     const queryClient = new QueryClient()
 
+    // Refetch categories list
+    const { refetch } = useFetchAllCategories()
+
     return useMutation({
         mutationFn: (data: AddCategory) => addCategory(data),
         onSuccess: (response) => {
             // Sucess toast
             toast.success(response);
+        
+            // Get the categories list updated
+            refetch()
 
             // Invalidate queries
             queryClient.invalidateQueries({

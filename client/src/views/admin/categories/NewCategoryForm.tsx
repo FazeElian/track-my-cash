@@ -11,9 +11,6 @@ import { Colors } from "../../../lib/lists/Colors";
 // Mutation
 import { useAddCategoryMutation } from "../../../services/categories/mutations";
 
-// Query
-import { useFetchAllCategories } from "../../../services/categories/queries";
-
 // Types
 import type { ModalFormPropsType } from "../../../lib/types/modal-form.type";
 import type { AddCategory } from "../../../lib/types/services/category.type";
@@ -23,7 +20,6 @@ import { ErrorMessageValidation } from "../../../components/company/ErrorMessage
 
 const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
     const [color, setColor] = useState(Colors[0]);
-    const { refetch } = useFetchAllCategories();
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<AddCategory> ({
         defaultValues: {
@@ -45,7 +41,6 @@ const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) =
         registerMutation.mutate(categoryData, {
             onSuccess: () => {
                 reset()
-                refetch()
                 onClose()
             }
         });
