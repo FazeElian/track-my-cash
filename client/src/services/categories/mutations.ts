@@ -5,7 +5,10 @@ import { toast } from "sonner";
 import type { AddCategory } from "../../lib/types/services/category.type";
 
 // API Calls
-import { addCategory } from "./api";
+import { addCategory, deleteCategory } from "./api";
+
+// Query
+import { useFetchAllCategories } from "./queries";
 
 // Add category mutation
 export const useAddCategoryMutation = () => {
@@ -26,7 +29,32 @@ export const useAddCategoryMutation = () => {
         onError: (error: Error) => {
             const message = error.message;
             toast.error(message);
-            console.log(error)
+        },
+    })
+}
+
+export const useDeleteCategoryMutation = () => {
+    // Query client
+    const queryClient = new QueryClient()
+
+    // Refetch categories list
+    const { refetch } = useFetchAllCategories()
+
+    return useMutation({
+        mutationFn: (id: number) => deleteCategory(id),
+        onSuccess: (response) => {
+            // Sucess toast
+            toast.success(response);
+
+            refetch()
+
+            queryClient.refetchQueries({
+                queryKey: ["categories"]
+            });
+        },
+        onError: (error: Error) => {
+            const message = error.message;
+            toast.error(message);
         },
     })
 }

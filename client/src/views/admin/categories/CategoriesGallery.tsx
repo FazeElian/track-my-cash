@@ -4,8 +4,9 @@ import { motion } from 'framer-motion';
 import "../../../assets/css/components/admin/CategoriesGallery.css";
 
 // React icons
-import { MdOutlineMoreHoriz } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { IoMdCart } from "react-icons/io";
+import { BiEdit } from "react-icons/bi";
 
 // Query
 import { useGetAllCategories } from '../../../services/categories/queries';
@@ -17,7 +18,16 @@ import type { Category } from '../../../lib/types/services/category.type';
 import { iconsMap } from '../../../lib/lists/Icons';
 import { colorClassMap } from '../../../lib/lists/Colors';
 
+// Delete mutation
+import { useDeleteCategoryMutation } from '../../../services/categories/mutations';
+
 const CategoriesGallery = () => {
+    // Delete mutation
+    const deleteCategoryMutation = useDeleteCategoryMutation()
+    const handleDeleteCategory  = (id: number) => {
+        deleteCategoryMutation.mutate(id)
+    }
+
     // Categories list from query
     const categories = useGetAllCategories()
 
@@ -40,6 +50,7 @@ const CategoriesGallery = () => {
             {categories.map((category: Category) => (
                 <motion.div
                     className="item-categories-gallery"
+                    key={category.id}
                     whileHover={{ scale: 1.05 }}
                     transition={{
                         duration: .25,
@@ -62,9 +73,16 @@ const CategoriesGallery = () => {
                         </div>
                         <button
                             type="button"
-                            className="btn-options-top-item-categories-gallery"
+                            className="btn-options-top-item-categories-gallery btn-edit-top-item-categories-gallery "
                         >
-                            <MdOutlineMoreHoriz />
+                            <BiEdit />
+                        </button>
+                        <button
+                            type="button"
+                            className="btn-options-top-item-categories-gallery btn-delete-top-item-categories-gallery"
+                            onClick={() => handleDeleteCategory(category.id)}
+                        >
+                            <MdOutlineDeleteOutline />
                         </button>
                     </div>
                     <div className="txt-top-item-categories-gallery">
