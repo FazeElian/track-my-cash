@@ -9,9 +9,24 @@ import { CategoriesGallery } from "./CategoriesGallery";
 import { BiCategoryAlt } from "react-icons/bi";
 import NewCategoryForm from "./NewCategoryForm";
 
+// Query
+import { useGetAllCategories } from "../../../services/categories/queries";
+
 const CategoriesView = () => {
     const [isOpen, setIsOpen] = useState(false);
     const formRef = useRef<HTMLFormElement>(null);
+
+    // Get all categories
+    const categories = useGetAllCategories()
+
+    // Filter categories
+    const totalCategories = Array.isArray(categories) ? categories.length : 0;
+    const totalExpenses = Array.isArray(categories)
+        ? categories.filter((category) => category.type === "Expense").length
+        : 0;
+    const totalIncomes = Array.isArray(categories)
+        ? categories.filter((category) => category.type === "Income").length
+        : 0;
 
     // Close the modal when user clicks outside the form
     useEffect(() => {
@@ -44,6 +59,9 @@ const CategoriesView = () => {
                 txtBtnAdd="Añadir categoría"
                 txtBtnAddShort="Añadir"
                 btnAddOnClick={() => setIsOpen(true)}
+                quickState1Value={`${totalCategories} categorías creadas`}
+                quickState2Value={`${totalIncomes} de ingresos`}
+                quickState3Value={`${totalExpenses} de gastos`}
             />
             <SearchBar
                 titleModule="Categorías"
@@ -61,6 +79,7 @@ const CategoriesView = () => {
             }
         </main>
     )
+    
 }
 
 export default CategoriesView

@@ -33,13 +33,13 @@ const TopViewModule : React.FC<TopViewModuleType> = (props) => {
                 </div>
                 <div className="quick-stats-top-title-view-module">
                     <div className="item-quick-stats-top-title-view-module item-blue-quick-stats-top-title-view-module">
-                        10 categorías creadas
+                        {props.quickState1Value}
                     </div>
                     <div className="item-quick-stats-top-title-view-module item-green-quick-stats-top-title-view-module">
-                        3 de ingresos
+                        {props.quickState2Value}
                     </div>
                     <div className="item-quick-stats-top-title-view-module item-orange-quick-stats-top-title-view-module">
-                        10 de gastos
+                        {props.quickState3Value}
                     </div>
                 </div>
                 <button
