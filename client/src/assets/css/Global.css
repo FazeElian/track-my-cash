@@ -89,6 +89,23 @@ option {
     overflow: hidden;
 }
 
+.no-data {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    background-color: var(--color-white);
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 0 4rem;
+    filter: drop-shadow(0 1px 2px var(--color-dark-blue));
+    color: var(--color-dark-blue);
+    font-size: 17px;
+    font-weight: 400;
+}
+
 @keyframes gradientMovement {
     0% {
         background-position: 200% 0%;
@@ -107,6 +124,11 @@ option {
         margin-left: 300px;
         padding: 3.5rem 4rem 3.5rem;
     }
+
+    .no-data {
+        font-size: 15px;
+        padding: 3.5rem 0 3.5rem;
+    }
 }
 
 /* Responsive 1024px */
@@ -114,6 +136,10 @@ option {
     .content-page--admin {
         margin-left: 0;
         padding: 2.5rem 3rem 2.5rem;
+    }
+
+    .no-data {
+        padding: 2.5rem 2rem 2.5rem;
     }
 }
 
