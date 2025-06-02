@@ -162,12 +162,8 @@ const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) =
                         id="monthlyBudget"
                         type="number"
                         placeholder="0"
+                        {...register("monthlyBudget")}
                     />
-                    {errors.monthlyBudget && 
-                        <ErrorMessageValidation>
-                            { errors.monthlyBudget?.message }
-                        </ErrorMessageValidation>
-                    }
                 </div>
                 <button
                     type="submit"
