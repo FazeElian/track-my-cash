@@ -15,7 +15,7 @@ import type { ModalFormPropsType } from "../../../lib/types/modal-form.type";
 import type { AddCategory } from "../../../lib/types/services/category.type";
 import type { Color } from "../../../lib/types/atoms/colors-input-field.type";
 
-// Error message component for fields validation
+// Components for this view - form
 import { InputField } from "../../../components/admin/atoms/InputField";
 import { TypeSelectField } from "../../../components/admin/atoms/TypeSelectField";
 import { IconSelectField } from "../../../components/admin/atoms/IconSelectField";

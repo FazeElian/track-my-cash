@@ -25,12 +25,12 @@ const SearchBar : React.FC<SearchBarType> = (props) => {
                 <div className="filter">
                     <select
                         className="font-lexend"
-                        id=""
+                        id="filter-categories"
                         defaultValue={0}
                     >
-                        <option value="" key="">Todas las categorías</option>
-                        <option value="" key="">Ingresos</option>
-                        <option value="" key="">Gastos</option>
+                        <option value="All" key="All">Todas las categorías</option>
+                        <option value="Incomes" key="Incomes">Ingresos</option>
+                        <option value="Expenses" key="Expenses">Gastos</option>
                     </select>
                 </div>
             </div>

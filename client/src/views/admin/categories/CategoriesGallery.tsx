@@ -32,6 +32,7 @@ const CategoriesGallery = () => {
         <section className="categories-gallery">
             {categories.map((category: Category) => (
                 <CategoryCard
+                    key={category.id}
                     id={category.id}
                     name={category.name}
                     type={category.type}
