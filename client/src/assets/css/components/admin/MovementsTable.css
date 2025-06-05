@@ -1,0 +1,257 @@
+@import "../../Global.css";
+
+.table-transactions {
+    display: flex;
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    margin: 1.5rem 0 1rem;
+    padding: 1rem 2rem 2rem;
+    flex-direction: column;
+    background-color: var(--color-white);
+    border-radius: 5px;
+    filter: drop-shadow(0 2px 3px var(--color-gray2));
+}
+
+    .thead {
+        display: flex;
+        width: auto;
+        justify-content: space-between;
+        border-bottom: 1px solid #F2F2F2;
+        overflow: auto;
+    }
+
+        .tr {
+            display: flex;
+            width: auto;
+            height: auto;
+            padding: 1rem;
+            color: var(--color-dark-blue);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 16.5px;
+            font-weight: 600;
+        }
+
+        .tr-title-transaction,
+        .td-title-transaction {
+            width: 20%;
+            min-width: 20%;
+        }
+
+        .tr-category-transaction,
+        .td-category-transaction {
+            width: 16%;
+            min-width: 16%;
+        }
+
+        .tr-date-transaction,
+        .td-date-transaction {
+            width: 16%;
+            min-width: 16%;
+        }
+
+        .tr-amount-transaction,
+        .td-amount-transaction,
+        .tr-state-transaction,
+        .td-state-transaction {
+            width: 15%;
+            min-width: 15%;
+        }
+
+            .state-transaction {
+                display: flex;
+                align-items: center;
+                gap: 3px;
+            }
+
+                .state-transaction svg {
+                    width: 18px;
+                    height: 18px;
+                }
+
+            .state-completed,
+            .amount-income {
+                color: var(--color-dark-green) !important;
+            }
+    
+            .amount-expense {
+                color: var(--color-red) !important;
+            }
+
+            .state-pending {
+                color: var(--color-yellow);
+            }
+
+        .tr-options-transaction,
+        .td-options-transaction {
+            width: 18%;
+            min-width: 18%;
+        }
+
+        .td-options {
+            display: flex;
+            gap: 12px;
+        }
+
+    .tbody {
+        display: flex;
+        width: auto;
+        justify-content: space-between;
+        border-bottom: 1px solid #F2F2F2;
+        overflow: auto;
+    }
+
+        .tbody:hover {
+            background-color: var(--color-gray);
+        }
+
+        .td {
+            display: flex;
+            width: auto;
+            height: auto;
+            padding: 14px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 15.5px;
+            color: var(--color-dark-blue);
+        }
+
+        .btn-td {
+            display: flex;
+            width: auto;
+            height: auto;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+            .btn-td svg {
+                width: 21px;
+                height: 21px;
+            }
+
+            .btn-td:hover {
+                opacity: 0.7;
+                transition: 0.3s ease-in;
+            }
+
+                .btn-td-edit {
+                    color: var(--color-blue);
+                }
+
+                .btn-td-delete {
+                    color: var(--color-red);
+                }
+
+/* Responsive 1440px */
+@media screen and (max-width: 1440px) {
+    .table {
+        margin: 2rem 0 1rem;
+    }
+
+    .tr {
+        font-size: 15px;
+    }
+
+    .td {
+        font-size: 14px;
+    }
+
+    .td-options {
+        gap: 10px;
+    }
+
+    btn-td svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Responsive 768px */
+@media screen and (max-width: 768px) {
+    .table {
+        padding: 0.5rem 1.5rem 2rem;
+    }
+
+    .state-transaction {
+        font-size: 0;
+        gap: 0;
+    }
+}
+
+/* Responsive 650px */
+@media screen and (max-width: 650px) {
+    .table-transactions {
+        margin: 1.5rem 0 1rem;
+        padding: 1rem 1rem 2rem;
+    }
+
+    .tr-category-transaction,
+    .td-category-transaction,
+    .tr-state-transaction,
+    .td-state-transaction {
+        display: none;
+    }
+
+    .tr-title-transaction,
+    .td-title-transaction {
+        width: 30%;
+        min-width: 30%;
+    }
+
+    .tr-date-transaction,
+    .td-date-transaction {
+        width: 20%;
+        min-width: 20%;
+    }
+
+    .tr-amount-transaction,
+    .td-amount-transaction {
+        width: 24%;
+        min-width: 24%;
+    }
+
+    .tr-options-transaction,
+    .td-options-transaction {
+        width: 25%;
+        min-width: 25%;
+    }
+}
+
+/* Responsive 425px */
+@media screen and (max-width: 425px) {
+    .table-transactions {
+        margin: 1.5rem 0 0.5rem;
+    }
+
+    .tr-date-transaction,
+    .td-date-transaction,
+    .tr-amount-transaction,
+    .td-amount-transaction {
+        display: none;
+    }
+
+    .tr-title-transaction,
+    .td-title-transaction {
+        width: 60%;
+        min-width: 60%;
+    }
+
+    .tr-options-transaction,
+    .td-options-transaction {
+        width: 40%;
+        min-width: 40%;
+    }
+
+    .tr {
+        padding: 14px;
+    }
+
+    .td {
+        padding: 12px;
+    }
+}

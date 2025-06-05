@@ -4,12 +4,13 @@ import { SearchBar } from "../../../components/admin/SearchBar"
 
 // React icons
 import { IoMdSwap } from "react-icons/io"
+import { TransactionsTable } from "./TransactionsTable"
 
 const TransactionsView = () => {
     return (
         <main className="content-page--admin">
             <TopViewModule
-                title="Gestión de movimientos"
+                title="Mis Movimientos"
                 icon={IoMdSwap}
                 txtBtnAdd="Registrar movimiento"
                 txtBtnAddShort="Registrar"
@@ -23,6 +24,7 @@ const TransactionsView = () => {
                 searchName="transactions"
                 placeholder="Buscar movimiento por título"
             />
+            <TransactionsTable />
         </main>
     )
 }
