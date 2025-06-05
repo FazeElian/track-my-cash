@@ -56,9 +56,6 @@ const EditCategoryForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, onC
         updateMutation.mutate(categoryData, {
             onSuccess: () => {
                 onClose()
-            },
-            onError: (error) => {
-                console.error("Error al actualizar la categoría:", error);
             }
         });
     }

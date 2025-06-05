@@ -14,7 +14,7 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { useFetchAllCategories } from "../../../services/categories/queries";
 
 const CategoriesView = () => {
-const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
+    const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const [editCategoryId, setEditCategoryId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
 

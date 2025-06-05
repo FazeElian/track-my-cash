@@ -47,6 +47,14 @@ class Transaction extends Model {
     })
     declare date: string
 
+    // State
+    @AllowNull(false)
+    @Default("Completed")
+    @Column({
+        type: DataType.ENUM("Completed", "Pending")
+    })
+    declare state: string
+
     // Notes
     @AllowNull(true)
     @Column({
