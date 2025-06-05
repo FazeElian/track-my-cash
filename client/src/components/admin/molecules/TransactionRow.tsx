@@ -10,7 +10,16 @@ import type { Transaction } from "../../../lib/types/services/transaction.type";
 import { formatDate } from "../../../lib/utils/dateFormat";
 import { useGetCategoryById } from "../../../services/categories/queries";
 
+// Delete mutation
+import { useDeleteTransactionMutation } from "../../../services/transactions/mutations";
+
 const TransactionRow : React.FC<Transaction> = (props) => {
+    // Delete mutation
+    const deleteTransactionMutation = useDeleteTransactionMutation()
+    const handleDeleteTransaction  = (id: number) => {
+        deleteTransactionMutation.mutate(id)
+    }
+
     const { data: category, isLoading } = useGetCategoryById(props.categoryId)
     let categoryName = category?.name
 
@@ -63,7 +72,11 @@ const TransactionRow : React.FC<Transaction> = (props) => {
                 <button className="btn-td btn-td-edit">
                     <BiEdit />
                 </button>
-                <button className="btn-td btn-td-delete">
+                <button
+                    type="button"
+                    className="btn-td btn-td-delete"
+                    onClick={() => handleDeleteTransaction(props.id)}
+                >
                     <MdOutlineDeleteOutline />
                 </button>
             </td>

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import type { TransactionForm } from "../../lib/types/services/transaction.type";
 
 // API Calls
-import { newTransaction } from "./api";
+import { deleteTransaction, newTransaction } from "./api";
 
 // Query
 import { useFetchAllTransactions } from "./queries";
@@ -31,6 +31,33 @@ export const useNewTransactionMutation = () => {
             queryClient.invalidateQueries({
                 queryKey: ["categories"]
             })
+        },
+        onError: (error: Error) => {
+            const message = error.message;
+            toast.error(message);
+        },
+    })
+}
+
+// Delete transaction mutation
+export const useDeleteTransactionMutation = () => {
+    // Query client
+    const queryClient = new QueryClient()
+
+    // Refetch categories list
+    const { refetch } = useFetchAllTransactions()
+
+    return useMutation({
+        mutationFn: (id: number) => deleteTransaction(id),
+        onSuccess: (response) => {
+            // Sucess toast
+            toast.success(response);
+
+            refetch()
+
+            queryClient.refetchQueries({
+                queryKey: ["categories"]
+            });
         },
         onError: (error: Error) => {
             const message = error.message;

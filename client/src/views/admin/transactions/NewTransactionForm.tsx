@@ -13,7 +13,7 @@ import { TransactionTypeField } from '../../../components/admin/atoms/Transactio
 import { CategoriesSelectField } from '../../../components/admin/atoms/CategoriesSelectField';
 
 // Mutation
-import { useNewTransactionMutation } from "../../../services/transactions/mutation";
+import { useNewTransactionMutation } from "../../../services/transactions/mutations";
 import { TransactionStateSelectField } from '../../../components/admin/atoms/TransactionStateSelectField';
 import { TransactionNotesField } from '../../../components/admin/atoms/TransactionNotesField';
 
