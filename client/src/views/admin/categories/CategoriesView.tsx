@@ -19,7 +19,7 @@ const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null
     const formRef = useRef<HTMLFormElement>(null);
 
     // Get all categories
-    const { data: categories } = useFetchAllCategories()
+    const { data: categories, isLoading } = useFetchAllCategories()
 
     // Filter categories
     const totalCategories = Array.isArray(categories) ? categories.length : 0;
@@ -53,6 +53,13 @@ const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null
         };
     }, [modalForm]);
 
+    let loadingState = false
+
+    // If is loading
+    if (isLoading) {
+        loadingState = true
+    }
+
     // Handle edit form
     const handleEditForm = (id: number) => {
         setEditCategoryId(id);
@@ -78,6 +85,8 @@ const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null
             />
             <CategoriesGallery
                 setEditForm={handleEditForm}
+                categories={Array.isArray(categories) ? categories : []}
+                loadingState={loadingState}
             />
 
             {/* Modal form */}
@@ -97,7 +106,6 @@ const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null
             )}
         </main>
     )
-    
 }
 
 export default CategoriesView
