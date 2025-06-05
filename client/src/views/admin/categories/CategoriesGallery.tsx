@@ -18,6 +18,15 @@ const CategoriesGallery = ({ setEditForm, categories, loadingState } : GalleryPr
     // If is loading
     if (loadingState == true) return <ModuleLoading />
 
+    // If categories doesn't have items or is not an []
+    if (!Array.isArray(categories) || categories.length === 0) {
+        return (
+            <div className="no-data">
+                Aún no has añadido ninguna categoría.
+            </div>
+        );
+    }
+
     return (
         <section className="categories-gallery">
             {categories.map((category: Category) => (
