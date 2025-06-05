@@ -90,6 +90,23 @@
                 cursor: pointer;
             }
 
+        .form-group h2 {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--color-dark-blue);
+        }
+
+            .form-group h2 a {
+                text-decoration: none;
+                color: var(--color-green);
+                margin-left: 3px;
+                font-weight: 400;
+            }
+
+                .form-group h2 a:hover{
+                    text-decoration: underline;
+                }
+
     .form-double-group {
         display: flex;
         gap: 1rem;
@@ -160,7 +177,8 @@
     }
 
     .form-group input,
-    .form-group select {
+    .form-group select,
+    .form-group textarea {
         border-radius: 4px;
         padding: 9px 14px 9px;
         font-size: 15px;
