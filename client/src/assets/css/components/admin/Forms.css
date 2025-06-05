@@ -33,6 +33,7 @@
     border-radius: 5px;
     padding: 2.5rem;
     flex-direction: column;
+    overflow: auto;
 }
 
     .form-module h1 {
