@@ -95,6 +95,10 @@
         gap: 1rem;
     }
 
+        .form-double-group .form-group {
+            max-width: 48%;
+        }
+
     .form-group-colors {
         display: flex;
         gap: 10px;
@@ -187,6 +191,15 @@
     .form-transactions {
         width: 86%;
         height: 550px;
+    }
+
+    .form-double-group {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-double-group .form-group {
+        min-width: 100%;
     }
 }
 
