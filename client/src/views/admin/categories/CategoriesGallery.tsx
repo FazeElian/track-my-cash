@@ -1,31 +1,28 @@
 // Styles for this component
 import "../../../assets/css/components/admin/CategoriesGallery.css";
 
-// Query
-import { useGetAllCategories } from '../../../services/categories/queries';
-
 // Type
 import type { Category } from '../../../lib/types/services/category.type';
 
 // Card component
 import { CategoryCard } from '../../../components/admin/molecules/CategoryCard';
+import { useFetchAllCategories } from "../../../services/categories/queries";
 
-const CategoriesGallery = () => {
-    // Categories list from query
-    const categories = useGetAllCategories()
+interface GalleryProps {
+    setEditForm: (id: number) => void;
+}
 
-    // Check if it's an array
-    if (!Array.isArray(categories)) {
-        return null;
-    }
+const CategoriesGallery = ({ setEditForm } : GalleryProps) => {
+    // Get categories
+    const { data: categories } = useFetchAllCategories()
 
-    // Check if it has categories
-    if (categories.length === 0) {
+    // Si `data` es `undefined` o un array vacío después de que la carga ha terminado y no hubo error
+    if (!Array.isArray(categories) || categories.length === 0) {
         return (
             <div className="no-data">
                 Aún no has añadido ninguna categoría.
             </div>
-        )
+        );
     }
 
     return (
@@ -39,6 +36,7 @@ const CategoriesGallery = () => {
                     icon={category.icon}
                     color={category.color}
                     monthlyBudget={category.monthlyBudget}
+                    editForm={setEditForm}
                 />
             ))}
         </section>

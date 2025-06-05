@@ -4,20 +4,22 @@ import { useEffect, useRef, useState } from "react";
 import { SearchBar } from "../../../components/admin/SearchBar";
 import { TopViewModule } from "../../../components/admin/TopTitle"
 import { CategoriesGallery } from "./CategoriesGallery";
+import EditCategoryForm from "./EditCategoryForm";
+import NewCategoryForm from "./NewCategoryForm";
 
 // React icons
 import { BiCategoryAlt } from "react-icons/bi";
-import NewCategoryForm from "./NewCategoryForm";
 
 // Query
-import { useGetAllCategories } from "../../../services/categories/queries";
+import { useFetchAllCategories } from "../../../services/categories/queries";
 
 const CategoriesView = () => {
-    const [isOpen, setIsOpen] = useState(false);
+const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
+    const [editCategoryId, setEditCategoryId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
     // Get all categories
-    const categories = useGetAllCategories()
+    const { data: categories } = useFetchAllCategories()
 
     // Filter categories
     const totalCategories = Array.isArray(categories) ? categories.length : 0;
@@ -32,11 +34,11 @@ const CategoriesView = () => {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (formRef.current && !formRef.current.contains(event.target as Node)) {
-                setIsOpen(false);
+                setModalForm(null);
             }
         };
 
-        if (isOpen) {
+        if (modalForm) {
             document.addEventListener("mousedown", handleClickOutside);
 
             // Remove scroll on body
@@ -49,7 +51,13 @@ const CategoriesView = () => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [isOpen]);
+    }, [modalForm]);
+
+    // Handle edit form
+    const handleEditForm = (id: number) => {
+        setEditCategoryId(id);
+        setModalForm(`edit ${id}`);
+    };
 
     return (
         <main className="content-page--admin">
@@ -58,7 +66,7 @@ const CategoriesView = () => {
                 icon={BiCategoryAlt}
                 txtBtnAdd="Añadir categoría"
                 txtBtnAddShort="Añadir"
-                btnAddOnClick={() => setIsOpen(true)}
+                btnAddOnClick={() => setModalForm("new")}
                 quickState1Value={`${totalCategories} categorías creadas`}
                 quickState2Value={`${totalIncomes} de ingresos`}
                 quickState3Value={`${totalExpenses} de gastos`}
@@ -68,15 +76,25 @@ const CategoriesView = () => {
                 searchName="categories"
                 placeholder="Buscar categoría por nombre"
             />
-            <CategoriesGallery />
+            <CategoriesGallery
+                setEditForm={handleEditForm}
+            />
 
             {/* Modal form */}
-            {isOpen && 
+            {modalForm === "new" && 
                 <NewCategoryForm
                     modalRef={formRef}
-                    onClose={() => setIsOpen(false)}
+                    onClose={() => setModalForm(null)}
                 />
             }
+
+            {modalForm === `edit ${editCategoryId}` && editCategoryId !== null && (
+                <EditCategoryForm
+                    id={editCategoryId}
+                    modalRef={formRef}
+                    onClose={()  => setModalForm(null)}
+                />
+            )}
         </main>
     )
     

@@ -5,9 +5,11 @@ export type Category = {
     icon: string
     color: string
     monthlyBudget: number
+    editForm: (id: number) => void
 }
 
-export type AddCategory = Pick<Category,
+export type CategoryForm = Pick<Category,
+    "id" |
     "name" |
     "type" |
     "icon" |

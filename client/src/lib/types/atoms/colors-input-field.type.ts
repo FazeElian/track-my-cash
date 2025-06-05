@@ -1,5 +1,3 @@
-import type { FieldError } from "react-hook-form";
-
 export type Color = {
     id: number;
     value: string;
@@ -11,5 +9,4 @@ export interface ColorsInputField {
     labelFor: string;
     setColor: (color: Color) => void;
     color: Color;
-    error?: FieldError;
 }

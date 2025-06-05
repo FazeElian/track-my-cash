@@ -22,6 +22,8 @@ const CategoryCard : React.FC<Category> = (props) => {
         deleteCategoryMutation.mutate(id)
     }
 
+    const IconComponent = iconsMap[props.icon];
+
     return (
         <motion.div
             className="item-categories-gallery"
@@ -35,10 +37,7 @@ const CategoryCard : React.FC<Category> = (props) => {
                 <div
                     className={`icon-top-item-categories-gallery ${colorClassMap[props.color]}`}
                 >
-                    {(() => {
-                        const Icon = iconsMap[props.icon];
-                        return Icon ? <Icon /> : <IoMdCart />;
-                    })()}
+                    {IconComponent ? <IconComponent /> : <IoMdCart />}
                 </div>
                 <div className="info-top-item-categories-gallery">
                     <h1>{props.name}</h1>
@@ -48,7 +47,8 @@ const CategoryCard : React.FC<Category> = (props) => {
                 </div>
                 <button
                     type="button"
-                    className="btn-options-top-item-categories-gallery btn-edit-top-item-categories-gallery "
+                    className="btn-options-top-item-categories-gallery btn-edit-top-item-categories-gallery"
+                    onClick={() => props.editForm(props.id)}
                 >
                     <BiEdit />
                 </button>

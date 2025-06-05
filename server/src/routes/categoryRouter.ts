@@ -41,8 +41,8 @@ router.post("/categories/new",
 );
 
 router.put("/categories/:categoryId",
-    validateCategoryInput,
-    handleInputErrors,
+    // validateCategoryInput,
+    // handleInputErrors,
     authenticate,
     CategoryController.updateById
 );

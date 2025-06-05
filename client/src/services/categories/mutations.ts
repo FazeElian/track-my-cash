@@ -2,10 +2,10 @@ import { QueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 // Types
-import type { AddCategory } from "../../lib/types/services/category.type";
+import type { CategoryForm } from "../../lib/types/services/category.type";
 
 // API Calls
-import { addCategory, deleteCategory } from "./api";
+import { addCategory, deleteCategory, updateCategory } from "./api";
 
 // Query
 import { useFetchAllCategories } from "./queries";
@@ -19,7 +19,7 @@ export const useAddCategoryMutation = () => {
     const { refetch } = useFetchAllCategories()
 
     return useMutation({
-        mutationFn: (data: AddCategory) => addCategory(data),
+        mutationFn: (data: CategoryForm) => addCategory(data),
         onSuccess: (response) => {
             // Sucess toast
             toast.success(response);
@@ -31,6 +31,32 @@ export const useAddCategoryMutation = () => {
             queryClient.invalidateQueries({
                 queryKey: ["categories"]
             })
+        },
+        onError: (error: Error) => {
+            const message = error.message;
+            toast.error(message);
+        },
+    })
+}
+
+export const useUpdateCategoryMutation = (id: number) => {
+    // Query client
+    const queryClient = new QueryClient()
+
+    // Refetch categories list
+    const { refetch } = useFetchAllCategories()
+
+    return useMutation({
+        mutationFn: (data: CategoryForm) => updateCategory(data, id),
+        onSuccess: (response) => {
+            // Sucess toast
+            toast.success(response.message);
+
+            refetch()
+
+            queryClient.invalidateQueries({
+                queryKey: ["category", id],
+            });
         },
         onError: (error: Error) => {
             const message = error.message;

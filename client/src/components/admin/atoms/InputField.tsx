@@ -12,7 +12,7 @@ const InputField = ({ label, labelFor, error, ...rest }: InputFieldProps) => {
                 <input {...rest} className="font-lexend" />
                 {error && 
                     <ErrorMessageValidation>
-                        {error?.message}
+                        {error.message}
                     </ErrorMessageValidation>
                 }
             </div>

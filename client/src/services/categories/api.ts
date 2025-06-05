@@ -4,7 +4,7 @@ import { isAxiosError } from "axios";
 import { api } from "../../config/axios";
 
 // Types
-import type { AddCategory, Category } from "../../lib/types/services/category.type";
+import type { CategoryForm, Category } from "../../lib/types/services/category.type";
 
 export async function getAllCategories () {
     try {
@@ -19,9 +19,35 @@ export async function getAllCategories () {
     }
 }
 
-export async function addCategory (categoryData: AddCategory) {
+export async function getCategoryById (id: number) {
+    try {
+        const { data } = await api<Category>(`/admin/categories/${id}`);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
+
+export async function addCategory (categoryData: CategoryForm) {
     try {
         const { data } = await api.post("/admin/categories/new", categoryData);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
+
+export async function updateCategory (categoryData: CategoryForm, id: number) {
+    try {
+        const { data } = await api.put(`/admin/categories/${id}`, categoryData);
         return data;
     } catch (error) {
         if (isAxiosError(error) && error.response) {
