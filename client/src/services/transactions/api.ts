@@ -4,11 +4,11 @@ import { isAxiosError } from "axios";
 import { api } from "../../config/axios";
 
 // Types
-import type { TransactionForm } from "../../lib/types/services/transaction.type";
+import type { Transaction, TransactionForm } from "../../lib/types/services/transaction.type";
 
 export async function getAllTransactions () {
     try {
-        const { data } = await api.post("/admin/transactions/");
+        const { data } = await api.get<Transaction[]>("/admin/transactions/");
         return data;
     } catch (error) {
         if (isAxiosError(error) && error.response) {

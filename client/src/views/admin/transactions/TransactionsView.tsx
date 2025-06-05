@@ -3,15 +3,21 @@ import { useEffect, useRef, useState } from "react"
 // Components for this view
 import { TopViewModule } from "../../../components/admin/TopTitle"
 import { SearchBar } from "../../../components/admin/SearchBar"
+import NewTransactionForm from "./NewTransactionForm"
 
 // React icons
 import { IoMdSwap } from "react-icons/io"
 import { TransactionsTable } from "./TransactionsTable"
-import NewTransactionForm from "./NewTransactionForm"
+
+// Query
+import { useFetchAllTransactions } from "../../../services/transactions/queries"
 
 const TransactionsView = () => {
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
+
+    // Get transactions list
+    const { data: transactions, isLoading } = useFetchAllTransactions()
 
     // Close the modal when user clicks outside the form
     useEffect(() => {
@@ -36,6 +42,13 @@ const TransactionsView = () => {
         };
     }, [modalForm]);
 
+    let loadingState = false
+
+    // If is loading
+    if (isLoading) {
+        loadingState = true
+    }
+
     return (
         <main className="content-page--admin">
             <TopViewModule
@@ -53,7 +66,11 @@ const TransactionsView = () => {
                 searchName="transactions"
                 placeholder="Buscar movimiento por título"
             />
-            <TransactionsTable />
+            <TransactionsTable
+                transactions={Array.isArray(transactions) ? transactions : []}
+                loadingState={loadingState}
+            />
+
             {/* Modal form */}
             {modalForm === "new" && 
                 <NewTransactionForm

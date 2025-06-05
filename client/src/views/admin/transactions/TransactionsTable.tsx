@@ -1,12 +1,32 @@
 // Styles for this component
 import "../../../assets/css/components/admin/MovementsTable.css";
 
-// React icons
-import { MdOutlineDeleteOutline, MdOutlineWatchLater } from 'react-icons/md';
-import { BiEdit } from 'react-icons/bi';
-import { MdOutlineCheckCircle } from "react-icons/md";
+// Components for this view
+import { ModuleLoading } from "../../../components/admin/ModuleLoading";
+import { TransactionRow } from "../../../components/admin/molecules/TransactionRow";
 
-const TransactionsTable = () => {
+// Type
+import type { Transaction } from "../../../lib/types/services/transaction.type";
+
+interface TransactionsTableProps {
+    // setEditForm: (id: number) => void;
+    transactions: Transaction[];
+    loadingState: boolean
+}
+
+const TransactionsTable = ({ transactions, loadingState } : TransactionsTableProps) => {
+    // If is loading
+    if (loadingState == true) return <ModuleLoading />
+
+    // If transactions doesn't have items or is not an []
+    if (!Array.isArray(transactions) || transactions.length === 0) {
+        return (
+            <div className="no-data">
+                Aún no has registrado ningún movimiento.
+            </div>
+        );
+    }
+
     return (
         <table className="table-transactions">
             <thead>
@@ -20,52 +40,22 @@ const TransactionsTable = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr className="tbody tbody-categories">
-                    <td className="td td-title-transaction">Renta AirBnb Miami, Florida</td>
-                    <td className="td td-category-transaction">Rentas</td>
-                    <td className="td td-td td-date-transaction">2024-01-15</td>
-                    <td className="td td-amount-transaction amount-income">+$35000.00</td>
-                    <td className="td td-state-transaction">
-                        {/* <div className="state-transaction state-completed">
-                            <FaCheckCircle />
-                            Completada
-                        </div> */}
-                        <div className="state-transaction state-pending">
-                            <MdOutlineWatchLater />
-                            Pendiente
-                        </div>
-                    </td>
-                    <td className="td td-options-transaction">
-                        <button className="btn-td btn-td-edit">
-                            <BiEdit />
-                        </button>
-                        <button className="btn-td btn-td-delete">
-                            <MdOutlineDeleteOutline />
-                        </button>
-                    </td>
-                </tr>
+                {transactions.map((transaction) => (
+                    <TransactionRow
+                        key={transaction.id}
+                        id={transaction.id}
+                        title={transaction.title}
+                        amount={transaction.amount}
+                        type={transaction.type}
+                        categoryId={transaction.categoryId}
+                        date={transaction.date}
+                        state={transaction.state}
+                        notes={transaction.notes}
+                        editForm={() => console.log()}
+                    />
+                ))}
             </tbody>
             <tbody>
-                <tr className="tbody tbody-categories">
-                    <td className="td td-title-transaction">Renta AirBnb Dubai </td>
-                    <td className="td td-category-transaction">Rentas</td>
-                    <td className="td td-td td-date-transaction">2024-01-15</td>
-                    <td className="td td-amount-transaction amount-expense">-$25000.00</td>
-                    <td className="td td-state-transaction">
-                        <div className="state-transaction state-completed">
-                            <MdOutlineCheckCircle />
-                            Completada
-                        </div>
-                    </td>
-                    <td className="td td-options-transaction">
-                        <button className="btn-td btn-td-edit">
-                            <BiEdit />
-                        </button>
-                        <button className="btn-td btn-td-delete">
-                            <MdOutlineDeleteOutline />
-                        </button>
-                    </td>
-                </tr>
             </tbody>
         </table>
     )
