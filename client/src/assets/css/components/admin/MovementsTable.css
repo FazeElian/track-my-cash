@@ -118,6 +118,38 @@
             font-size: 15.5px;
             color: var(--color-dark-blue);
         }
+            .td-title-transaction {
+                gap: 14px;
+                text-align: start;
+                justify-content: start;
+            }
+            
+            .icon-title-transaction {
+                display: flex;
+                width: auto;
+                height: auto;
+                padding: 10px;
+                border-radius: 50%;
+            }
+
+                .icon-income-title-transaction {
+                    background-color: var(--color-light-green);
+                    color: var(--color-green);
+                }
+
+                .icon-expense-title-transaction {
+                    background-color: var(--color-light-red2);
+                    color: var(--color-red);
+                }
+                    
+                    .icon-expense-title-transaction svg {
+                        transform: rotate(90deg);
+                    }
+
+                .icon-title-transaction svg {
+                    width: 20px;
+                    height: 20px;
+                }
 
         .btn-td {
             display: flex;

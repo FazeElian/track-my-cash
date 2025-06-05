@@ -1,6 +1,6 @@
 // React icons
 import { FaCheckCircle } from "react-icons/fa";
-import { MdOutlineDeleteOutline, MdOutlineWatchLater } from "react-icons/md";
+import { MdOutlineDeleteOutline, MdOutlineWatchLater, MdOutlineArrowOutward } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 
 // Type
@@ -20,7 +20,21 @@ const TransactionRow : React.FC<Transaction> = (props) => {
 
     return (
         <tr className="tbody tbody-categories" key={props.id}>
-            <td className="td td-title-transaction">{props.title}</td>
+            {props.type == "Income" ? (
+                <td className="td td-title-transaction">
+                    <div className="icon-title-transaction icon-income-title-transaction">
+                        <MdOutlineArrowOutward />
+                    </div>
+                    {props.title}
+                </td>
+            ): (
+                <td className="td td-title-transaction">
+                    <div className="icon-title-transaction icon-expense-title-transaction">
+                        <MdOutlineArrowOutward />
+                    </div>
+                    {props.title}
+                </td>
+            )}
             <td className="td td-category-transaction">{categoryName}</td>
             <td className="td td-td td-date-transaction">{formatDate(props.date)}</td>
             {props.type == "Income" ? (
