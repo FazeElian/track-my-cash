@@ -42,15 +42,6 @@ const CategoriesGallery = ({ setEditForm, categories, loadingState, searchQueryV
         );
     }
 
-    // If there's no results
-    if(filteredCategories.length <= 0) {
-        return (
-            <div className="no-data">
-                No hay categorías que coincidan con
-            </div>
-        );
-    }
-
     return (
         <section className="categories-gallery">
             {filteredCategories.map((category: Category) => (

@@ -15,6 +15,12 @@ import { useFetchAllTransactions } from "../../../services/transactions/queries"
 const TransactionsView = () => {
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleSearchSubmit = (value: string) => {
+        value = value.toLowerCase()
+        setSearchQuery(value);
+    };
 
     // Get transactions list
     const { data: transactions, isLoading } = useFetchAllTransactions()
@@ -58,6 +64,11 @@ const TransactionsView = () => {
         loadingState = true
     }
 
+    const transactionsList =  Array.isArray(transactions)
+        ? transactions.filter(transaction =>
+            transaction.title.toLowerCase().includes(searchQuery)
+        ) : []
+
     return (
         <main className="content-page--admin">
             <TopViewModule
@@ -69,15 +80,19 @@ const TransactionsView = () => {
                 quickState1Value={`${totalTransactions} movimientos registrados`}
                 quickState2Value={`${totalCompleted} completados`}
                 quickState3Value={`${totalPending} pendientes`}
+                onSearchSubmit={handleSearchSubmit}
+
             />
             <SearchBar
                 titleModule="Movimientos"
                 searchName="transactions"
                 placeholder="Buscar movimiento por título"
+                onSearchSubmit={handleSearchSubmit}
             />
             <TransactionsTable
-                transactions={Array.isArray(transactions) ? transactions : []}
+                transactions={transactionsList}
                 loadingState={loadingState}
+                searchQueryValue={searchQuery}
             />
 
             {/* Modal form */}

@@ -52,4 +52,10 @@ router.delete("/transactions/:transactionId",
     TransactionController.deleteById
 );
 
+router.get("/transactions/search",
+    authenticate,
+    TransactionController.search
+);
+
+
 export default router;

@@ -12,11 +12,26 @@ interface TransactionsTableProps {
     // setEditForm: (id: number) => void;
     transactions: Transaction[];
     loadingState: boolean
+    searchQueryValue: string
 }
 
-const TransactionsTable = ({ transactions, loadingState } : TransactionsTableProps) => {
+const TransactionsTable = ({ transactions, loadingState, searchQueryValue } : TransactionsTableProps) => {
     // If is loading
     if (loadingState == true) return <ModuleLoading />
+
+    // Transactions that match with the search query
+    const filteredTransactions = transactions.filter((transaction) =>
+        transaction.title.toLowerCase().includes(searchQueryValue.toLowerCase())
+    );
+
+    // If there's no results
+    if(filteredTransactions.length <= 0) {
+        return (
+            <div className="no-data">
+                No hay movimientos que coincidan con "{searchQueryValue}"
+            </div>
+        );
+    }
 
     // If transactions doesn't have items or is not an []
     if (!Array.isArray(transactions) || transactions.length === 0) {

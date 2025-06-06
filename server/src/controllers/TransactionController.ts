@@ -56,4 +56,34 @@ export class TransactionController {
 
         res.json("Registro de movimiento eliminado con éxito.");
     }
+
+    // Search transaction by name
+    static search = async (req: Request, res: Response) => {
+        try {
+            const userId = req.user.id;
+            const transactionQuery = req.query.name;
+            // console.log(transactionQuery)
+
+            const categories = await Transaction.findAll({
+                where: {
+                    userId: userId,
+                }
+            });
+
+            const searchResult = categories.filter(transaction =>
+                transaction.title.toLowerCase().includes((transactionQuery as string).trim())
+            );
+
+            if (!searchResult  || searchResult.length === 0) {
+                const error = new Error(`El movimiento "${transactionQuery}}" no existe.`);
+                res.status(409).json({ error: error.message });
+                return;
+            }
+
+            // Return categories list
+            res.json(searchResult)
+        } catch (error) {
+            res.status(500).json({ error: "Error al buscar movimiento." })
+        }
+    }
 }
