@@ -31,17 +31,19 @@ const TopViewModule : React.FC<TopViewModuleType> = (props) => {
                         </button>
                     </div>
                 </div>
-                <div className="quick-stats-top-title-view-module">
-                    <div className="item-quick-stats-top-title-view-module item-blue-quick-stats-top-title-view-module">
-                        {props.quickState1Value}
+                {props.quickState1Value === "" ? "" : (
+                    <div className="quick-stats-top-title-view-module">
+                        <div className="item-quick-stats-top-title-view-module item-blue-quick-stats-top-title-view-module">
+                            {props.quickState1Value}
+                        </div>
+                        <div className="item-quick-stats-top-title-view-module item-green-quick-stats-top-title-view-module">
+                            {props.quickState2Value}
+                        </div>
+                        <div className="item-quick-stats-top-title-view-module item-orange-quick-stats-top-title-view-module">
+                            {props.quickState3Value}
+                        </div>
                     </div>
-                    <div className="item-quick-stats-top-title-view-module item-green-quick-stats-top-title-view-module">
-                        {props.quickState2Value}
-                    </div>
-                    <div className="item-quick-stats-top-title-view-module item-orange-quick-stats-top-title-view-module">
-                        {props.quickState3Value}
-                    </div>
-                </div>
+                )}
                 <button
                     className="btn-add-mobile btn-actions-top-title-view-module font-lexend"
                     onClick={props.btnAddOnClick}
