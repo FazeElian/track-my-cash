@@ -12,11 +12,26 @@ interface GalleryProps {
     setEditForm: (id: number) => void;
     categories: Category[];
     loadingState: boolean
+    searchQueryValue: string
 }
 
-const CategoriesGallery = ({ setEditForm, categories, loadingState } : GalleryProps) => {
+const CategoriesGallery = ({ setEditForm, categories, loadingState, searchQueryValue } : GalleryProps) => {
     // If is loading
     if (loadingState == true) return <ModuleLoading />
+
+    // Categories that match with the search query
+    const filteredCategories = categories.filter((category) =>
+        category.name.toLowerCase().includes(searchQueryValue.toLowerCase())
+    );
+
+    // If there's no results
+    if(filteredCategories.length <= 0) {
+        return (
+            <div className="no-data">
+                No hay categorías que coincidan con "{searchQueryValue}"
+            </div>
+        );
+    }
 
     // If categories doesn't have items or is not an []
     if (!Array.isArray(categories) || categories.length === 0) {
@@ -27,9 +42,18 @@ const CategoriesGallery = ({ setEditForm, categories, loadingState } : GalleryPr
         );
     }
 
+    // If there's no results
+    if(filteredCategories.length <= 0) {
+        return (
+            <div className="no-data">
+                No hay categorías que coincidan con
+            </div>
+        );
+    }
+
     return (
         <section className="categories-gallery">
-            {categories.map((category: Category) => (
+            {filteredCategories.map((category: Category) => (
                 <CategoryCard
                     key={category.id}
                     id={category.id}

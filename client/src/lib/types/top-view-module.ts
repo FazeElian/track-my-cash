@@ -7,4 +7,5 @@ export type TopViewModuleType = {
     quickState1Value: string
     quickState2Value: string
     quickState3Value: string
+    onSearchSubmit: (query: string) => void
 }

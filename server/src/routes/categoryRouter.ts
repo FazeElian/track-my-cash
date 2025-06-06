@@ -52,4 +52,9 @@ router.delete("/categories/:categoryId",
     CategoryController.deleteById
 );
 
+router.get("/categories/search",
+    authenticate,
+    CategoryController.search
+);
+
 export default router;

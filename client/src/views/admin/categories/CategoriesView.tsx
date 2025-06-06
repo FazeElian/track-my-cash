@@ -17,6 +17,12 @@ const CategoriesView = () => {
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const [editCategoryId, setEditCategoryId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleSearchSubmit = (value: string) => {
+        value = value.toLowerCase()
+        setSearchQuery(value);
+    };
 
     // Get all categories
     const { data: categories, isLoading } = useFetchAllCategories()
@@ -66,6 +72,12 @@ const CategoriesView = () => {
         setModalForm(`edit ${id}`);
     };
 
+
+    const categoriesList =  Array.isArray(categories)
+        ? categories.filter(category =>
+            category.name.toLowerCase().includes(searchQuery)
+        ) : []
+
     return (
         <main className="content-page--admin">
             <TopViewModule
@@ -77,16 +89,19 @@ const CategoriesView = () => {
                 quickState1Value={`${totalCategories} categorías creadas`}
                 quickState2Value={`${totalIncomes} de ingresos`}
                 quickState3Value={`${totalExpenses} de gastos`}
+                onSearchSubmit={handleSearchSubmit}
             />
             <SearchBar
                 titleModule="Categorías"
                 searchName="categories"
                 placeholder="Buscar categoría por nombre"
+                onSearchSubmit={handleSearchSubmit}
             />
             <CategoriesGallery
                 setEditForm={handleEditForm}
-                categories={Array.isArray(categories) ? categories : []}
+                categories={categoriesList}
                 loadingState={loadingState}
+                searchQueryValue={searchQuery}
             />
 
             {/* Modal form */}

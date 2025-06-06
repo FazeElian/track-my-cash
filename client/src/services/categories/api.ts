@@ -70,3 +70,16 @@ export async function deleteCategory (id: number) {
         return new Error(`${error}`)
     }
 }
+
+export async function searchCategory (query: string) {
+    try {
+        const { data } = await api.get<Category[]>(`/admin/categories/search?name=${encodeURIComponent(query)}`);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
