@@ -19,6 +19,15 @@ const TransactionsView = () => {
     // Get transactions list
     const { data: transactions, isLoading } = useFetchAllTransactions()
 
+    // Filter transactions
+    const totalTransactions = Array.isArray(transactions) ? transactions.length : 0;
+    const totalCompleted = Array.isArray(transactions)
+        ? transactions.filter((category) => category.state === "Completed").length
+        : 0;
+    const totalPending = Array.isArray(transactions)
+        ? transactions.filter((category) => category.state === "Pending").length
+        : 0;
+
     // Close the modal when user clicks outside the form
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -57,9 +66,9 @@ const TransactionsView = () => {
                 txtBtnAdd="Registrar movimiento"
                 txtBtnAddShort="Registrar"
                 btnAddOnClick={() => setModalForm("new")}
-                quickState1Value={`${12} movimientos registrador`}
-                quickState2Value={`${4} de ingresos`}
-                quickState3Value={`${8} de gastos`}
+                quickState1Value={`${totalTransactions} movimientos registrados`}
+                quickState2Value={`${totalCompleted} completados`}
+                quickState3Value={`${totalPending} pendientes`}
             />
             <SearchBar
                 titleModule="Movimientos"
