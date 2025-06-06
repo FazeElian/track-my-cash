@@ -4,6 +4,7 @@ import { TbLayoutDashboard } from "react-icons/tb"
 // Components for this view
 import { TopViewModule } from "../../components/admin/TopTitle"
 import { DashboardStats } from "../../components/admin/molecules/DashboardStats"
+import { DashboardCharts } from "../../components/admin/molecules/DashboardCharts"
 
 const DashboardView = () => {
     return (
@@ -23,6 +24,7 @@ const DashboardView = () => {
                 ¡Bienvenido de vuelta! Aquí está tu resumen financiero.
             </h2>
             <DashboardStats />
+            <DashboardCharts />
         </main>
     )
 }
