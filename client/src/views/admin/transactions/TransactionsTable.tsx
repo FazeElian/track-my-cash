@@ -19,6 +19,24 @@ const TransactionsTable = ({ transactions, loadingState, searchQueryValue } : Tr
     // If is loading
     if (loadingState == true) return <ModuleLoading />
 
+    // If transactions doesn't have items or is not an []
+    const hasTransactions = Array.isArray(transactions) && transactions.length > 0;
+    if (!hasTransactions) {
+        if (searchQueryValue.trim() !== "") {
+            return (
+                <div className="no-data">
+                    No hay movimientos que coincidan con "{searchQueryValue}"
+                </div>
+            );
+        } else {
+            return (
+                <div className="no-data">
+                    Aún no has registrado ningún movimiento.
+                </div>
+            );
+        }
+    }
+
     // Transactions that match with the search query
     const filteredTransactions = transactions.filter((transaction) =>
         transaction.title.toLowerCase().includes(searchQueryValue.toLowerCase())
@@ -29,15 +47,6 @@ const TransactionsTable = ({ transactions, loadingState, searchQueryValue } : Tr
         return (
             <div className="no-data">
                 No hay movimientos que coincidan con "{searchQueryValue}"
-            </div>
-        );
-    }
-
-    // If transactions doesn't have items or is not an []
-    if (!Array.isArray(transactions) || transactions.length === 0) {
-        return (
-            <div className="no-data">
-                Aún no has registrado ningún movimiento.
             </div>
         );
     }

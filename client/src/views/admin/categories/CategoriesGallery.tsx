@@ -19,6 +19,24 @@ const CategoriesGallery = ({ setEditForm, categories, loadingState, searchQueryV
     // If is loading
     if (loadingState == true) return <ModuleLoading />
 
+    // If categories doesn't have items or is not an []
+    const hasCategories = Array.isArray(categories) && categories.length > 0;
+    if (!hasCategories) {
+        if (searchQueryValue.trim() !== "") {
+            return (
+                <div className="no-data">
+                    No hay categorías que coincidan con "{searchQueryValue}"
+                </div>
+            );
+        } else {
+            return (
+                <div className="no-data">
+                    Aún no has añadido ninguna categoría.
+                </div>
+            );
+        }
+    }
+
     // Categories that match with the search query
     const filteredCategories = categories.filter((category) =>
         category.name.toLowerCase().includes(searchQueryValue.toLowerCase())
@@ -29,15 +47,6 @@ const CategoriesGallery = ({ setEditForm, categories, loadingState, searchQueryV
         return (
             <div className="no-data">
                 No hay categorías que coincidan con "{searchQueryValue}"
-            </div>
-        );
-    }
-
-    // If categories doesn't have items or is not an []
-    if (!Array.isArray(categories) || categories.length === 0) {
-        return (
-            <div className="no-data">
-                Aún no has añadido ninguna categoría.
             </div>
         );
     }
