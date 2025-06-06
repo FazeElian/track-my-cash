@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { TopViewModule } from "../../../components/admin/TopTitle"
 import { SearchBar } from "../../../components/admin/SearchBar"
 import NewTransactionForm from "./NewTransactionForm"
+import EditTransactionForm from "./EditTransactionForm"
 
 // React icons
 import { IoMdSwap } from "react-icons/io"
@@ -14,6 +15,7 @@ import { useFetchAllTransactions } from "../../../services/transactions/queries"
 
 const TransactionsView = () => {
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
+    const [editTransactionId, setEditTransactionId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -64,6 +66,12 @@ const TransactionsView = () => {
         loadingState = true
     }
 
+    // Handle edit form
+    const handleEditForm = (id: number) => {
+        setEditTransactionId(id);
+        setModalForm(`edit ${id}`);
+    };
+
     const transactionsList =  Array.isArray(transactions)
         ? transactions.filter(transaction =>
             transaction.title.toLowerCase().includes(searchQuery)
@@ -90,6 +98,7 @@ const TransactionsView = () => {
                 onSearchSubmit={handleSearchSubmit}
             />
             <TransactionsTable
+                setEditForm={handleEditForm}
                 transactions={transactionsList}
                 loadingState={loadingState}
                 searchQueryValue={searchQuery}
@@ -102,6 +111,14 @@ const TransactionsView = () => {
                     onClose={() => setModalForm(null)}
                 />
             }
+
+            {modalForm === `edit ${editTransactionId}` && editTransactionId !== null && ( 
+                <EditTransactionForm
+                    id={editTransactionId}
+                    modalRef={formRef}
+                    onClose={() => setModalForm(null)}
+                />
+            )}
         </main>
     )
 }

@@ -69,7 +69,11 @@ const TransactionRow : React.FC<Transaction> = (props) => {
                 )}
             </td>
             <td className="td td-options-transaction">
-                <button className="btn-td btn-td-edit">
+                <button
+                    type="button"
+                    className="btn-td btn-td-edit"
+                    onClick={() => props.editForm(props.id)}
+                >
                     <BiEdit />
                 </button>
                 <button

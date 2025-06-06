@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 
 // API Calls
-import { getAllTransactions, searchTransaction } from "./api";
+import { getAllTransactions, getTransactionById, searchTransaction } from "./api";
 
 interface SearchProps {
     searchQuery: string;
@@ -29,5 +29,14 @@ export const useGetAllTransactions = ({ searchQuery } : SearchProps) => {
                 : getAllTransactions(),
         retry: 1,
         refetchOnWindowFocus: false
+    });
+}
+
+export const useGetTransactionById = (id: number) => {
+    return useQuery({
+        queryKey: ["transaction", id!],
+        queryFn: () => getTransactionById(id),
+        refetchOnWindowFocus: false,
+        enabled: !!id
     });
 }

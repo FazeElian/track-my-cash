@@ -41,8 +41,8 @@ router.post("/transactions/new",
 );
 
 router.put("/transactions/:transactionId",
-    validateTransactionInput,
-    handleInputErrors,
+    // validateTransactionInput,
+    // handleInputErrors,
     authenticate,
     TransactionController.updateById
 );

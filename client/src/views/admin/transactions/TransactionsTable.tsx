@@ -9,13 +9,13 @@ import { TransactionRow } from "../../../components/admin/molecules/TransactionR
 import type { Transaction } from "../../../lib/types/services/transaction.type";
 
 interface TransactionsTableProps {
-    // setEditForm: (id: number) => void;
+    setEditForm: (id: number) => void;
     transactions: Transaction[];
     loadingState: boolean
     searchQueryValue: string
 }
 
-const TransactionsTable = ({ transactions, loadingState, searchQueryValue } : TransactionsTableProps) => {
+const TransactionsTable = ({ transactions, loadingState, searchQueryValue, setEditForm } : TransactionsTableProps) => {
     // If is loading
     if (loadingState == true) return <ModuleLoading />
 
@@ -75,7 +75,7 @@ const TransactionsTable = ({ transactions, loadingState, searchQueryValue } : Tr
                         date={transaction.date}
                         state={transaction.state}
                         notes={transaction.notes}
-                        editForm={() => console.log()}
+                        editForm={setEditForm}
                     />
                 ))}
             </tbody>
