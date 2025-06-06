@@ -67,7 +67,7 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
                 method="POST"
                 onSubmit={handleSubmit(handleUpdateTransaction)}
             >
-                <h1>Registrar movimiento</h1>
+                <h1>Editar movimiento</h1>
 
                 {/* Name */}
                 <InputField
@@ -180,7 +180,7 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
                     type="submit"
                     className="btn-submit-form-module font-lexend"
                 >
-                    Registrar movimiento
+                    Guardar cambios
                 </button>
             </form>
         </section>
