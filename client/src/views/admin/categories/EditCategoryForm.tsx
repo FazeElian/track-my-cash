@@ -74,15 +74,6 @@ const EditCategoryForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, onC
                 onSubmit={handleSubmit(handleUpdateCategory)}
             >
                 <h1>Editar categoría</h1>
-                {updateMutation.isError && (
-                    <div style={{ color: 'red', marginBottom: '15px' }}>
-                        Error al guardar cambios: {updateMutation.error?.message || 'Error desconocido al actualizar.'}
-                    </div>
-                )}
-                {/* Opcional: mostrar un estado de carga mientras se guarda */}
-                {updateMutation.isPending && (
-                    <div style={{ color: 'blue', marginBottom: '15px' }}>Guardando cambios...</div>
-                )}
 
                 {/* Name */}
                 <InputField

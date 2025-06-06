@@ -50,7 +50,7 @@ export const useUpdateCategoryMutation = (id: number) => {
         mutationFn: (data: CategoryForm) => updateCategory(data, id),
         onSuccess: (response) => {
             // Sucess toast
-            toast.success(response.message);
+            toast.success(response);
 
             refetch()
 
