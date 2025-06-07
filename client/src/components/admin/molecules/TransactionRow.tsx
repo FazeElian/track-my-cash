@@ -7,7 +7,7 @@ import { BiEdit } from "react-icons/bi";
 import type { Transaction } from "../../../lib/types/services/transaction.type";
 
 // Utils
-import { formatDate } from "../../../lib/utils/dateFormat";
+import { formatDate } from "../../../lib/utils/formatDate";
 import { useGetCategoryById } from "../../../services/categories/queries";
 
 // Delete mutation

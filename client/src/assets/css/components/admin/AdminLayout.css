@@ -122,7 +122,6 @@
                 display: flex;
                 width: 18px;
                 height: 18px;
-                margin-left: 2rem;
                 transform: rotate(180deg);
             }
 
@@ -181,7 +180,6 @@
     .btn-user-side-bar svg {
         width: 15px;
         height: 15px;
-        margin-left: 20px;
     }
 
     .txt-user-side-var h1 {
@@ -239,7 +237,7 @@
     .nav-side-bar {
         display: flex;
         width: 25%;
-        min-width: 270px;
+        min-width: 280px;
         height: -webkit-fill-available;
         min-height: 95vh;
         position: fixed;
@@ -305,7 +303,6 @@
 
     .nav-side-bar {
         top: 5.3rem;
-        min-width: 250px;
     }
 
     .btn-side-bar svg {
