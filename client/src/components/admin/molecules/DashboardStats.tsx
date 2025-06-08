@@ -7,7 +7,12 @@ import { RiWallet3Line } from "react-icons/ri";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { LiaPiggyBankSolid } from "react-icons/lia";
 
+// Query
+import { useGetStats } from "../../../services/admin/queries";
+
 const DashboardStats = () => {
+    const stats = useGetStats()
+
     return (
         <section className="dashboard-stats">
             {/* Incomes */}
@@ -15,7 +20,7 @@ const DashboardStats = () => {
                 <div className="top-item-dashboard-stats">
                     <div className="txt-item-dashboard-stats">
                         <h1>Ingresos totales</h1>
-                        <h2>$4250</h2>
+                        <h2>${stats.totalIncomes}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
                         <MdOutlineArrowOutward />
@@ -35,7 +40,7 @@ const DashboardStats = () => {
                 <div className="top-item-dashboard-stats">
                     <div className="txt-item-dashboard-stats">
                         <h1>Gastos totales</h1>
-                        <h2>$1565</h2>
+                        <h2>${stats.totalExpenses}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
                         <MdOutlineArrowOutward />
@@ -55,7 +60,7 @@ const DashboardStats = () => {
                 <div className="top-item-dashboard-stats">
                     <div className="txt-item-dashboard-stats">
                         <h1>Saldo</h1>
-                        <h2>$2705</h2>
+                        <h2>${stats.totalBalance}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
                         <RiWallet3Line />
