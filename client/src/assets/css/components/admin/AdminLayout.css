@@ -96,6 +96,7 @@
         width: 100%;
         height: auto;
         justify-content: center;
+        text-decoration: none;
     }
 
         .btn-user-side-bar {
@@ -120,9 +121,8 @@
 
             .btn-user-side-bar svg {
                 display: flex;
-                width: 18px;
-                height: 18px;
-                transform: rotate(180deg);
+                width: 20px;
+                height: 20px;
             }
 
         .txt-user-side-var {

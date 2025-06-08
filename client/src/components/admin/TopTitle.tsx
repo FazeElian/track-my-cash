@@ -20,16 +20,18 @@ const TopViewModule : React.FC<TopViewModuleType> = (props) => {
                             <h1>{props.title}</h1>
                         </div>
                     </div>
-                    <div className="actions-top-title-view-module">
-                        <button
-                            className="btn-actions-top-title-view-module font-lexend"
-                            onClick={props.btnAddOnClick}
-                        >
-                            <IoMdAdd />
-                            <h2>{props.txtBtnAddShort}</h2>
-                            {props.txtBtnAdd}
-                        </button>
-                    </div>
+                    {props.txtBtnAdd === "" ? "" : (
+                        <div className="actions-top-title-view-module">
+                            <button
+                                className="btn-actions-top-title-view-module font-lexend"
+                                onClick={props.btnAddOnClick}
+                            >
+                                <IoMdAdd />
+                                <h2>{props.txtBtnAddShort}</h2>
+                                {props.txtBtnAdd}
+                            </button>
+                        </div>
+                    )}
                 </div>
                 {props.quickState1Value === "" ? "" : (
                     <div className="quick-stats-top-title-view-module">
@@ -44,13 +46,15 @@ const TopViewModule : React.FC<TopViewModuleType> = (props) => {
                         </div>
                     </div>
                 )}
-                <button
-                    className="btn-add-mobile btn-actions-top-title-view-module font-lexend"
-                    onClick={props.btnAddOnClick}
-                >
-                    <IoMdAdd />
-                    {props.txtBtnAdd}
-                </button>
+                {props.txtBtnAdd === "" ? "" : (
+                    <button
+                        className="btn-add-mobile btn-actions-top-title-view-module font-lexend"
+                        onClick={props.btnAddOnClick}
+                    >
+                        <IoMdAdd />
+                        {props.txtBtnAdd}
+                    </button>
+                )}
             </div>
         </>
     )

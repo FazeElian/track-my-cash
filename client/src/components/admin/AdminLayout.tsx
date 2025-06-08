@@ -10,10 +10,10 @@ import Logo from "../../assets/img/Logo.webp";
 
 // React icons
 import { TbLayoutDashboard } from "react-icons/tb";
-import { IoMdSwap, IoIosArrowUp, IoIosMenu } from "react-icons/io";
+import { IoMdSwap, IoIosMenu } from "react-icons/io";
 import { BiCategoryAlt } from "react-icons/bi";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { MdOutlineLogout } from "react-icons/md";
+import { MdOutlineLogout, MdArrowForward } from "react-icons/md";
 
 // Query
 import { useGetAuthenticatedUser } from "../../services/auth/queries";
@@ -26,6 +26,9 @@ import Loading from "./Loading";
 
 // Utils
 import { truncateText } from "../../lib/utils/truncateText";
+
+// Context
+import { UserContext } from "../../services/auth/context";
 
 const AdminLayout = () => {
     const logOut = () => {
@@ -57,7 +60,7 @@ const AdminLayout = () => {
 
     if (user) {
         return (
-            <>
+            <UserContext.Provider value={{ user }}>
                 <aside className="side-bar">
                     <div className="top-side-bar">
                         <img src={Logo} alt="Track my cash logo" />
@@ -120,22 +123,22 @@ const AdminLayout = () => {
                                 Cerrar Sesión
                             </button>
                         </ul>
-                        <div className="user-side-bar">
+                        <Link to="/admin/profile" className="user-side-bar">
                             <button className="btn-user-side-bar">
                                 <img src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png" alt="" />
                                 <div className="txt-user-side-var font-lexend">
                                     <h1>{user.userName}</h1>
                                     <h2>{truncateText(user.email, 18)}</h2>
                                 </div>
-                                <IoIosArrowUp />
+                                <MdArrowForward />
                             </button>
-                        </div>
+                        </Link>
                     </nav>
                 </aside>
                 
                 <Toaster position="top-center" richColors />
                 <Outlet />
-            </>
+            </UserContext.Provider>
         )
     }
 }
