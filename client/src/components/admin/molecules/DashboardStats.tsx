@@ -10,6 +10,9 @@ import { LiaPiggyBankSolid } from "react-icons/lia";
 // Query
 import { useGetStats } from "../../../services/admin/queries";
 
+// Utils
+import { formatAmount } from "../../../lib/utils/formatAmount";
+
 const DashboardStats = () => {
     const stats = useGetStats()
 
@@ -20,7 +23,7 @@ const DashboardStats = () => {
                 <div className="top-item-dashboard-stats">
                     <div className="txt-item-dashboard-stats">
                         <h1>Ingresos totales</h1>
-                        <h2>${stats.totalIncomes}</h2>
+                        <h2>{formatAmount(stats.totalIncomes)}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
                         <MdOutlineArrowOutward />
@@ -40,7 +43,7 @@ const DashboardStats = () => {
                 <div className="top-item-dashboard-stats">
                     <div className="txt-item-dashboard-stats">
                         <h1>Gastos totales</h1>
-                        <h2>${stats.totalExpenses}</h2>
+                        <h2>{formatAmount(stats.totalExpenses)}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
                         <MdOutlineArrowOutward />
@@ -60,7 +63,7 @@ const DashboardStats = () => {
                 <div className="top-item-dashboard-stats">
                     <div className="txt-item-dashboard-stats">
                         <h1>Saldo</h1>
-                        <h2>${stats.totalBalance}</h2>
+                        <h2>{formatAmount(stats.totalBalance)}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
                         <RiWallet3Line />

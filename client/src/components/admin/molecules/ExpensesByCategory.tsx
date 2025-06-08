@@ -7,6 +7,9 @@ import {
     Cell
 } from "recharts";
 
+// Utils
+import { formatAmount } from "../../../lib/utils/formatAmount";
+
 const data = [
     { name: "Categoría A", value: 400 },
     { name: "Categoría B", value: 300 },
@@ -32,7 +35,7 @@ export default class ExpensesByCategory extends PureComponent {
                     cy="50%"
                     outerRadius={80}
                     fill="#8884d8"
-                    label={({ name, value }) => `${name}: $${value}`}
+                    label={({ name, value }) => `${name}: ${formatAmount(value)}`}
                 >
                     {data.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

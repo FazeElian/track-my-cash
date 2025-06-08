@@ -13,6 +13,9 @@ import {
 // Query
 import { useGetSummary } from "../../../services/admin/queries";
 
+// Utils
+import { formatAmount } from "../../../lib/utils/formatAmount";
+
 interface SummaryItem {
     month: string;
     incomes: number;
@@ -47,7 +50,7 @@ const MonthlySummary: React.FC = () => {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip 
-                    formatter={(value: number, name: string) => [`$${value}`, name]} 
+                    formatter={(value: number, name: string) => [`${formatAmount(value)}`, name]} 
                 />
                 <Legend />
                 <Bar

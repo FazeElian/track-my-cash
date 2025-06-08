@@ -54,7 +54,7 @@ class Category extends Model {
     @AllowNull(true)
     @Default(0)
     @Column({
-        type: DataType.DECIMAL(10, 2)
+        type: DataType.INTEGER
     })
     declare monthlyBudget: number
 

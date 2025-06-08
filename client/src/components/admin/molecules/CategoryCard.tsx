@@ -15,6 +15,9 @@ import { colorClassMap } from '../../../lib/lists/Colors';
 // Delete mutation
 import { useDeleteCategoryMutation } from '../../../services/categories/mutations';
 
+// Utils
+import { formatAmount } from '../../../lib/utils/formatAmount';
+
 const CategoryCard : React.FC<Category> = (props) => {
     // Delete mutation
     const deleteCategoryMutation = useDeleteCategoryMutation()
@@ -23,6 +26,7 @@ const CategoryCard : React.FC<Category> = (props) => {
     }
 
     const IconComponent = iconsMap[props.icon];
+    const price = formatAmount(props.monthlyBudget)
 
     return (
         <motion.div
@@ -67,7 +71,7 @@ const CategoryCard : React.FC<Category> = (props) => {
                 </li>
                 <li className="item-txt-top-item-categories-gallery">
                     <h2>Presupuesto</h2>
-                    <h3>$ {props.monthlyBudget}</h3>
+                    <h3>{price}</h3>
                 </li>
                 <li className="item-txt-top-item-categories-gallery">
                     <h2>Gastado</h2>
