@@ -28,7 +28,7 @@ class Transaction extends Model {
     // Amount
     @AllowNull(false)
     @Column({
-        type: DataType.DECIMAL(10, 2)
+        type: DataType.INTEGER
     })
     declare amount: number
     
