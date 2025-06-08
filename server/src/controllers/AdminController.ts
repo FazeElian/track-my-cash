@@ -96,9 +96,7 @@ export class AdminController {
             transactions.forEach(transaction => {
                 const month = new Date(transaction.date).toISOString().slice(0, 7);
 
-                if (!totals[month]) {
-                    totals[month] = { incomes: 0, expenses: 0 };
-                }
+                if (!totals[month]) return; // Ignore months out of range
 
                 if (transaction.type === "Income") {
                     totals[month].incomes += transaction.amount;

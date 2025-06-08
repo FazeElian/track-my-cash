@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getStats } from "./api";
+import { getStats, getSummary } from "./api";
 
 export const useGetStats = () => {
     const { data: stats } = useQuery({
@@ -14,4 +14,13 @@ export const useGetStats = () => {
     }
 
     return stats
+}
+
+export const useGetSummary = () => {
+    return useQuery({
+        queryKey: ["summary"],
+        queryFn: getSummary,
+        retry: 1,
+        refetchOnWindowFocus: true
+    });
 }
