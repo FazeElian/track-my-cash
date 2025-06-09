@@ -51,12 +51,14 @@ export const useUpdateCategoryMutation = (id: number) => {
         onSuccess: (response) => {
             // Sucess toast
             toast.success(response);
-
-            refetch()
-
+            
+            // Invalidate queries
             queryClient.invalidateQueries({
                 queryKey: ["category", id],
             });
+
+            // Get the categories list updated
+            refetch()
         },
         onError: (error: Error) => {
             const message = error.message;

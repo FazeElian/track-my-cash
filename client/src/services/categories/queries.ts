@@ -12,7 +12,9 @@ export const useFetchAllCategories = () => {
         queryKey: ["categories"],
         queryFn: getAllCategories,
         retry: 1,
-        refetchOnWindowFocus: false
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: true
     });
 }
 
@@ -28,7 +30,9 @@ export const useGetAllCategories = ({ searchQuery } : SearchProps) => {
                 ? searchCategory(searchQuery)
                 : getAllCategories(),
         retry: 1,
-        refetchOnWindowFocus: false
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: true
     });
 }
 

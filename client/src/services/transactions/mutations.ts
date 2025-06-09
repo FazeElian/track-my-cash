@@ -15,7 +15,7 @@ export const useNewTransactionMutation = () => {
     // Query client
     const queryClient = new QueryClient()
 
-    // Refetch categories list
+    // Refetch transactions list
     const { refetch } = useFetchAllTransactions()
 
     return useMutation({
@@ -24,12 +24,12 @@ export const useNewTransactionMutation = () => {
             // Sucess toast
             toast.success(response);
         
-            // Get the categories list updated
+            // Get the transactions list updated
             refetch()
 
             // Invalidate queries
             queryClient.invalidateQueries({
-                queryKey: ["categories"]
+                queryKey: ["transactions"]
             })
         },
         onError: (error: Error) => {
@@ -53,11 +53,13 @@ export const useUpdateTransactionMutation = (id: number) => {
             // Sucess toast
             toast.success(response);
 
-            refetch()
-
+            // Invalidate queries
             queryClient.invalidateQueries({
                 queryKey: ["transaction", id],
             });
+
+            // Get the transactions list updated
+            refetch()
         },
         onError: (error: Error) => {
             const message = error.message;
@@ -71,7 +73,7 @@ export const useDeleteTransactionMutation = () => {
     // Query client
     const queryClient = new QueryClient()
 
-    // Refetch categories list
+    // Refetch transactions list
     const { refetch } = useFetchAllTransactions()
 
     return useMutation({
@@ -79,12 +81,14 @@ export const useDeleteTransactionMutation = () => {
         onSuccess: (response) => {
             // Sucess toast
             toast.success(response);
-
-            refetch()
-
+            
+            // Invalidate queries
             queryClient.refetchQueries({
-                queryKey: ["categories"]
+                queryKey: ["transactions"]
             });
+
+            // Get the transactions list updated
+            refetch()
         },
         onError: (error: Error) => {
             const message = error.message;

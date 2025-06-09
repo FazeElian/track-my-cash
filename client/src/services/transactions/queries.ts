@@ -12,7 +12,9 @@ export const useFetchAllTransactions = () => {
         queryKey: ["transactions"],
         queryFn: getAllTransactions,
         retry: 1,
-        refetchOnWindowFocus: false
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: true
     });
 }
 
@@ -28,7 +30,9 @@ export const useGetAllTransactions = ({ searchQuery } : SearchProps) => {
                 ? searchTransaction(searchQuery)
                 : getAllTransactions(),
         retry: 1,
-        refetchOnWindowFocus: false
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: true
     });
 }
 
