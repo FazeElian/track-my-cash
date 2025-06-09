@@ -34,7 +34,7 @@ const MonthlySummary: React.FC = () => {
     const data: ChartDataItem[] | undefined = summary.data
         ?.sort((a: SummaryItem, b: SummaryItem) => a.month.localeCompare(b.month))
         .map((item: SummaryItem): ChartDataItem => ({
-            name: new Date(item.month + "-01").toLocaleString("es-ES", { month: "long" }),
+            name: new Date(item.month + "-1").toLocaleString("es-ES", { month: "long" }),
             Ingresos: item.incomes,
             Gastos: item.expenses,
         }));
