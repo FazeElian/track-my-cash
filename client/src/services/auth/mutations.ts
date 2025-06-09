@@ -9,6 +9,7 @@ import type {
     LoginUser,
     RegisterUser,
     ResetPassword,
+    UpdatePassword,
     ValidateCode
 } from "../../lib/types/services/user.type";
 
@@ -19,7 +20,8 @@ import {
     confirmAccount,
     forgotPassword,
     validateCode,
-    resetPassword
+    resetPassword,
+    updatePassword
 } from "./api";
 
 // Register user mutation
@@ -161,6 +163,21 @@ export const useResetPasswordMutation = (code: string) => {
             queryClient.invalidateQueries({
                 queryKey: ["users"]
             })
+        },
+        onError: (error: Error) => {
+            const message = error.message;
+            toast.error(message);
+        },
+    })
+}
+
+// Update password
+export const useUpdatePasswordMutation = () => {
+    return useMutation({
+        mutationFn: (data: UpdatePassword) => updatePassword(data),
+        onSuccess: (response) => {
+            // Sucess toast
+            toast.success(response);
         },
         onError: (error: Error) => {
             const message = error.message;

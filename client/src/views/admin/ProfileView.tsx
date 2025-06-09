@@ -8,11 +8,11 @@ import "../../assets/css/components/admin/Forms.css";
 // Components for this view
 import { TopViewModule } from "../../components/admin/TopTitle"
 import { InputField } from "../../components/admin/atoms/InputField";
+import { UpdatePasswordForm } from "../../components/company/UpdatePasswordForm";
 
 // React icons
 import { FaRegUser } from "react-icons/fa";
 import { BiEdit } from 'react-icons/bi';
-import { MdOutlineSecurity } from "react-icons/md";
 
 // Get user from auth context
 import { useUser } from "../../services/auth/context";
@@ -101,49 +101,7 @@ const ProfileView = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="item-profile">
-                    <h1>
-                        <MdOutlineSecurity />
-                        Seguridad de la Cuenta
-                    </h1>
-                    <h2>Cambiar Contraseña</h2>
-
-                    {/* Current password */}
-                    <InputField
-                        label="Contraseña Actual"
-                        labelFor="currentPassword"
-                        id="currentPassword"
-                        type="text"
-                        placeholder="Ingresa tu contraseña actual para verificar tu identidad."
-                    />
-
-                    {/* New password */}
-                    <InputField
-                        label="Nueva Contraseña"
-                        labelFor="newPassword"
-                        id="newPassword"
-                        type="text"
-                        placeholder="Ingresa tu nueva contraseña"
-                    />
-
-                    {/* Confirm new password */}
-                    <InputField
-                        label="Contraseña actual"
-                        labelFor="currentPassword"
-                        id="currentPassword"
-                        type="text"
-                        placeholder="Confirma tu nueva contraseña"
-                    />
-                    <div className="btm-item-profile">
-                        <button
-                            type="submit"
-                            className="btn-edit-profile font-lexend"
-                        >
-                            <MdOutlineSecurity />
-                            Actualizar contraseña
-                        </button>
-                    </div>
-                </div>
+                <UpdatePasswordForm />
             </section>
         </main>
     )

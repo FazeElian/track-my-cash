@@ -10,6 +10,7 @@ import type {
     LoginUser,
     RegisterUser,
     ResetPassword,
+    UpdatePassword,
     User,
     ValidateCode
 } from "../../lib/types/services/user.type";
@@ -95,6 +96,19 @@ export async function validateCode (userData: ValidateCode) {
 export async function resetPassword (userData: ResetPassword, code: string) {
     try {
         const { data } = await api.post(`/auth/reset-password/${code}`, userData);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
+
+export async function updatePassword (userData: UpdatePassword) {
+    try {
+        const { data } = await api.post("/auth/update-password/", userData);
         return data;
     } catch (error) {
         if (isAxiosError(error) && error.response) {

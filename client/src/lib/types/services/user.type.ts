@@ -15,3 +15,8 @@ export type ConfirmUserAccount = Pick<User, "code">
 export type ForgotPassword = Pick<User, "email">
 export type ValidateCode = Pick<User, "code">
 export type ResetPassword = Pick<User, "password">
+export type UpdatePassword = {
+    currentPassword: string
+    newPassword: string
+    confirmPassword: string
+}
