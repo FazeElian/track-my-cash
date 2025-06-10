@@ -23,6 +23,7 @@ export class AdminController {
                 where: {
                     userId,
                     type: "Income",
+                    state: "Completed",
                     date: {
                         [Op.between] : [startDate, endDate]
                     }
@@ -81,7 +82,8 @@ export class AdminController {
                     },
                     date: {
                         [Op.gte]: startDate
-                    }
+                    },
+                    state: "Completed",
                 }
             })
 
@@ -129,7 +131,8 @@ export class AdminController {
             const transactions = await Transaction.findAll({
                 where: {
                     userId,
-                    type: "Expense"
+                    type: "Expense",
+                    state: "Completed",
                 }
             })
 
