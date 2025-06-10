@@ -10,7 +10,12 @@ export class CategoryController {
             const userId = req.user.id;
             
             // Get call categories
-            const categories = await Category.findAll({ where: { userId } })
+            const categories = await Category.findAll({
+                where: { userId },
+                order: [
+                    ["updatedAt", "DESC"]
+                ]
+            })
 
             // Send categories
             res.json(categories)

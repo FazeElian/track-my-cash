@@ -10,7 +10,12 @@ export class TransactionController {
             const userId = req.user.id;
             
             // Get call transactions
-            const transactions = await Transaction.findAll({ where: { userId } })
+            const transactions = await Transaction.findAll({
+                where: { userId },
+                order: [
+                    ["date", "DESC"]
+                ]
+            })
 
             // Send transactions
             res.json(transactions)
