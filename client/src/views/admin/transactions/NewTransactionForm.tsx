@@ -15,7 +15,7 @@ import { CategoriesSelectField } from '../../../components/admin/atoms/Categorie
 // Mutation
 import { useNewTransactionMutation } from "../../../services/transactions/mutations";
 import { TransactionStateSelectField } from '../../../components/admin/atoms/TransactionStateSelectField';
-import { TransactionNotesField } from '../../../components/admin/atoms/TransactionNotesField';
+import { TextAreaField } from '../../../components/admin/atoms/TextAreaField';
 
 // Query
 import { useFetchAllCategories } from '../../../services/categories/queries';
@@ -157,7 +157,7 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
                 />
 
                 {/* Name */}
-                <TransactionNotesField
+                <TextAreaField
                     label="Notas (opcional)"
                     labelFor="notes"
                     id="notes"

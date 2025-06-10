@@ -1,7 +1,7 @@
 // Error validation component
 import type { TextAreaFieldProps } from "../../../lib/types/atoms/textarea-field.type";
 
-const TransactionNotesField = ({ label, labelFor, ...rest }: TextAreaFieldProps) => {
+const TextAreaField = ({ label, labelFor, ...rest }: TextAreaFieldProps) => {
     return (
         <>
             <div className="form-group">
@@ -12,4 +12,4 @@ const TransactionNotesField = ({ label, labelFor, ...rest }: TextAreaFieldProps)
     )
 }
 
-export { TransactionNotesField };
+export { TextAreaField };

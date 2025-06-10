@@ -50,13 +50,13 @@ class Category extends Model {
     })
     declare color: string
 
-    // Monthly Budget
+    // Description
     @AllowNull(true)
-    @Default(0)
+    @Default("")
     @Column({
-        type: DataType.INTEGER
+        type: DataType.STRING(100)
     })
-    declare monthlyBudget: number
+    declare description: string
 
     // Relationship with <Transactions[]>
     @HasMany(() => Transaction, {

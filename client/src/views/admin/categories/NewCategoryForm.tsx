@@ -20,6 +20,7 @@ import { InputField } from "../../../components/admin/atoms/InputField";
 import { TypeSelectField } from "../../../components/admin/atoms/TypeSelectField";
 import { IconSelectField } from "../../../components/admin/atoms/IconSelectField";
 import { ColorsInputField } from "../../../components/admin/atoms/ColorsInputField";
+import { TextAreaField } from "../../../components/admin/atoms/TextAreaField";
 
 const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
     const [color, setColor] = useState<Color>(Colors[0]);
@@ -29,7 +30,7 @@ const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) =
             name: "",
             type: "",
             icon: "",
-            monthlyBudget: 0
+            description: ""
         }
     });
 
@@ -115,20 +116,13 @@ const NewCategoryForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) =
                     color={color}
                 />
 
-                {/* Monthly Budget */}
-                <InputField
-                    label="Presupuesto mensual (opcional)"
-                    labelFor="monthlyBudget"
-                    id="monthlyBudget"
-                    type="number"
-                    error={errors.monthlyBudget}
-                    placeholder="$$$"
-                    {...register("monthlyBudget", {
-                        min: {
-                            value: 0,
-                            message: "El presupuesto no puede ser negativo."
-                        }
-                    })}
+                {/* Description */}
+                <TextAreaField
+                    label="Descripción (opcional)"
+                    labelFor="description"
+                    id="description"
+                    placeholder="Añade una descripción a la categoría"
+                    {...register("description")}
                 />
                 <button
                     type="submit"

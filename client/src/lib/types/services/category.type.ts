@@ -4,7 +4,7 @@ export type Category = {
     type: string
     icon: string
     color: string
-    monthlyBudget: number
+    description: string
     editForm: (id: number) => void
 }
 
@@ -14,5 +14,5 @@ export type CategoryForm = Pick<Category,
     "type" |
     "icon" |
     "color" |
-    "monthlyBudget"
+    "description"
 >;

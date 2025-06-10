@@ -59,12 +59,7 @@ export const validateCategoryInput = async (req: Request, res: Response, next: N
         .run(req),
     await body("color")
         .isString().withMessage("Color de categoría no válido")
-        .run(req),
-    await body("monthlyBudget")
-        .isLength({ min: 1 }).withMessage("Presupuesto mensual no válido")
-        .isInt().withMessage("Presupuesto mensual no válido")
-        .run(req),
-    
+        .run(req)
     next()
 }
 
