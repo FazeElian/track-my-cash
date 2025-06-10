@@ -16,6 +16,7 @@ export class AdminController {
 
             // Current month
             const { startDate, endDate } = await getCurrentMonth()
+            console.log(startDate, endDate)
 
             // Get the list of transactions & expenses by user
             const transactions = await Transaction.findAll({

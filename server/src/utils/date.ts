@@ -4,8 +4,8 @@ export const getCurrentMonth = async () => {
     const currentYear = now.getFullYear();
     const currentMonth = now.getMonth();
 
-    const startDate = new Date(currentYear, currentMonth, 1);
-    const endDate = new Date(currentYear, currentMonth + 1, 0, 23, 59, 59);
+    const startDate = new Date(Date.UTC(currentYear, currentMonth, 1, 0, 0, 0));
+    const endDate = new Date(currentYear, currentMonth, 0, 23, 59, 59);
 
     return { startDate, endDate };
 }
