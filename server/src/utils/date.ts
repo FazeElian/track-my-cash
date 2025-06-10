@@ -1,11 +1,11 @@
 export const getCurrentMonth = async () => {
     // Get the current date
     const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth();
+    const currentYear = now.getUTCFullYear();
+    const currentMonth = now.getUTCMonth();
 
     const startDate = new Date(Date.UTC(currentYear, currentMonth, 1, 0, 0, 0));
-    const endDate = new Date(currentYear, currentMonth, 0, 23, 59, 59);
+    const endDate = new Date(Date.UTC(currentYear, currentMonth + 1, 0, 23, 59, 59));
 
     return { startDate, endDate };
 }
