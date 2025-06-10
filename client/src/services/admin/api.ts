@@ -28,3 +28,16 @@ export async function getSummary () {
         return new Error(`${error}`)
     }
 }
+
+export async function getExpensesByCategory () {
+    try {
+        const { data } = await api.get("/admin/dashboard/expenses-by-category");
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}

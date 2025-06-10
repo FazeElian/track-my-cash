@@ -3,7 +3,7 @@ import "../../../assets/css/components/admin/DashboardCharts.css";
 
 // Components
 import MonthlySummary from "./MonthlySummary";
-import ExpensesByCategory from "./ExpensesByCategory";
+import { ExpensesByCategory } from "./ExpensesByCategory";
 
 const DashboardCharts = () => {
     return (

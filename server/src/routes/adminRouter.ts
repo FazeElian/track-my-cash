@@ -14,10 +14,14 @@ router.get("/dashboard/stats",
     authenticate,
     AdminController.getStats
 );
-
 router.get("/dashboard/summary",
     authenticate,
     AdminController.getSummary
+);
+
+router.get("/dashboard/expenses-by-category",
+    authenticate,
+    AdminController.getExpensesByCategory
 );
 
 export default router;

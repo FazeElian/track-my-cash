@@ -117,4 +117,53 @@ export class AdminController {
             res.status(500).json({ error: "Error getting monthly resume of the user" })
         }
     }
+
+    // Expenses by category
+    static getExpensesByCategory = async (req: Request, res: Response) => {
+        try {
+            // User id
+            const userId = req.user.id
+
+            // Get all transactions
+            const transactions = await Transaction.findAll({
+                where: {
+                    userId,
+                    type: "Expense"
+                }
+            })
+
+            // Get the amount by category
+            const amountByCategory: { [key: number]: number } = {}; // Initialize amounts
+            let totalAmountCategories = 0 //  Initialize total
+
+            transactions.forEach(transaction => {
+                // Get category from transaction id
+                const category = transaction.categoryId;
+
+                // If there's no category
+                if (!amountByCategory[category]) {
+                    amountByCategory[category] = 0;
+                }
+
+                // Sum getting the total amout of every category
+                amountByCategory[category] += transaction.amount;
+            });
+
+            // Calc total - sum amountByCategory values
+            totalAmountCategories = Object.values(amountByCategory).reduce((sum, amount) => sum + amount, 0);
+
+            // Calc percentages
+            const percentagesByCategory: { [key: number]: number } = {};
+            for (const categoryId in amountByCategory) {
+                percentagesByCategory[categoryId] = Math.round(
+                    (amountByCategory[categoryId] / totalAmountCategories) * 100
+                );
+            }
+
+            // Return percentages by category
+            res.json({ percentagesByCategory });
+        } catch (error) {
+            res.status(500).json({ error: "Error getting expenses by category" })
+        }
+    }
 }
