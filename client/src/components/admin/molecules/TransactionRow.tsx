@@ -1,3 +1,5 @@
+import { toast } from 'sonner';
+
 // React icons
 import { FaCheckCircle } from "react-icons/fa";
 import { MdOutlineDeleteOutline, MdOutlineWatchLater, MdOutlineArrowOutward } from "react-icons/md";
@@ -17,7 +19,19 @@ const TransactionRow : React.FC<Transaction> = (props) => {
     // Delete mutation
     const deleteTransactionMutation = useDeleteTransactionMutation()
     const handleDeleteTransaction  = (id: number) => {
-        deleteTransactionMutation.mutate(id)
+        toast.warning(`¿Seguro que quieres eliminar este movimiento: "${props.title}"?`, {
+            action: (
+                <button
+                    onClick={() => {
+                        deleteTransactionMutation.mutate(id)
+                        toast.dismiss();
+                    }}
+                    className="font-lexend btn-confirm-delete"
+                >
+                    Eliminar
+                </button>
+            ),
+        });
     }
 
     const { data: category, isLoading } = useGetCategoryById(props.categoryId)

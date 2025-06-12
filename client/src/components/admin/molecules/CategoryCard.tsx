@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 
 // Type
 import type { Category } from "../../../lib/types/services/category.type";
@@ -22,7 +23,19 @@ const CategoryCard : React.FC<Category> = (props) => {
     // Delete mutation
     const deleteCategoryMutation = useDeleteCategoryMutation()
     const handleDeleteCategory  = (id: number) => {
-        deleteCategoryMutation.mutate(id)
+        toast.warning(`¿Seguro que quieres eliminar esta categoría: "${props.name}"?`, {
+            action: (
+                <button
+                    onClick={() => {
+                        deleteCategoryMutation.mutate(id)
+                        toast.dismiss();
+                    }}
+                    className="font-lexend btn-confirm-delete"
+                >
+                    Eliminar
+                </button>
+            ),
+        });
     }
     const IconComponent = iconsMap[props.icon];
 

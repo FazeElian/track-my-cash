@@ -9,6 +9,7 @@
 body {
     padding: 0;
     margin: 0;
+    font-family: "Lexend", sans-serif;
 }
 
 /* Variables */
@@ -107,6 +108,17 @@ option {
     color: var(--color-dark-blue);
     font-size: 17px;
     font-weight: 400;
+}
+
+.btn-confirm-delete {
+    display: flex;
+    background: transparent;
+    height: auto;
+    border: none;
+    color: #F20544;
+    cursor: pointer;
+    min-width: 80px;
+    font-weight: 500;
 }
 
 @keyframes gradientMovement {
