@@ -186,4 +186,17 @@ export class AuthController {
 
         res.status(200).json("Contraseña actualizada con éxito");
     }
+
+    // Update basic info
+    static updateBasicInfo = async (req: Request, res: Response) => {
+        try {
+            // Update changes
+            await req.user.update(req.body);
+
+            res.json("Información actualizada con éxito.");
+        } catch (error) {
+            res.status(500).json({ error: "Error updating user basic info" })
+            console.log(error)
+        }
+    }
 }

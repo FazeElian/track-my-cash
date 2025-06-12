@@ -9,6 +9,7 @@ import type {
     LoginUser,
     RegisterUser,
     ResetPassword,
+    UpdateBasicInfo,
     UpdatePassword,
     ValidateCode
 } from "../../lib/types/services/user.type";
@@ -21,8 +22,10 @@ import {
     forgotPassword,
     validateCode,
     resetPassword,
-    updatePassword
+    updatePassword,
+    updateBasicInfo
 } from "./api";
+import { useFetchUser } from "./queries";
 
 // Register user mutation
 export const useRegisterMutation = () => {
@@ -178,6 +181,33 @@ export const useUpdatePasswordMutation = () => {
         onSuccess: (response) => {
             // Sucess toast
             toast.success(response);
+        },
+        onError: (error: Error) => {
+            const message = error.message;
+            toast.error(message);
+        },
+    })
+}
+
+// Update basic info
+export const useUpdateBasicInfoMutation = () => {
+    // Redirection
+    const redirect = useNavigate()
+
+    // Refetch user info
+    const { refetch } = useFetchUser()
+
+    return useMutation({
+        mutationFn: (data: UpdateBasicInfo) => updateBasicInfo(data),
+        onSuccess: (response) => {
+            // Sucess toast
+            toast.success(response);
+
+            // Refetch user info
+            refetch()
+
+            // Redirection to account main view
+            redirect("/admin/account")
         },
         onError: (error: Error) => {
             const message = error.message;

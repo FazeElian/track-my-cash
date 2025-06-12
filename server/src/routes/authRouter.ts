@@ -90,4 +90,9 @@ router.post("/update-password",
     AuthController.updatePassword
 );
 
+router.put("/update-info",
+    authenticate,
+    AuthController.updateBasicInfo
+);
+
 export default router;

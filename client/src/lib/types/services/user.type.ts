@@ -20,3 +20,4 @@ export type UpdatePassword = {
     newPassword: string
     confirmPassword: string
 }
+export type UpdateBasicInfo = Pick<User, "name" | "lastName" | "userName">

@@ -10,6 +10,7 @@ import type {
     LoginUser,
     RegisterUser,
     ResetPassword,
+    UpdateBasicInfo,
     UpdatePassword,
     User,
     ValidateCode
@@ -109,6 +110,19 @@ export async function resetPassword (userData: ResetPassword, code: string) {
 export async function updatePassword (userData: UpdatePassword) {
     try {
         const { data } = await api.post("/auth/update-password/", userData);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
+
+export async function updateBasicInfo (userData: UpdateBasicInfo) {
+    try {
+        const { data } = await api.put("/auth/update-info/", userData);
         return data;
     } catch (error) {
         if (isAxiosError(error) && error.response) {
