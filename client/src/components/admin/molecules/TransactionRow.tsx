@@ -44,7 +44,13 @@ const TransactionRow : React.FC<Transaction> = (props) => {
                     {props.title}
                 </td>
             )}
-            <td className="td td-category-transaction">{categoryName}</td>
+            <td className="td td-category-transaction">
+                {categoryName ? (
+                    categoryName
+                ) : (
+                    "Sin clasificar"
+                )}
+            </td>
             <td className="td td-td td-date-transaction">{formatDate(props.date)}</td>
             {props.type == "Income" ? (
                 <td className="td td-amount-transaction amount-income">

@@ -13,7 +13,7 @@ export const useFetchAllCategories = () => {
         queryFn: getAllCategories,
         retry: 1,
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
+        refetchOnMount: true,
         refetchOnReconnect: true
     });
 }
@@ -31,7 +31,7 @@ export const useGetAllCategories = ({ searchQuery } : SearchProps) => {
                 : getAllCategories(),
         retry: 1,
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
+        refetchOnMount: true,
         refetchOnReconnect: true
     });
 }
