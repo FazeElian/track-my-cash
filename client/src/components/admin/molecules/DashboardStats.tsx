@@ -22,7 +22,7 @@ const DashboardStats = () => {
             <div className="item-dashboard-stats item-incomes-dashboard-stats">
                 <div className="top-item-dashboard-stats">
                     <div className="txt-item-dashboard-stats">
-                        <h1>Ingresos totales</h1>
+                        <h1>Ingresos este mes</h1>
                         <h2>{formatAmount(stats.totalIncomes)}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
@@ -42,7 +42,7 @@ const DashboardStats = () => {
             <div className="item-dashboard-stats item-expenses-dashboard-stats">
                 <div className="top-item-dashboard-stats">
                     <div className="txt-item-dashboard-stats">
-                        <h1>Gastos totales</h1>
+                        <h1>Gastos este mes</h1>
                         <h2>{formatAmount(stats.totalExpenses)}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
@@ -62,7 +62,7 @@ const DashboardStats = () => {
             <div className="item-dashboard-stats item-balance-dashboard-stats">
                 <div className="top-item-dashboard-stats">
                     <div className="txt-item-dashboard-stats">
-                        <h1>Saldo</h1>
+                        <h1>Saldo (histórico)</h1>
                         <h2>{formatAmount(stats.totalBalance)}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">

@@ -40,6 +40,22 @@ export class AdminController {
                 }
             })
 
+            // Get historical values
+            const allIncomes = await Transaction.findAll({
+                where: {
+                    userId,
+                    type: "Income",
+                    state: "Completed"
+                }
+            })
+            const allExpenses = await Transaction.findAll({
+                where: {
+                    userId,
+                    type: "Expense",
+                    state: "Completed"
+                }
+            })
+
             // Total value in transactions
             let totalIncomes = 0 // Initialize value
             transactions.forEach(transaction => {
@@ -54,8 +70,22 @@ export class AdminController {
                 totalExpenses += transactionAmount
             }); 
 
+            // Historical values total
+            let allIncomesTotal = 0
+            let allExpensesTotal = 0
+
+            allIncomes.forEach(transaction => {
+                const transactionAmount = transaction.amount
+                allIncomesTotal += transactionAmount
+            });
+
+            allExpenses.forEach(transaction => {
+                const transactionAmount = transaction.amount
+                allExpensesTotal += transactionAmount
+            }); 
+
             // Calc balance
-            const totalBalance = totalIncomes - totalExpenses
+            const totalBalance = allIncomesTotal - allExpensesTotal
 
             // Return values for the dashboard
             res.json({ totalIncomes, totalExpenses, totalBalance })
