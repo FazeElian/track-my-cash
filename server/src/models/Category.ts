@@ -54,7 +54,7 @@ class Category extends Model {
     @AllowNull(true)
     @Default("")
     @Column({
-        type: DataType.STRING(100)
+        type: DataType.STRING(255)
     })
     declare description: string
 

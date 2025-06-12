@@ -16,7 +16,7 @@ import { colorClassMap } from '../../../lib/lists/Colors';
 import { useDeleteCategoryMutation } from '../../../services/categories/mutations';
 
 // Utils
-import { formatAmount } from '../../../lib/utils/formatAmount';
+import { truncateText } from '../../../lib/utils/truncateText';
 
 const CategoryCard : React.FC<Category> = (props) => {
     // Delete mutation
@@ -24,9 +24,7 @@ const CategoryCard : React.FC<Category> = (props) => {
     const handleDeleteCategory  = (id: number) => {
         deleteCategoryMutation.mutate(id)
     }
-
     const IconComponent = iconsMap[props.icon];
-    const price = formatAmount(props.monthlyBudget)
 
     return (
         <motion.div
@@ -64,20 +62,15 @@ const CategoryCard : React.FC<Category> = (props) => {
                     <MdOutlineDeleteOutline />
                 </button>
             </div>
-            <div className="txt-top-item-categories-gallery">
-                <li className="item-txt-top-item-categories-gallery">
-                    <h2>Transacciones</h2>
-                    <h3>0</h3>
-                </li>
-                <li className="item-txt-top-item-categories-gallery">
-                    <h2>Presupuesto</h2>
-                    <h3>{price}</h3>
-                </li>
-                <li className="item-txt-top-item-categories-gallery">
-                    <h2>Gastado</h2>
-                    <h3>$ 0</h3>
-                </li>
-            </div>
+                {props.description ? (
+                    <p className="category-description">
+                        {truncateText(props.description, 90)}
+                    </p>
+                ) : (
+                    <p className="category-description category-description-empty">
+                        Sin descripción
+                    </p>
+                )}
         </motion.div>
     )
 }

@@ -61,7 +61,7 @@ const CategoriesGallery = ({ setEditForm, categories, loadingState, searchQueryV
                     type={category.type}
                     icon={category.icon}
                     color={category.color}
-                    monthlyBudget={category.monthlyBudget}
+                    description={category.description}
                     editForm={setEditForm}
                 />
             ))}
