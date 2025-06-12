@@ -18,8 +18,8 @@
 
 .form-module {
     display: flex;
-    width: 520px;
-    max-height: 600px;
+    width: 560px;
+    max-height: 500px;
     background-color: var(--color-white);
     position: absolute;
     margin: auto;
@@ -80,14 +80,7 @@
 
             .form-group textarea {
                 min-height: 110px;
-            }
-
-            .form-double-group select {
-                appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                background: none;
-                cursor: pointer;
+                min-width: 100%;
             }
 
         .form-group h2 {

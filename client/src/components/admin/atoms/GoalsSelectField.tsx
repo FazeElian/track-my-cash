@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 // Types
 import type { SelectFieldProps } from "../../../lib/types/atoms/select-field.type";
-import type { Category } from "../../../lib/types/services/category.type";
+import type { Goal } from "../../../lib/types/services/goal.type";
 
 // Error validation component
 import { ErrorMessageValidation } from "../../company/ErrorMessageValidation";
 
-const CategoriesSelectField = ({ categoriesList, label, labelFor, error, ...rest }: SelectFieldProps) => {
+const GoalsSelectField = ({ categoriesList, label, labelFor, error, ...rest }: SelectFieldProps) => {
     return (
         <div className="item-form-double-group form-group">
             <label htmlFor={labelFor}>{label}</label>
@@ -16,16 +16,16 @@ const CategoriesSelectField = ({ categoriesList, label, labelFor, error, ...rest
                     <option value="" disabled>
                         Seleccionar
                     </option>
-                    {categoriesList!.map((category: Category) => (
-                        <option value={category.id} key={category.id}>
-                            {category.name}
+                    {categoriesList!.map((goal: Goal) => (
+                        <option value={goal.id} key={goal.id}>
+                            {goal.title}
                         </option>
                     ))}
                 </select>
             ) : (
                 <h2>
-                    Aún no has añadido ninguna categoría
-                    <Link to="/admin/categories">Añadir</Link>
+                    Aún no has añadido ninguna meta financiera
+                    <Link to="/admin/goals">Añadir</Link>
                 </h2>
             )}
             {error && 
@@ -37,4 +37,4 @@ const CategoriesSelectField = ({ categoriesList, label, labelFor, error, ...rest
     )
 }
 
-export { CategoriesSelectField };
+export { GoalsSelectField };

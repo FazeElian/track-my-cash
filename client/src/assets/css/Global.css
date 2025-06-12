@@ -12,6 +12,15 @@ body {
     font-family: "Lexend", sans-serif;
 }
 
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    background-image: none;
+    cursor: pointer;
+}
+
 /* Variables */
 :root {
     --color-white: #FFF;

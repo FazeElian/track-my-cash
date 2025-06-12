@@ -10,7 +10,7 @@ import type { TransactionForm } from '../../../lib/types/services/transaction.ty
 // Components for this form
 import { InputField } from '../../../components/admin/atoms/InputField'
 import { TransactionTypeField } from '../../../components/admin/atoms/TransactionTypeField';
-import { CategoriesSelectField } from '../../../components/admin/atoms/CategoriesSelectField';
+import { GoalsSelectField } from '../../../components/admin/atoms/GoalsSelectField';
 
 // Mutation
 import { useNewTransactionMutation } from "../../../services/transactions/mutations";
@@ -26,7 +26,7 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
             title: "",
             amount: 0,
             type: "",
-            categoryId: 0,
+            goalId: 0,
             date: "",
             state: "",
             notes: "",
@@ -114,14 +114,14 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
 
                 {/* Divided group */}
                 <div className="form-double-group">
-                    {/* Category */}
-                    <CategoriesSelectField
-                        label="Categoría"
-                        labelFor="categoryId"
+                    {/* Goal */}
+                    <GoalsSelectField
+                        label="Meta (opcional)"
+                        labelFor="goalId"
                         defaultValue={0}
-                        error={errors.categoryId}
+                        error={errors.goalId}
                         // categoriesList={Array.isArray(categories) ? categories : []}
-                        // {...register("categoryId", {
+                        // {...register("goalId", {
                         //     required: "La categoría es obligatoria.",
                         //     validate: value => value !== 0 || "La categoría es obligatoria",
                         // })}

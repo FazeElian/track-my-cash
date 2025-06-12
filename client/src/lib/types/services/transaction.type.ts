@@ -3,7 +3,7 @@ export type Transaction = {
     title: string
     amount: number
     type: string
-    categoryId: number
+    goalId?: number | null
     date: string
     state: string
     notes: string
@@ -15,7 +15,7 @@ export type TransactionForm = Pick<Transaction,
     "title" |
     "amount" |
     "type" |
-    "categoryId" |
+    "goalId" |
     "date" | 
     "state" | 
     "notes"
