@@ -7,12 +7,10 @@ import {
     AllowNull,
     ForeignKey,
     BelongsTo,
-    HasMany,
 } from "sequelize-typescript";
 
 // Models
 import User from "./User";
-import Category from "./Category";
 import Objective from "./Objective";
 
 @Table({
@@ -63,13 +61,6 @@ class Transaction extends Model {
         type: DataType.STRING(80)
     })
     declare notes: string
-
-    // Relationship with <Category>
-    @BelongsTo(() => Category)
-    declare category: Category
-
-    @ForeignKey(() => Category)
-    declare categoryId: number
 
     // Relationship with <Objective>
     @ForeignKey(() => Objective)

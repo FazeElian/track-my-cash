@@ -11,7 +11,6 @@ import Logo from "../../assets/img/Logo.webp";
 // React icons
 import { TbLayoutDashboard } from "react-icons/tb";
 import { IoMdSwap, IoIosMenu } from "react-icons/io";
-import { BiCategoryAlt } from "react-icons/bi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdOutlineLogout, MdArrowForward } from "react-icons/md";
 import { GoGoal } from "react-icons/go";
@@ -94,16 +93,6 @@ const AdminLayout = () => {
                             >
                                 <IoMdSwap />
                                 Movimientos
-                            </Link>
-                            <Link
-                                to="/admin/categories"
-                                className={`item-nav-list-side-bar
-                                    ${location.pathname === "/admin/categories" ? "item-active-nav-list-side-bar" : ""}
-                                `}
-                                onClick={() => setSideBar(false)}
-                            >
-                                <BiCategoryAlt />
-                                Categorías
                             </Link>
                             <Link
                                 to="/admin/goals"

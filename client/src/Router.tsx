@@ -21,7 +21,6 @@ const ResetPasswordView = lazy(() => import("./views/auth/ResetPasswordView"))
 
 // Admin views
 const DashboardView = lazy(() => import("./views/admin/DashboardView"))
-const CategoriesView = lazy(() => import("./views/admin/categories/CategoriesView"))
 const TransactionsView = lazy(() => import("./views/admin/transactions/TransactionsView"))
 const GoalsView = lazy(() => import("./views/admin/goals/GoalsView"))
 const NotificationsView = lazy(() => import("./views/admin/NotificationsView"))
@@ -48,7 +47,6 @@ export default function Router() {
         {/* Admin */}
         <Route path="/admin/*" element={<AdminLayout />}>
           <Route index path="dashboard" element={<DashboardView />} />
-          <Route path="categories" element={<CategoriesView />} />
           <Route path="transactions" element={<TransactionsView />} />
           <Route path="goals" element={<GoalsView />} />
           <Route path="notifications" element={<NotificationsView />} />

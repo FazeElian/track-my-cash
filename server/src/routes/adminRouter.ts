@@ -19,9 +19,4 @@ router.get("/dashboard/summary",
     AdminController.getSummary
 );
 
-router.get("/dashboard/expenses-by-category",
-    authenticate,
-    AdminController.getExpensesByCategory
-);
-
 export default router;

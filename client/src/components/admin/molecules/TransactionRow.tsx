@@ -10,7 +10,6 @@ import type { Transaction } from "../../../lib/types/services/transaction.type";
 
 // Utils
 import { formatDate } from "../../../lib/utils/formatDate";
-import { useGetCategoryById } from "../../../services/categories/queries";
 
 // Delete mutation
 import { useDeleteTransactionMutation } from "../../../services/transactions/mutations";
@@ -34,13 +33,6 @@ const TransactionRow : React.FC<Transaction> = (props) => {
         });
     }
 
-    const { data: category, isLoading } = useGetCategoryById(props.categoryId)
-    let categoryName = category?.name
-
-    if (isLoading) {
-        categoryName = "Cargando..."
-    }
-
     return (
         <tr className="tbody tbody-categories" key={props.id}>
             {props.type == "Income" ? (
@@ -59,11 +51,7 @@ const TransactionRow : React.FC<Transaction> = (props) => {
                 </td>
             )}
             <td className="td td-category-transaction">
-                {categoryName ? (
-                    categoryName
-                ) : (
-                    "Sin clasificar"
-                )}
+                Sin clasificar
             </td>
             <td className="td td-td td-date-transaction">{formatDate(props.date)}</td>
             {props.type == "Income" ? (

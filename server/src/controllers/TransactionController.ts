@@ -69,13 +69,13 @@ export class TransactionController {
             const transactionQuery = req.query.name;
             // console.log(transactionQuery)
 
-            const categories = await Transaction.findAll({
+            const transactions = await Transaction.findAll({
                 where: {
                     userId: userId,
                 }
             });
 
-            const searchResult = categories.filter(transaction =>
+            const searchResult = transactions.filter(transaction =>
                 transaction.title.toLowerCase().includes((transactionQuery as string).trim())
             );
 
@@ -85,7 +85,7 @@ export class TransactionController {
                 return;
             }
 
-            // Return categories list
+            // Return transactions list
             res.json(searchResult)
         } catch (error) {
             res.status(500).json({ error: "Error al buscar movimiento." })

@@ -17,12 +17,9 @@ import { useNewTransactionMutation } from "../../../services/transactions/mutati
 import { TransactionStateSelectField } from '../../../components/admin/atoms/TransactionStateSelectField';
 import { TextAreaField } from '../../../components/admin/atoms/TextAreaField';
 
-// Query
-import { useFetchAllCategories } from '../../../services/categories/queries';
-
 const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
     // Get all categories
-    const { data: categories } = useFetchAllCategories()
+    // const categories = []
     
     const { register, handleSubmit, reset, formState: { errors } } = useForm<TransactionForm> ({
         defaultValues: {
@@ -123,11 +120,11 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
                         labelFor="categoryId"
                         defaultValue={0}
                         error={errors.categoryId}
-                        categoriesList={Array.isArray(categories) ? categories : []}
-                        {...register("categoryId", {
-                            required: "La categoría es obligatoria.",
-                            validate: value => value !== 0 || "La categoría es obligatoria",
-                        })}
+                        // categoriesList={Array.isArray(categories) ? categories : []}
+                        // {...register("categoryId", {
+                        //     required: "La categoría es obligatoria.",
+                        //     validate: value => value !== 0 || "La categoría es obligatoria",
+                        // })}
                     />
 
                     {/* Name */}

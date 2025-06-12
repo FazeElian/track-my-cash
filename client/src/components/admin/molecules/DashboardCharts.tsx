@@ -3,8 +3,6 @@ import "../../../assets/css/components/admin/DashboardCharts.css";
 
 // Components
 import MonthlySummary from "./MonthlySummary";
-import { ExpensesByCategory } from "./ExpensesByCategory";
-
 const DashboardCharts = () => {
     return (
         <section className="dashboard-charts">
@@ -16,7 +14,6 @@ const DashboardCharts = () => {
             <div className="item-dashboard-charts">
                 <h1>Categorías de gastos</h1>
                 <h2>Distribución de tus gastos por categoría</h2>
-                <ExpensesByCategory />
             </div>
         </section>
     )

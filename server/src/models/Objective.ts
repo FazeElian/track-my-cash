@@ -11,7 +11,6 @@ import {
 
 // Models
 import User from "./User";
-import Category from "./Category";
 
 @Table({
     tableName: "objectives"
@@ -53,13 +52,6 @@ class Objective extends Model {
         type: DataType.ENUM("Completed", "InProgress", "Expired")
     })
     declare state: string
-
-    // Relationship with <Category>
-    @BelongsTo(() => Category)
-    declare category: Category
-
-    @ForeignKey(() => Category)
-    declare categoryId: number
 
     // Relationship with <User>
     @ForeignKey(() => User)

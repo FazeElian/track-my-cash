@@ -11,7 +11,6 @@ import { db } from "./config/db";
 
 // Routers
 import authRouter from "./routes/authRouter";
-import categoryRouter from "./routes/categoryRouter";
 import transactionRouter from "./routes/transactionRouter";
 import adminRouter from "./routes/adminRouter";
 
@@ -34,6 +33,6 @@ app.use(express.json())
 
 // Routers
 app.use("/api/auth/", authRouter);
-app.use("/api/admin/", categoryRouter, transactionRouter, adminRouter);
+app.use("/api/admin/", transactionRouter, adminRouter);
 
 export default app

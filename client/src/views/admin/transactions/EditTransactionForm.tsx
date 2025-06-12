@@ -19,13 +19,9 @@ import { TransactionStateSelectField } from '../../../components/admin/atoms/Tra
 import { TextAreaField } from '../../../components/admin/atoms/TextAreaField';
 
 // Queries
-import { useFetchAllCategories } from '../../../services/categories/queries';
 import { useGetTransactionById } from '../../../services/transactions/queries';
 
 const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, onClose }) => {
-    // Get all categories
-    const { data: categories } = useFetchAllCategories()
-    
     // Get transaction
     const { data: transaction, isLoading } = useGetTransactionById(id)
 
@@ -134,11 +130,11 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
                         labelFor="categoryId"
                         defaultValue={0}
                         error={errors.categoryId}
-                        categoriesList={Array.isArray(categories) ? categories : []}
-                        {...register("categoryId", {
-                            required: "La categoría es obligatoria.",
-                            validate: value => value !== 0 || "La categoría es obligatoria",
-                        })}
+                        // categoriesList={Array.isArray(categories) ? categories : []}
+                        // {...register("categoryId", {
+                        //     required: "La categoría es obligatoria.",
+                        //     validate: value => value !== 0 || "La categoría es obligatoria",
+                        // })}
                     />
 
                     {/* Date */}

@@ -33,7 +33,7 @@ export const validateIfTransactionExists = async (req: Request, res: Response, n
         const transaction = await Transaction.findByPk(transactionId)
 
         if (!transaction) {
-            const error = new Error("Categoría no encontrada");
+            const error = new Error("Movimiento no encontrado");
             res.status(404).json({ error: error.message });
             return;
         }
