@@ -7,19 +7,17 @@ import {
     AllowNull,
     ForeignKey,
     BelongsTo,
-    HasMany,
 } from "sequelize-typescript";
 
 // Models
 import User from "./User";
 import Category from "./Category";
-import Objective from "./Objective";
 
 @Table({
-    tableName: "transactions"
+    tableName: "objectives"
 })
 
-class Transaction extends Model {
+class Objective extends Model {
     // Title
     @AllowNull(false)
     @Column({
@@ -27,42 +25,34 @@ class Transaction extends Model {
     })
     declare title: string
 
+    // Description
+    @AllowNull(true)
+    @Column({
+        type: DataType.STRING(255)
+    })
+    declare description: string
+
     // Amount
     @AllowNull(false)
     @Column({
         type: DataType.INTEGER
     })
     declare amount: number
-    
-    // Type
-    @AllowNull(false)
-    @Default("Expense")
-    @Column({
-        type: DataType.ENUM("Income", "Expense")
-    })
-    declare type: string
 
-    // Date
+    // Deadline
     @AllowNull(false)
     @Column({
         type: DataType.DATE
     })
-    declare date: string
+    declare deadline: string
 
     // State
     @AllowNull(false)
-    @Default("Completed")
+    @Default("InProgress")
     @Column({
-        type: DataType.ENUM("Completed", "Pending")
+        type: DataType.ENUM("Completed", "InProgress", "Expired")
     })
     declare state: string
-
-    // Notes
-    @AllowNull(true)
-    @Column({
-        type: DataType.STRING(80)
-    })
-    declare notes: string
 
     // Relationship with <Category>
     @BelongsTo(() => Category)
@@ -70,17 +60,6 @@ class Transaction extends Model {
 
     @ForeignKey(() => Category)
     declare categoryId: number
-
-    // Relationship with <Objective>
-    @ForeignKey(() => Objective)
-    @AllowNull(true)
-    @Column({
-        type: DataType.INTEGER
-    })
-    declare objectiveId?: number;
-
-    @BelongsTo(() => Objective)
-    declare objective?: Objective;
 
     // Relationship with <User>
     @ForeignKey(() => User)
@@ -90,4 +69,4 @@ class Transaction extends Model {
     declare user : User
 }
 
-export default Transaction;
+export default Objective;
