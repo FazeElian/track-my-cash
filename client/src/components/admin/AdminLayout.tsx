@@ -14,6 +14,7 @@ import { IoMdSwap, IoIosMenu } from "react-icons/io";
 import { BiCategoryAlt } from "react-icons/bi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdOutlineLogout, MdArrowForward } from "react-icons/md";
+import { GoGoal } from "react-icons/go";
 
 // Query
 import { useGetAuthenticatedUser } from "../../services/auth/queries";
@@ -103,6 +104,16 @@ const AdminLayout = () => {
                             >
                                 <BiCategoryAlt />
                                 Categorías
+                            </Link>
+                            <Link
+                                to="/admin/goals"
+                                className={`item-nav-list-side-bar
+                                    ${location.pathname === "/admin/goals" ? "item-active-nav-list-side-bar" : ""}
+                                `}
+                                onClick={() => setSideBar(false)}
+                            >
+                                <GoGoal />
+                                Metas
                             </Link>
                             <Link
                                 to="/admin/notifications"

@@ -23,6 +23,7 @@ const ResetPasswordView = lazy(() => import("./views/auth/ResetPasswordView"))
 const DashboardView = lazy(() => import("./views/admin/DashboardView"))
 const CategoriesView = lazy(() => import("./views/admin/categories/CategoriesView"))
 const TransactionsView = lazy(() => import("./views/admin/transactions/TransactionsView"))
+const GoalsView = lazy(() => import("./views/admin/goals/GoalsView"))
 const NotificationsView = lazy(() => import("./views/admin/NotificationsView"))
 const AccountView = lazy(() => import("./views/admin/account/AccountView"))
 const EditAccountInfoView = lazy(() => import("./views/admin/account/EditAccountInfoView"))
@@ -49,6 +50,7 @@ export default function Router() {
           <Route index path="dashboard" element={<DashboardView />} />
           <Route path="categories" element={<CategoriesView />} />
           <Route path="transactions" element={<TransactionsView />} />
+          <Route path="goals" element={<GoalsView />} />
           <Route path="notifications" element={<NotificationsView />} />
           <Route path="account" element={<AccountView />} />
           <Route path="account/edit" element={<EditAccountInfoView />} />
