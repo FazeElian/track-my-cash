@@ -123,7 +123,7 @@ const AdminLayout = () => {
                                 Cerrar Sesión
                             </button>
                         </ul>
-                        <Link to="/admin/profile" className="user-side-bar">
+                        <Link to="/admin/account" className="user-side-bar">
                             <button className="btn-user-side-bar">
                                 <img src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png" alt="" />
                                 <div className="txt-user-side-var font-lexend">

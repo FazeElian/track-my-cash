@@ -1,23 +1,22 @@
 import { Link } from "react-router-dom";
 
 // Styles for this view
-import "../../assets/css/components/admin/Profile.css";
-import "../../assets/css/components/admin/AdminLayout.css";
-import "../../assets/css/components/admin/Forms.css";
+import "../../../assets/css/components/admin/Profile.css";
+import "../../../assets/css/components/admin/Forms.css";
 
 // Components for this view
-import { TopViewModule } from "../../components/admin/TopTitle"
-import { InputField } from "../../components/admin/atoms/InputField";
-import { UpdatePasswordForm } from "../../components/company/UpdatePasswordForm";
+import { TopViewModule } from "../../../components/admin/TopTitle"
+import { InputField } from "../../../components/admin/atoms/InputField";
+import { UpdatePasswordForm } from "../../../components/company/UpdatePasswordForm";
 
 // React icons
 import { FaRegUser } from "react-icons/fa";
 import { BiEdit } from 'react-icons/bi';
 
 // Get user from auth context
-import { useUser } from "../../services/auth/context";
+import { useUser } from "../../../services/auth/context";
 
-const ProfileView = () => {
+const AccountView = () => {
     // Get user
     const { user } = useUser();
 
@@ -27,7 +26,7 @@ const ProfileView = () => {
     return (
         <main className="content-page--admin">
             <TopViewModule
-                title="Mi Perfil"
+                title="Mi Cuenta"
                 icon={FaRegUser}
                 txtBtnAdd={""}
                 txtBtnAddShort={""}
@@ -97,7 +96,7 @@ const ProfileView = () => {
                     <div className="btm-item-profile">
                         <Link to="edit" className="btn-edit-profile">
                             <BiEdit />
-                            Editar perfil
+                            Editar información
                         </Link>
                     </div>
                 </div>
@@ -107,4 +106,4 @@ const ProfileView = () => {
     )
 }
 
-export default ProfileView
+export default AccountView
