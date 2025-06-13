@@ -2,7 +2,7 @@
 import { FaCarSide, FaPlaneDeparture } from "react-icons/fa";
 import { FaBurger, FaGift } from "react-icons/fa6";
 import { IoHome, IoGameController, IoBriefcaseOutline } from "react-icons/io5";
-import { IoIosPricetag } from "react-icons/io";
+import { IoIosPricetag, IoMdCart } from "react-icons/io";
 import { BsCapsule } from "react-icons/bs";
 import { RiBookShelfFill } from "react-icons/ri";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
@@ -83,7 +83,8 @@ export const Categories = [
 ];
 
 export const categoriesMap: Record<string, React.ComponentType> = {
-    Compras: FaCarSide,
+    Compras: IoMdCart,
+    Auto: FaCarSide,
     Comida: FaBurger,
     Hogar: IoHome,
     Salud: BsCapsule,

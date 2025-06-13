@@ -31,12 +31,20 @@ class Goal extends Model {
     })
     declare description: string
 
-    // Amount
+    // Current Amount
+    @AllowNull(true)
+    @Default(0)
+    @Column({
+        type: DataType.INTEGER
+    })
+    declare currentAmount: number
+
+    // Target Amount
     @AllowNull(false)
     @Column({
         type: DataType.INTEGER
     })
-    declare amount: number
+    declare targetAmount: number
 
     // Deadline
     @AllowNull(false)
@@ -44,6 +52,13 @@ class Goal extends Model {
         type: DataType.DATE
     })
     declare deadline: string
+
+    // Priority Level
+    @AllowNull(false)
+    @Column({
+        type: DataType.ENUM("Low", "Medium", "High")
+    })
+    declare priorityLevel: string
 
     // State
     @AllowNull(false)

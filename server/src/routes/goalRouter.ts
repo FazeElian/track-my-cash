@@ -12,6 +12,11 @@ import { handleInputErrors } from "../middleware/validation";
 const router = Router()
 
 // Routes
+router.get("/goals",
+    authenticate,
+    GoalController.getAll
+);
+
 router.post("/goals/new",
     validateGoalInput,
     handleInputErrors,

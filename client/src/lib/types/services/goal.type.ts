@@ -2,9 +2,11 @@ export type Goal = {
     id: number
     title: string
     description: string
-    amount: number
+    currentAmount: number
+    targetAmount: number
     deadline: string
     category: string
+    priorityLevel: string
     color: string
     state: string
     editForm: (id: number) => void
@@ -13,8 +15,9 @@ export type Goal = {
 export type GoalForm = Pick<Goal,
     "title" |
     "description" |
-    "amount" |
+    "targetAmount" |
     "deadline" |
+    "priorityLevel" |
     "category" |
     "color"
 >

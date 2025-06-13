@@ -51,7 +51,7 @@ export const validateGoalInput = async (req: Request, res: Response, next: NextF
         .isLength({ min: 5 }).withMessage("El nombre de la meta debe tener al menos 5 caracteres.")
         .isLength({ max: 70 }).withMessage("El nombre de la meta no puede superar los 70 caracteres.")
         .run(req),
-    await body("amount")
+    await body("targetAmount")
         .notEmpty().withMessage("La cantidad objetivo de la meta es un dato obligatorio")
         .isLength({ min: 1 }).withMessage("Cantidad objetivo no válida")
         .isFloat({ gt: 0 }).withMessage("La cantidad objetivo debe ser un número mayor que cero.")
@@ -60,6 +60,10 @@ export const validateGoalInput = async (req: Request, res: Response, next: NextF
     await body("deadline")
         .notEmpty().withMessage("La fecha límite para la meta es un dato obligatorio")
         .isString().withMessage("Fecha límite no válida")
+        .run(req),
+    await body("priorityLevel")
+        .notEmpty().withMessage("El nivel de prioridad de la meta es un dato obligatorio")
+        .isString().withMessage("Nivel de prioridad no válido")
         .run(req),
     await body("category")
         .notEmpty().withMessage("La categoría de la meta es un dato obligatorio")

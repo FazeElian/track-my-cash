@@ -4,15 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import { SearchBar } from "../../../components/admin/SearchBar"
 import { TopViewModule } from "../../../components/admin/TopTitle"
 import { GoalsGallery } from "./GoalsGallery";
+import { ModuleLoading } from "../../../components/admin/ModuleLoading";
 
 // React icons
 import { GoGoal } from "react-icons/go";
 import NewGoalForm from "./NewGoalForm";
 
+// Query
+import { useFetchAllGoals } from "../../../services/goals/queries";
+
 const GoalsView = () => {
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
-    
+    const { data: goals, isLoading } = useFetchAllGoals()
 
     // Close the modal when user clicks outside the form
     useEffect(() => {
@@ -37,6 +41,8 @@ const GoalsView = () => {
         };
     }, [modalForm]);
 
+    if (isLoading) return <ModuleLoading />
+
     return (
         <main className="content-page--admin">
             <TopViewModule
@@ -57,7 +63,9 @@ const GoalsView = () => {
                 onSearchSubmit={() => console.log()}
             />
 
-            <GoalsGallery />
+            <GoalsGallery
+                goals={Array.isArray(goals) ? goals : []}
+            />
 
             {/* Modal form */}
             {modalForm === "new" &&

@@ -6,17 +6,34 @@ import type { Goal } from "../../../lib/types/services/goal.type";
 
 // Error validation component
 import { ErrorMessageValidation } from "../../company/ErrorMessageValidation";
+import { useFetchAllGoals } from "../../../services/goals/queries";
 
-const GoalsSelectField = ({ categoriesList, label, labelFor, error, ...rest }: SelectFieldProps) => {
+const GoalsSelectField = ({ label, labelFor, error, ...rest }: SelectFieldProps) => {
+    const { data: goalsList, isLoading } = useFetchAllGoals() 
+
+    if (isLoading) return "Cargando..."
+    
+    if (!Array.isArray(goalsList)) {
+        return (
+            <div className="item-form-double-group form-group">
+                <label htmlFor={labelFor}>{label}</label>
+                <h2>
+                    Aún no has añadido ninguna meta financiera
+                    <Link to="/admin/goals">Añadir</Link>
+                </h2>
+            </div>
+        )
+    }
+
     return (
         <div className="item-form-double-group form-group">
             <label htmlFor={labelFor}>{label}</label>
-            {(categoriesList?.length ?? 0) > 0 ? (
+            {(goalsList?.length ?? 0) > 0 ? (
                 <select {...rest} className="font-lexend">
                     <option value="" disabled>
                         Seleccionar
                     </option>
-                    {categoriesList!.map((goal: Goal) => (
+                    {goalsList!.map((goal: Goal) => (
                         <option value={goal.id} key={goal.id}>
                             {goal.title}
                         </option>

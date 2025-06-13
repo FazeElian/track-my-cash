@@ -4,6 +4,27 @@ import { Request, Response } from "express";
 import Goal from "../models/Goal";
 
 export class GoalController {
+    // Get all the goals
+    static getAll = async (req: Request, res: Response) => {
+        try {
+            const userId = req.user.id;
+            
+            // Get all goals
+            const goals = await Goal.findAll({
+                where: { userId },
+                order: [
+                    ["priorityLevel", "DESC"],
+                    ["deadline", "DESC"]
+                ]
+            })
+
+            // Send goals
+            res.json(goals)
+        } catch (error) {
+            res.status(500).json({ error: "Error getting all the goals" })
+        }
+    }
+
     // Add new goal
     static new = async (req: Request, res: Response) => {
         const { title } = req.body;
@@ -27,7 +48,7 @@ export class GoalController {
             res.status(201).json(`Meta añadida con éxito: ${title}`)
         } catch (error) {
             res.status(500).json({ error: "Error adding the goal" })
-            // console.log(error)
+            console.log(error)
         }
     }
 }

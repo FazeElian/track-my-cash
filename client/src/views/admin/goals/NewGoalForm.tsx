@@ -20,6 +20,7 @@ import { InputField } from "../../../components/admin/atoms/InputField";
 import { CategoriesSelectField } from "../../../components/admin/atoms/CategoriesSelectField";
 import { ColorsInputField } from "../../../components/admin/atoms/ColorsInputField";
 import { TextAreaField } from "../../../components/admin/atoms/TextAreaField";
+import { PriorityLevelSelectField } from "../../../components/admin/atoms/PriorityLevelSelectField";
 
 const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
     const [color, setColor] = useState<Color>(Colors[0]);
@@ -28,7 +29,8 @@ const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
         defaultValues: {
             title: "",
             description: "",
-            amount: 0,
+            targetAmount: 0,
+            priorityLevel: "",
             deadline: "",
             category: "",
             color: "",
@@ -102,10 +104,9 @@ const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
                         labelFor="deadline"
                         id="deadline"
                         type="date"
-                        placeholder="Ingresa el título del movimiento"
                         error={errors.deadline}
                         {...register("deadline", {
-                            required: "La fecha del movimiento es un dato obligatorio.",
+                            required: "La fecha límite para la meta es un dato obligatorio.",
                         })}
                     />
                 </div>
@@ -127,23 +128,36 @@ const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
                     color={color}
                 />
 
-                {/* Amount */}
-                <InputField
-                    label="Cantidad objetivo"
-                    labelFor="amount"
-                    id="amount"
-                    type="number"
-                    placeholder="$$$"
-                    error={errors.amount}
-                    {...register("amount", {
-                        required: "La cantidad objetivo es obligatoria",
-                        min: {
-                            value: 0,
-                            message: "La cantidad objetivo no puede ser negativa."
-                        },
-                        validate: value => value !== 0 || "La categoría de la meta es un dato obligatorio.",
-                    })}
-                />
+                {/* Divided group */}
+                <div className="form-double-group">
+                    {/* targetAmount */}
+                    <InputField
+                        label="Cantidad objetivo"
+                        labelFor="targetAmount"
+                        id="targetAmount"
+                        type="number"
+                        placeholder="$$$"
+                        error={errors.targetAmount}
+                        {...register("targetAmount", {
+                            required: "La cantidad objetivo es obligatoria",
+                            min: {
+                                value: 0,
+                                message: "La cantidad objetivo no puede ser negativa."
+                            },
+                            validate: value => value !== 0 || "La cantidad objetivo es obligatoria.",
+                        })}
+                    />
+                    <PriorityLevelSelectField
+                        label="Nivel de prioridad"
+                        labelFor="priorityLevel"
+                        defaultValue="Medium"
+                        error={errors.priorityLevel}
+                        {...register("priorityLevel", {
+                            required: "El nivel de prioridad de la meta es un dato obligatorio.",
+                            validate: value => value !== "" || "El nivel de prioridad de la meta es un dato obligatorio.",
+                        })}
+                    />
+                </div>
 
                 <button
                     type="submit"

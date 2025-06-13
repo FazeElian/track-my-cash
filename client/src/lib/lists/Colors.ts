@@ -27,10 +27,19 @@ export const Colors = [
 ];
 
 export const colorClassMap: Record<string, string> = {
-    Blue: "icon-blue-top-item-categories-gallery",
-    Red: "icon-red-top-item-categories-gallery",
-    Green: "icon-green-top-item-categories-gallery",
-    Yellow: "icon-yellow-top-item-categories-gallery",
-    Orange: "icon-orange-top-item-categories-gallery",
-    Purple: "icon-purple-top-item-categories-gallery",
+    Blue: "icon-blue-top-item-goals-gallery",
+    Red: "icon-red-top-item-goals-gallery",
+    Green: "icon-green-top-item-goals-gallery",
+    Yellow: "icon-yellow-top-item-goals-gallery",
+    Orange: "icon-orange-top-item-goals-gallery",
+    Purple: "icon-purple-top-item-goals-gallery",
+};
+
+export const barColorClassMap: Record<string, string> = {
+    Blue: "bar-blue-top-item-goals-gallery",
+    Red: "bar-red-top-item-goals-gallery",
+    Green: "bar-green-top-item-goals-gallery",
+    Yellow: "bar-yellow-top-item-goals-gallery",
+    Orange: "bar-orange-top-item-goals-gallery",
+    Purple: "bar-purple-top-item-goals-gallery",
 };

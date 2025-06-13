@@ -120,11 +120,6 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
                         labelFor="goalId"
                         defaultValue={0}
                         error={errors.goalId}
-                        // categoriesList={Array.isArray(categories) ? categories : []}
-                        // {...register("goalId", {
-                        //     required: "La categoría es obligatoria.",
-                        //     validate: value => value !== 0 || "La categoría es obligatoria",
-                        // })}
                     />
 
                     {/* Name */}
