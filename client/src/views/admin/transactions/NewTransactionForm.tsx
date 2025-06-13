@@ -26,7 +26,7 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
             title: "",
             amount: 0,
             type: "",
-            goalId: 0,
+            goalId: null,
             date: "",
             state: "",
             notes: "",

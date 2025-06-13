@@ -56,7 +56,7 @@ const TransactionsTable = ({ transactions, loadingState, searchQueryValue, setEd
             <thead>
                 <tr className="thead-transactions thead">
                     <th className="tr tr-title-transaction">Movimiento</th>
-                    <th className="tr tr-category-transaction">Categoría</th>
+                    <th className="tr tr-goal-transaction">Meta Asociada</th>
                     <th className="tr tr-date-transaction">Fecha</th>
                     <th className="tr tr-amount-transaction">Cantidad</th>
                     <th className="tr tr-state-transaction">Estado</th>
@@ -71,7 +71,7 @@ const TransactionsTable = ({ transactions, loadingState, searchQueryValue, setEd
                         title={transaction.title}
                         amount={transaction.amount}
                         type={transaction.type}
-                        categoryId={transaction.categoryId}
+                        goalId={transaction.goalId}
                         date={transaction.date}
                         state={transaction.state}
                         notes={transaction.notes}

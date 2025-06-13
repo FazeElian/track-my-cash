@@ -4,18 +4,18 @@ import type { SelectFieldProps } from "../../../lib/types/atoms/select-field.typ
 // Error validation component
 import { ErrorMessageValidation } from "../../company/ErrorMessageValidation";
 
-// Icons list
-import { Icons } from "../../../lib/lists/Icons";
+// Categories list
+import { Categories } from "../../../lib/lists/Categories";
 
-const IconSelectField = ({ label, labelFor, error, ...rest }: SelectFieldProps) => {
+const CategoriesSelectField = ({ label, labelFor, error, ...rest }: SelectFieldProps) => {
     return (
         <div className="item-form-double-group form-group">
             <label htmlFor={labelFor}>{label}</label>
             <select {...rest} className="font-lexend">
                 <option value="" disabled>
-                    Selecciona un icono
+                    Seleccionar
                 </option>
-                {Icons.map((icon) => (
+                {Categories.map((icon) => (
                     <option value={icon.value} key={icon.id}>
                         {icon.content}
                     </option>
@@ -30,4 +30,4 @@ const IconSelectField = ({ label, labelFor, error, ...rest }: SelectFieldProps) 
     )
 }
 
-export { IconSelectField };
+export { CategoriesSelectField };

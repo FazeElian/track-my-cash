@@ -40,11 +40,16 @@
             min-width: 20%;
         }
 
-        .tr-category-transaction,
-        .td-category-transaction {
+        .tr-goal-transaction,
+        .td-goal-transaction {
             width: 16%;
             min-width: 16%;
         }
+
+            .td-goal-empty-transaction {
+                color: var(--color-gray2) !important;
+                font-weight: 350;
+            }
 
         .tr-date-transaction,
         .td-date-transaction {
@@ -222,8 +227,8 @@
         padding: 1rem 1rem 2rem;
     }
 
-    .tr-category-transaction,
-    .td-category-transaction,
+    .tr-goal-transaction,
+    .td-goal-transaction,
     .tr-state-transaction,
     .td-state-transaction {
         display: none;

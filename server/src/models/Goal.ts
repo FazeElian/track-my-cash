@@ -13,10 +13,10 @@ import {
 import User from "./User";
 
 @Table({
-    tableName: "objectives"
+    tableName: "goals"
 })
 
-class Objective extends Model {
+class Goal extends Model {
     // Title
     @AllowNull(false)
     @Column({
@@ -53,6 +53,22 @@ class Objective extends Model {
     })
     declare state: string
 
+    // Category
+    @AllowNull(false)
+    @Default("Other")
+    @Column({
+        type: DataType.STRING
+    })
+    declare category: string
+
+    // Color
+    @AllowNull(true)
+    @Default("Green")
+    @Column({
+        type: DataType.STRING
+    })
+    declare color: string
+
     // Relationship with <User>
     @ForeignKey(() => User)
     declare userId : number
@@ -61,4 +77,4 @@ class Objective extends Model {
     declare user : User
 }
 
-export default Objective;
+export default Goal;

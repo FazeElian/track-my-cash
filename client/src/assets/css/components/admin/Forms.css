@@ -19,7 +19,7 @@
 .form-module {
     display: flex;
     width: 560px;
-    max-height: 500px;
+    max-height: 685px;
     background-color: var(--color-white);
     position: absolute;
     margin: auto;
@@ -152,7 +152,7 @@
 /* Responsive 1440px */
 @media (max-width: 1440px) {
     .form-module {
-        height: 510px;
+        height: 655px;
     }
 
     .form-transactions {
@@ -181,8 +181,8 @@
 /* Responsive 768px */
 @media (max-width: 768px) {
     .form-module {
-        width: 410px;
-        height: 520px;
+        width: 440px;
+        height: 540px;
         padding: 35px;
     }
 
@@ -196,7 +196,7 @@
 @media (max-width: 425px) {
     .form-module {
         width: 86%;
-        height: 500px;
+        height: 65%;
     }
 
     .form-transactions {

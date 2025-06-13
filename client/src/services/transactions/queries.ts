@@ -13,7 +13,7 @@ export const useFetchAllTransactions = () => {
         queryFn: getAllTransactions,
         retry: 1,
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
+        refetchOnMount: true,
         refetchOnReconnect: true
     });
 }

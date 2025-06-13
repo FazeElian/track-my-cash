@@ -11,7 +11,7 @@ import {
 
 // Models
 import User from "./User";
-import Objective from "./Objective";
+import Goal from "./Goal";
 
 @Table({
     tableName: "transactions"
@@ -62,16 +62,17 @@ class Transaction extends Model {
     })
     declare notes: string
 
-    // Relationship with <Objective>
-    @ForeignKey(() => Objective)
+    // Relationship with <Goal>
+    @ForeignKey(() => Goal)
     @AllowNull(true)
+    @Default(null)
     @Column({
         type: DataType.INTEGER
     })
-    declare objectiveId?: number;
+    declare goalId?: number | null
 
-    @BelongsTo(() => Objective)
-    declare objective?: Objective;
+    @BelongsTo(() => Goal)
+    declare goal?: Goal
 
     // Relationship with <User>
     @ForeignKey(() => User)
