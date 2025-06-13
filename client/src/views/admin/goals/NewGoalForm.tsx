@@ -8,7 +8,7 @@ import "../../../assets/css/components/admin/Forms.css";
 import { Colors } from "../../../lib/lists/Colors";
 
 // Mutation
-// import { useAddCategoryMutation } from "../../../services/categories/mutations";
+import { useNewGoalMutation } from "../../../services/goals/mutations";
 
 // Types
 import type { ModalFormPropsType } from "../../../lib/types/modal-form.type";
@@ -36,15 +36,19 @@ const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
     });
 
     // Mutation
-    // const registerMutation = useAddCategoryMutation()
+    const newGoalMutation = useNewGoalMutation()
     const handleAddCategory = (formData: GoalForm) => {
-        const categoryData = {
+        const goalData = {
             ...formData,
             color: color.value
         }
-        console.log(categoryData)
-        reset()
-        onClose()
+
+        newGoalMutation.mutate(goalData, {
+            onSuccess: () => {
+                reset()
+                onClose()
+            }
+        });
     }
 
     return (

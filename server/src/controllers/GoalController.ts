@@ -21,6 +21,7 @@ export class GoalController {
             const goal = new Goal(req.body)
 
             // Save changes
+            goal.userId = req.user.id
             await goal.save()
 
             res.status(201).json(`Meta añadida con éxito: ${title}`)
