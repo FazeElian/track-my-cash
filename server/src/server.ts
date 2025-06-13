@@ -11,8 +11,9 @@ import { db } from "./config/db";
 
 // Routers
 import authRouter from "./routes/authRouter";
-import transactionRouter from "./routes/transactionRouter";
 import adminRouter from "./routes/adminRouter";
+import transactionRouter from "./routes/transactionRouter";
+import goalRouter from "./routes/goalRouter";
 
 async function connectDB () {
     try {
@@ -33,6 +34,10 @@ app.use(express.json())
 
 // Routers
 app.use("/api/auth/", authRouter);
-app.use("/api/admin/", transactionRouter, adminRouter);
+app.use("/api/admin/",
+    adminRouter,
+    transactionRouter,
+    goalRouter
+);
 
 export default app
