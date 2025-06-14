@@ -14,6 +14,9 @@ import { formatDate } from "../../../lib/utils/formatDate";
 // Delete mutation
 import { useDeleteTransactionMutation } from "../../../services/transactions/mutations";
 
+// Query
+import { useGetGoalById } from '../../../services/goals/queries';
+
 const TransactionRow : React.FC<Transaction> = (props) => {
     // Delete mutation
     const deleteTransactionMutation = useDeleteTransactionMutation()
@@ -33,6 +36,14 @@ const TransactionRow : React.FC<Transaction> = (props) => {
         });
     }
 
+    const { data: goal, isLoading } = useGetGoalById(props.goalId ?? 0)
+    const goalName =
+        props.goalId && goal && !(goal instanceof Error)
+            ? goal.title
+            : props.goalId && isLoading
+            ? "Cargando..."
+            : "Ninguna";
+
     return (
         <tr className="tbody tbody-categories" key={props.id}>
             {props.type == "Income" ? (
@@ -50,9 +61,9 @@ const TransactionRow : React.FC<Transaction> = (props) => {
                     {props.title}
                 </td>
             )}
-            {props.goalId ? (
+            {goal ? (
                 <td className="td td-goal-transaction">
-                    {props.goalId}
+                    {goalName}
                 </td>
             ) : (
                 <td className="td td-goal-transaction td-goal-empty-transaction">
