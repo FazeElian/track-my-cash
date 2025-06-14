@@ -46,13 +46,13 @@ const AdminLayout = () => {
     const navigate = useNavigate()
 
     // get authenticated user result from query
-    const userResult = useGetAuthenticatedUser();
+    const { data: userResult, isError, isLoading } = useGetAuthenticatedUser();
 
-    if (userResult === "Loading") {
+    if (isLoading) {
         return <Loading />;
     }
 
-    if (userResult === "Not Authenticated") {
+    if (isError) {
         navigate("/auth/login")
     }
 
