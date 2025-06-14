@@ -35,6 +35,7 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
             const formattedTransaction = {
                 ...transaction,
                 date: transaction.date?.split("T")[0],
+                goalId: transaction.goalId
             };
             reset(formattedTransaction);
         }
@@ -113,7 +114,6 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
                     <TransactionTypeField
                         label="Tipo"
                         labelFor="type"
-                        defaultValue=""
                         error={errors.type}
                         {...register("type", {
                             required: "El tipo de movimiento es obligatorio.",
@@ -128,13 +128,10 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
                     <GoalsSelectField
                         label="Meta (opcional)"
                         labelFor="goalId"
-                        defaultValue={0}
                         error={errors.goalId}
-                        // categoriesList={Array.isArray(categories) ? categories : []}
-                        // {...register("goalId", {
-                        //     required: "La categoría es obligatoria.",
-                        //     validate: value => value !== 0 || "La categoría es obligatoria",
-                        // })}
+                        {...register("goalId", {
+                            valueAsNumber: true
+                        })}
                     />
 
                     {/* Date */}

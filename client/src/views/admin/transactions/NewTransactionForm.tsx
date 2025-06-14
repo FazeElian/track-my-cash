@@ -18,10 +18,7 @@ import { TransactionStateSelectField } from '../../../components/admin/atoms/Tra
 import { TextAreaField } from '../../../components/admin/atoms/TextAreaField';
 
 const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
-    // Get all categories
-    // const categories = []
-    
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<TransactionForm> ({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<TransactionForm>({
         defaultValues: {
             title: "",
             amount: 0,
@@ -36,6 +33,7 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
     // Mutation
     const newTransactionMutation = useNewTransactionMutation()
     const handleNewTransaction = (formData: TransactionForm) => {
+        console.log(formData)
         newTransactionMutation.mutate(formData, {
             onSuccess: () => {
                 reset()
@@ -117,9 +115,12 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
                     {/* Goal */}
                     <GoalsSelectField
                         label="Meta (opcional)"
+                        defaultValue=""
                         labelFor="goalId"
-                        defaultValue={0}
                         error={errors.goalId}
+                        {...register("goalId", {
+                            valueAsNumber: true
+                        })}
                     />
 
                     {/* Name */}
