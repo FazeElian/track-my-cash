@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 
 // React icons
 import { WiTime4 } from "react-icons/wi";
@@ -17,10 +18,31 @@ import { categoriesMap } from '../../../lib/lists/Categories';
 // Type
 import type { Goal } from '../../../lib/types/services/goal.type';
 
+// Delete mutation
+import { useDeleteGoalMutation } from '../../../services/goals/mutations';
+
 const GoalCard : React.FC<Goal> = (props) => {
     // Calc % for progress
     const progressPercentage = ((props.currentAmount / props.targetAmount) * 100).toFixed(1).replace(".", ".")
     const IconComponent = categoriesMap[props.category];
+
+    // Delete mutation
+    const deleteGoalMutation = useDeleteGoalMutation()
+    const handleDeleteGoal  = (id: number) => {
+        toast.warning(`¿Seguro que quieres eliminar esta meta?: "${props.title}"?`, {
+            action: (
+                <button
+                    onClick={() => {
+                        deleteGoalMutation.mutate(id)
+                        toast.dismiss();
+                    }}
+                    className="font-lexend btn-confirm-delete"
+                >
+                    Eliminar
+                </button>
+            ),
+        });
+    }
 
     return (
         <motion.div
@@ -65,6 +87,7 @@ const GoalCard : React.FC<Goal> = (props) => {
                 <button
                     type="button"
                     className="btn-options-top-item-goals-gallery btn-delete-top-item-goals-gallery"
+                    onClick={() => handleDeleteGoal(props.id)}
                 >
                     <MdOutlineDeleteOutline />
                 </button>
