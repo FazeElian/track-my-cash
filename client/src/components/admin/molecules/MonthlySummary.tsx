@@ -31,13 +31,15 @@ interface ChartDataItem {
 const MonthlySummary: React.FC = () => {
     const summary = useGetSummary();
 
-    const data: ChartDataItem[] | undefined = summary.data
-        ?.sort((a: SummaryItem, b: SummaryItem) => a.month.localeCompare(b.month))
-        .map((item: SummaryItem): ChartDataItem => ({
-            name: new Date(item.month + "-1").toLocaleString("es-ES", { month: "long" }),
-            Ingresos: item.incomes,
-            Gastos: item.expenses,
-        }));
+    const data: ChartDataItem[] = Array.isArray(summary.data)
+        ? summary.data
+            .sort((a: SummaryItem, b: SummaryItem) => a.month.localeCompare(b.month))
+            .map((item: SummaryItem): ChartDataItem => ({
+                name: new Date(item.month + "-1").toLocaleString("es-ES", { month: "long" }),
+                Ingresos: item.incomes,
+                Gastos: item.expenses,
+            }))
+        : [];
 
     return (
         <ResponsiveContainer width="100%" height="100%">
