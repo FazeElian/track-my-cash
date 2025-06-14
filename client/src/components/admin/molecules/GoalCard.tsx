@@ -81,6 +81,7 @@ const GoalCard : React.FC<Goal> = (props) => {
                 <button
                     type="button"
                     className="btn-options-top-item-goals-gallery btn-edit-top-item-goals-gallery"
+                    onClick={() => props.editForm(props.id)}
                 >
                     <BiEdit />
                 </button>

@@ -32,8 +32,8 @@ router.get("/goals/:goalId",
 );
 
 router.put("/goals/:goalId",
-    validateGoalInput,
-    handleInputErrors,
+    // validateGoalInput,
+    // handleInputErrors,
     authenticate,
     GoalController.updateById
 );

@@ -3,18 +3,21 @@ import "../../../assets/css/components/admin/GoalsGallery.css";
 
 // Components for this view
 import { GoalCard } from "../../../components/admin/molecules/GoalCard";
+import { ModuleLoading } from "../../../components/admin/ModuleLoading";
 
 // Type
 import type { Goal } from "../../../lib/types/services/goal.type";
 
 interface GoalsGalleryProps {
-    // setEditForm: (id: number) => void;
+    setEditForm: (id: number) => void;
     goals: Goal[];
-    // loadingState: boolean
+    loadingState: boolean
     // searchQueryValue: string
 }
 
-const GoalsGallery = ({ goals } : GoalsGalleryProps) => {
+const GoalsGallery = ({ setEditForm, goals, loadingState } : GoalsGalleryProps) => {
+    // If is loading
+    if (loadingState == true) return <ModuleLoading />
 
     return (
         <section className="goals-gallery">
@@ -31,7 +34,7 @@ const GoalsGallery = ({ goals } : GoalsGalleryProps) => {
                     priorityLevel={goal.priorityLevel}
                     color={goal.color}
                     state={goal.state}
-                    editForm={() => console.log()}
+                    editForm={setEditForm}
                 />
             ))}
         </section>

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { SearchBar } from "../../../components/admin/SearchBar"
 import { TopViewModule } from "../../../components/admin/TopTitle"
 import { GoalsGallery } from "./GoalsGallery";
-import { ModuleLoading } from "../../../components/admin/ModuleLoading";
+import { EditGoalForm } from "./EditGoalForm";
 
 // React icons
 import { GoGoal } from "react-icons/go";
@@ -15,6 +15,7 @@ import { useFetchAllGoals } from "../../../services/goals/queries";
 
 const GoalsView = () => {
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
+    const [editGoalId, setEditGoalId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
     const { data: goals, isLoading } = useFetchAllGoals()
 
@@ -41,7 +42,21 @@ const GoalsView = () => {
         };
     }, [modalForm]);
 
-    if (isLoading) return <ModuleLoading />
+    let loadingState = false
+
+    // If is loading
+    if (isLoading) {
+        loadingState = true
+    }
+
+    // Handle edit form
+    const handleEditForm = (id: number) => {
+        setEditGoalId(id);
+        setModalForm(`edit ${id}`);
+    };
+
+    const goalsList =  Array.isArray(goals)
+        ? goals : []
 
     return (
         <main className="content-page--admin">
@@ -64,7 +79,9 @@ const GoalsView = () => {
             />
 
             <GoalsGallery
-                goals={Array.isArray(goals) ? goals : []}
+                setEditForm={handleEditForm}
+                goals={goalsList}
+                loadingState={loadingState}
             />
 
             {/* Modal form */}
@@ -74,6 +91,13 @@ const GoalsView = () => {
                     onClose={() => setModalForm(null)}
                 />
             }
+            {modalForm === `edit ${editGoalId}` && editGoalId !== null && (
+                <EditGoalForm
+                    id={editGoalId}
+                    modalRef={formRef}
+                    onClose={()  => setModalForm(null)}
+                />
+            )}
         </main>
     )
 }
