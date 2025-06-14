@@ -16,13 +16,18 @@ export class GoalController {
                     ["priorityLevel", "DESC"],
                     ["deadline", "DESC"]
                 ]
-            })
+            });
 
             // Send goals
             res.json(goals)
         } catch (error) {
             res.status(500).json({ error: "Error getting all the goals" })
         }
+    }
+
+    // Get goal by its id
+    static getById = async (req: Request, res: Response) => {
+        res.json(req.goal);
     }
 
     // Add new goal
@@ -50,5 +55,13 @@ export class GoalController {
             res.status(500).json({ error: "Error adding the goal" })
             console.log(error)
         }
+    }
+
+    // Delete goal with it's id
+    static deleteById = async (req: Request, res: Response) => {
+        // Delete
+        await req.goal.destroy()
+
+        res.json("Meta eliminada con éxito.");
     }
 }
