@@ -72,4 +72,34 @@ export class GoalController {
 
         res.json("Meta eliminada con éxito.");
     }
+
+    // Search goal by title
+    static search = async (req: Request, res: Response) => {
+        try {
+            const userId = req.user.id;
+            const goalQuery = req.query.title;
+            // console.log(goalQuery)
+
+            const goals = await Goal.findAll({
+                where: {
+                    userId: userId,
+                }
+            });
+
+            const searchResult = goals.filter(goal =>
+                goal.title.toLowerCase().includes((goalQuery as string).trim())
+            );
+
+            if (!searchResult  || searchResult.length === 0) {
+                const error = new Error(`La meta "${goalQuery}}" no existe.`);
+                res.status(409).json({ error: error.message });
+                return;
+            }
+
+            // Return goals list
+            res.json(searchResult)
+        } catch (error) {
+            res.status(500).json({ error: "Error al buscar meta." })
+        }
+    }
 }

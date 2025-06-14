@@ -17,6 +17,12 @@ const GoalsView = () => {
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const [editGoalId, setEditGoalId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleSearchSubmit = (value: string) => {
+        value = value.toLowerCase()
+        setSearchQuery(value);
+    };
 
     // Get goals list
     const { data: goals, isLoading } = useFetchAllGoals()
@@ -67,7 +73,9 @@ const GoalsView = () => {
     };
 
     const goalsList =  Array.isArray(goals)
-        ? goals : []
+        ? goals.filter(goal =>
+            goal.title.toLowerCase().includes(searchQuery)
+        ) : []
 
     return (
         <main className="content-page--admin">
@@ -80,19 +88,20 @@ const GoalsView = () => {
                 quickState1Value={`${totalGoals} metas creadas`}
                 quickState2Value={`${totalCompleted} completadas`}
                 quickState3Value={`${totalExpired} vencidas`}
-                onSearchSubmit={() => console.log()}
+                onSearchSubmit={handleSearchSubmit}
             />
             <SearchBar
                 titleModule="Metas"
                 searchName="goals"
                 placeholder="Buscar meta por su título"
-                onSearchSubmit={() => console.log()}
+                onSearchSubmit={handleSearchSubmit}
             />
 
             <GoalsGallery
                 setEditForm={handleEditForm}
                 goals={goalsList}
                 loadingState={loadingState}
+                searchQueryValue={searchQuery}
             />
 
             {/* Modal form */}

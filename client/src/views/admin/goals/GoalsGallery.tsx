@@ -12,12 +12,44 @@ interface GoalsGalleryProps {
     setEditForm: (id: number) => void;
     goals: Goal[];
     loadingState: boolean
-    // searchQueryValue: string
+    searchQueryValue: string
 }
 
-const GoalsGallery = ({ setEditForm, goals, loadingState } : GoalsGalleryProps) => {
+const GoalsGallery = ({ goals, loadingState, searchQueryValue, setEditForm } : GoalsGalleryProps) => {
     // If is loading
     if (loadingState == true) return <ModuleLoading />
+
+    // If goals doesn't have items or is not an []
+    const hasGoals = Array.isArray(goals) && goals.length > 0;
+    if (!hasGoals) {
+        if (searchQueryValue.trim() !== "") {
+            return (
+                <div className="no-data">
+                    No hay movimientos que coincidan con "{searchQueryValue}"
+                </div>
+            );
+        } else {
+            return (
+                <div className="no-data">
+                    Aún no has registrado ningún movimiento.
+                </div>
+            );
+        }
+    }
+
+    // goals that match with the search query
+    const filteredGoals = goals.filter((goal) =>
+        goal.title.toLowerCase().includes(searchQueryValue.toLowerCase())
+    );
+
+    // If there's no results
+    if(filteredGoals.length <= 0) {
+        return (
+            <div className="no-data">
+                No hay movimientos que coincidan con "{searchQueryValue}"
+            </div>
+        );
+    }
 
     return (
         <section className="goals-gallery">

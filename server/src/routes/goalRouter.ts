@@ -50,4 +50,9 @@ router.delete("/goals/:goalId",
     GoalController.deleteById
 );
 
+router.get("/goals/search",
+    authenticate,
+    GoalController.search
+);
+
 export default router;
