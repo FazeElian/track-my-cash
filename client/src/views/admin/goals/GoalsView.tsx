@@ -17,7 +17,18 @@ const GoalsView = () => {
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const [editGoalId, setEditGoalId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
+
+    // Get goals list
     const { data: goals, isLoading } = useFetchAllGoals()
+
+    // Filter goals
+    const totalGoals = Array.isArray(goals) ? goals.length : 0;
+    const totalCompleted = Array.isArray(goals)
+        ? goals.filter((goal) => goal.state === "Completed").length
+        : 0;
+    const totalExpired = Array.isArray(goals)
+        ? goals.filter((goal) => goal.state === "Expired").length
+        : 0;
 
     // Close the modal when user clicks outside the form
     useEffect(() => {
@@ -66,9 +77,9 @@ const GoalsView = () => {
                 txtBtnAdd="Añadir meta"
                 txtBtnAddShort="Añadir"
                 btnAddOnClick={() => setModalForm("new")}
-                quickState1Value={`${5} metas creadas`}
-                quickState2Value={`${3} completadas`}
-                quickState3Value={`${2} vencidas`}
+                quickState1Value={`${totalGoals} metas creadas`}
+                quickState2Value={`${totalCompleted} completadas`}
+                quickState3Value={`${totalExpired} vencidas`}
                 onSearchSubmit={() => console.log()}
             />
             <SearchBar
