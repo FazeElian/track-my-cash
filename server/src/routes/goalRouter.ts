@@ -31,6 +31,13 @@ router.get("/goals/:goalId",
     GoalController.getById
 );
 
+router.put("/goals/:goalId",
+    validateGoalInput,
+    handleInputErrors,
+    authenticate,
+    GoalController.updateById
+);
+
 router.post("/goals/new",
     validateGoalInput,
     handleInputErrors,

@@ -57,6 +57,14 @@ export class GoalController {
         }
     }
 
+    // Update goal with it's id
+    static updateById = async (req: Request, res: Response) => {
+        // Update changes
+        await req.goal.update(req.body);
+
+        res.json("Meta actualizada con éxito.");
+    }
+
     // Delete goal with it's id
     static deleteById = async (req: Request, res: Response) => {
         // Delete
