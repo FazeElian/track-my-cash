@@ -30,8 +30,8 @@ const GoalsSelectField = ({ label, labelFor, error, ...rest }: SelectFieldProps)
             <label htmlFor={labelFor}>{label}</label>
             {(goalsList?.length ?? 0) > 0 ? (
                 <select {...rest} className="font-lexend">
-                    <option value="" disabled>
-                        Seleccionar
+                    <option value="" key="">
+                        🚫 Ninguna
                     </option>
                     {goalsList!.map((goal: Goal) => (
                         <option value={goal.id} key={goal.id}>
