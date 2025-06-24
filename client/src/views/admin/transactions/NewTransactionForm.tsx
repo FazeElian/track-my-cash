@@ -93,7 +93,8 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
                             max: {
                                 value: 999999999999,
                                 message: "La cantidad no puede superar las 12 cifras."
-                            }
+                            },
+                            valueAsNumber: true,
                         })}
                     />
 

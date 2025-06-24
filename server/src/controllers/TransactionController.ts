@@ -30,12 +30,31 @@ export class TransactionController {
         try {
             const transaction = new Transaction(req.body)
 
+            // If the transaction type is not an income
+            if (transaction.type !== "Income" && transaction.goalId) {
+                const error = new Error("Para asociar una meta al movimiento, deber ser un ingreso.");
+                res.status(409).json({ error: error.message });
+                return;
+            }
+
+            // If the transaction is not completed
+            if (transaction.state !== "Completed" && transaction.goalId) {
+                const error = new Error("Para asociar una meta al movimiento, el movimiento debe haberse completado.");
+                res.status(409).json({ error: error.message });
+                return;
+            }
+
             // If the transaction is associated with a goal
             const goalId = transaction.goalId; // Get goal id from transaction
             if (goalId) {
                 const goal = await Goal.findOne({ where: { id: goalId } });
                 if (goal) {
                     goal.currentAmount += transaction.amount;
+
+                    if (goal.currentAmount >= goal.targetAmount) {
+                        goal.state = "Completed"
+                        goal.currentAmount = goal.targetAmount
+                    }
                     await goal.save();
                 }
             }
@@ -48,7 +67,7 @@ export class TransactionController {
 
         } catch (error) {
             res.status(500).json({ error: "Error adding the transaction" })
-            console.log(error)
+            // console.log(error)
         }
     }
 
@@ -59,18 +78,90 @@ export class TransactionController {
 
     // Update transaction with it's id
     static updateById = async (req: Request, res: Response) => {
-        // If the transaction is associated with a goal
-        const goalId = req.transaction.goalId; // Get goal id from transaction
-        if (goalId) {
-            const goal = await Goal.findOne({ where: { id: goalId } });
-            if (goal) {
-                goal.currentAmount += req.transaction.amount;
-                await goal.update({ currentAmount: goal.currentAmount });
+        // Get transaction
+        const oldTransaction = req.transaction;
+        const newTransaction = req.body;
+
+        // If the new transaction type is not an income
+        if (newTransaction.type !== "Income" && newTransaction.goalId) {
+            const error = new Error("Para asociar una meta al movimiento, deber ser un ingreso.");
+            res.status(409).json({ error: error.message });
+            return;
+        }
+
+        // If the new transaction is not completed
+        if (newTransaction.state !== "Completed" && newTransaction.goalId) {
+            const error = new Error("Para asociar una meta al movimiento, el movimiento debe haberse completado.");
+            res.status(409).json({ error: error.message });
+            return;
+        }
+
+        // If the transaction is associated with a goal or if it's type is an income or if it's not completed
+        if (newTransaction.goalId) {
+            // If the user change the value of the amount but is NOT the same goal
+            if (newTransaction.goalId !== oldTransaction.goalId) {
+                // substract with the previous goal (if existed)
+                if (oldTransaction.goalId) {
+                    const oldGoal = await Goal.findOne({ where: { id: oldTransaction.goalId } });
+                    if (oldGoal) {
+                        oldGoal.currentAmount -= oldTransaction.amount;
+
+                        // Mark as InProgress if the current amount is lower than the target amount
+                        if (oldGoal.currentAmount >= oldGoal.targetAmount) {
+                            oldGoal.state = "InProgress";
+                        }
+                    }
+                    await oldGoal.save();
+                }
+
+                // Sum to the new goal (if it's asocciated)
+                if (newTransaction.goalId) {
+                    const newGoal = await Goal.findOne({ where: { id: newTransaction.goalId } });
+                    if (newGoal) {
+                        newGoal.currentAmount += newTransaction.amount;
+
+                        // Mark as completed if the current amount is equal or higher than the target amount
+                        if (newGoal.currentAmount >= newGoal.targetAmount) {
+                            newGoal.state = "Completed";
+                            // newGoal.currentAmount = newGoal.targetAmount;
+                        } else {
+                            newGoal.state = "InProgress"
+                        }
+
+                        await newGoal.save();
+                    }
+                }
+            } else { // if its the same goal
+                // Get goal
+                const goal = await Goal.findOne({ where: { id: newTransaction.goalId } });
+
+                // If there's no goal
+                if (!goal) {
+                    const error = new Error("Esta meta no existe.");
+                    res.status(409).json({ error: error.message });
+                    return;
+                }
+
+                // Update value
+                goal.currentAmount = goal.currentAmount - oldTransaction.amount + newTransaction.amount
+
+                // Mark as completed if the current amount is equal or higher than the target amount
+                if (goal.currentAmount >= goal.targetAmount) {
+                    goal.state = "Completed";
+                    // goal.currentAmount = goal.targetAmount;
+                } else {
+                    goal.state = "InProgress"
+                }
+
+                await goal.update({
+                    currentAmount: goal.currentAmount,
+                    state: goal.state
+                });
             }
         }
 
         // Update changes
-        await req.transaction.update(req.body);
+        await oldTransaction.update(req.body);
 
         res.json("Registro de movimiento actualizado con éxito.");
     }
@@ -85,6 +176,18 @@ export class TransactionController {
             const goal = await Goal.findOne({ where: { id: goalId } });
             if (goal) {
                 goal.currentAmount -= transaction.amount;
+
+                // Check that current amount value is not 0
+                if(goal.currentAmount < 0) goal.currentAmount = 0
+
+                // Mark as completed if the current amount is equal or higher than the target amount
+                if (goal.currentAmount >= goal.targetAmount) {
+                    goal.state = "Completed";
+                    // goal.currentAmount = goal.targetAmount;
+                } else {
+                    goal.state = "InProgress"
+                }
+
                 await goal.save();
             }
         }

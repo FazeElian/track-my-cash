@@ -34,6 +34,7 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
         if (transaction && !(transaction instanceof Error)) {
             const formattedTransaction = {
                 ...transaction,
+                amount: Number(transaction.amount),
                 date: transaction.date?.split("T")[0],
                 goalId: transaction.goalId
             };
@@ -106,7 +107,8 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
                             max: {
                                 value: 999999999999,
                                 message: "La cantidad no puede superar las 12 cifras."
-                            }
+                            },
+                            valueAsNumber: true,
                         })}
                     />
 
