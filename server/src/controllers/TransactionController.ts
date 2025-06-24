@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 
-// Model
+// Models
 import Transaction from "../models/Transaction";
+import Goal from "../models/Goal";
 
 export class TransactionController {
     // Get a list with all the transactions registered
@@ -29,6 +30,16 @@ export class TransactionController {
         try {
             const transaction = new Transaction(req.body)
 
+            // If the transaction is associated with a goal
+            const goalId = transaction.goalId; // Get goal id from transaction
+            if (goalId) {
+                const goal = await Goal.findOne({ where: { id: goalId } });
+                if (goal) {
+                    goal.currentAmount += transaction.amount;
+                    await goal.save();
+                }
+            }
+
             // Send the user id & save
             transaction.userId = req.user.id
             await transaction.save()
@@ -48,6 +59,16 @@ export class TransactionController {
 
     // Update transaction with it's id
     static updateById = async (req: Request, res: Response) => {
+        // If the transaction is associated with a goal
+        const goalId = req.transaction.goalId; // Get goal id from transaction
+        if (goalId) {
+            const goal = await Goal.findOne({ where: { id: goalId } });
+            if (goal) {
+                goal.currentAmount += req.transaction.amount;
+                await goal.update({ currentAmount: goal.currentAmount });
+            }
+        }
+
         // Update changes
         await req.transaction.update(req.body);
 
@@ -56,6 +77,18 @@ export class TransactionController {
 
     // Delete transaction with it's id
     static deleteById = async (req: Request, res: Response) => {
+        const transaction = req.transaction;
+
+        // If the transaction is associated with a goal
+        const goalId = req.transaction.goalId; // Get goal id from transaction
+        if (goalId) {
+            const goal = await Goal.findOne({ where: { id: goalId } });
+            if (goal) {
+                goal.currentAmount -= transaction.amount;
+                await goal.save();
+            }
+        }
+
         // Delete
         await req.transaction.destroy()
 
