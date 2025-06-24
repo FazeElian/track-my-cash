@@ -96,6 +96,22 @@ export class TransactionController {
             return;
         }
 
+        // If there's no goal associated on the new transaction
+        if (oldTransaction.goalId && !newTransaction.goalId) {
+            const oldGoal = await Goal.findOne({ where: { id: oldTransaction.goalId } });
+            if (oldGoal) {
+                oldGoal.currentAmount -= oldTransaction.amount;
+                if (oldGoal.currentAmount < 0) oldGoal.currentAmount = 0;
+
+                // Actualizar estado
+                if (oldGoal.currentAmount < oldGoal.targetAmount) {
+                    oldGoal.state = "InProgress";
+                }
+
+                await oldGoal.save();
+            }
+        }
+
         // If the transaction is associated with a goal or if it's type is an income or if it's not completed
         if (newTransaction.goalId) {
             // If the user change the value of the amount but is NOT the same goal
