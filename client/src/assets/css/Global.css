@@ -170,6 +170,6 @@ option {
 /* Responsive 425px */
 @media (max-width: 425px) {
     .content-page--admin {
-        padding: 37px;
+        padding: 32px;
     }
 }

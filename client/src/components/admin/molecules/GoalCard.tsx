@@ -6,6 +6,7 @@ import { WiTime4 } from "react-icons/wi";
 import { TbPointFilled } from 'react-icons/tb';
 import { BiEdit } from 'react-icons/bi';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
+import { FaCheckCircle } from "react-icons/fa";
 
 // Utils
 import { truncateText } from "../../../lib/utils/truncateText";
@@ -46,13 +47,21 @@ const GoalCard : React.FC<Goal> = (props) => {
 
     return (
         <motion.div
-            className="item-goals-gallery"
+            className={`item-goals-gallery ${props.state === "Completed" ? "item-completed-goals-gallery" : ""}`}
             key={props.id}
             whileHover={{ scale: 1.05 }}
             transition={{
                 duration: .25,
             }}
         >
+            <div 
+                className={`txt-completed-item-completed-goals-gallery
+                ${props.state === "Completed" ? "txt-completed-item-completed-goals-gallery-visible" : ""}`}
+            >
+                <FaCheckCircle />
+                <br/>
+                Completada!
+            </div>
             <div className="top-item-goals-gallery">
                 <div
                     className={`icon-top-item-goals-gallery ${colorClassMap[props.color]}`}
