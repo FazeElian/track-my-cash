@@ -25,13 +25,13 @@ const GoalsGallery = ({ goals, loadingState, searchQueryValue, setEditForm } : G
         if (searchQueryValue.trim() !== "") {
             return (
                 <div className="no-data">
-                    No hay movimientos que coincidan con "{searchQueryValue}"
+                    No hay metas que coincidan con "{searchQueryValue}"
                 </div>
             );
         } else {
             return (
                 <div className="no-data">
-                    Aún no has registrado ningún movimiento.
+                    No hay metas.
                 </div>
             );
         }
@@ -46,7 +46,7 @@ const GoalsGallery = ({ goals, loadingState, searchQueryValue, setEditForm } : G
     if(filteredGoals.length <= 0) {
         return (
             <div className="no-data">
-                No hay movimientos que coincidan con "{searchQueryValue}"
+                No hay metas que coincidan con "{searchQueryValue}"
             </div>
         );
     }

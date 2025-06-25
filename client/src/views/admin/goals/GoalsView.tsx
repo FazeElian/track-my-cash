@@ -18,6 +18,7 @@ const GoalsView = () => {
     const [editGoalId, setEditGoalId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
     const [searchQuery, setSearchQuery] = useState("");
+    const [filter, setFilter] = useState("All");
 
     const handleSearchSubmit = (value: string) => {
         value = value.toLowerCase()
@@ -75,7 +76,20 @@ const GoalsView = () => {
     const goalsList =  Array.isArray(goals)
         ? goals.filter(goal =>
             goal.title.toLowerCase().includes(searchQuery)
-        ) : []
+        )
+        .filter(goal => {
+            if (filter === "Completed") {
+                return goal.state === "Completed"
+            }
+            if (filter === "InProgress") {
+                return goal.state === "InProgress"
+            }
+            if (filter === "Expired") {
+                return goal.state === "Expired"
+            }
+            return true; // "All"
+        })
+        : []
 
     return (
         <main className="content-page--admin">
@@ -95,6 +109,9 @@ const GoalsView = () => {
                 searchName="goals"
                 placeholder="Buscar meta por su título"
                 onSearchSubmit={handleSearchSubmit}
+                filter={filter}
+                setFilter={setFilter}
+                module="Goals"
             />
 
             <GoalsGallery

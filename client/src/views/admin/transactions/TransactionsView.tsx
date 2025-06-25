@@ -18,6 +18,7 @@ const TransactionsView = () => {
     const [editTransactionId, setEditTransactionId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
     const [searchQuery, setSearchQuery] = useState("");
+    const [filter, setFilter] = useState("All");
 
     const handleSearchSubmit = (value: string) => {
         value = value.toLowerCase()
@@ -72,10 +73,27 @@ const TransactionsView = () => {
         setModalForm(`edit ${id}`);
     };
 
-    const transactionsList =  Array.isArray(transactions)
-        ? transactions.filter(transaction =>
-            transaction.title.toLowerCase().includes(searchQuery)
-        ) : []
+    const transactionsList = Array.isArray(transactions)
+        ? transactions
+            .filter(transaction =>
+                transaction.title.toLowerCase().includes(searchQuery)
+            )
+            .filter(transaction => {
+                if (filter === "Income") {
+                    return transaction.type === "Income";
+                } 
+                if (filter === "Expense") {
+                    return transaction.type === "Expense";
+                }
+                if (filter === "Completed") {
+                    return transaction.state === "Completed";
+                }
+                if (filter === "Pending") {
+                    return transaction.state === "Pending";
+                }
+                return true; // "All"
+            })
+        : [];
 
     return (
         <main className="content-page--admin">
@@ -96,6 +114,9 @@ const TransactionsView = () => {
                 searchName="transactions"
                 placeholder="Buscar movimiento por título"
                 onSearchSubmit={handleSearchSubmit}
+                filter={filter}
+                setFilter={setFilter}
+                module="Transactions"
             />
             <TransactionsTable
                 setEditForm={handleEditForm}

@@ -31,7 +31,7 @@ const TransactionsTable = ({ transactions, loadingState, searchQueryValue, setEd
         } else {
             return (
                 <div className="no-data">
-                    Aún no has registrado ningún movimiento.
+                    No hay movimientos.
                 </div>
             );
         }

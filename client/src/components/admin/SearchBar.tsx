@@ -9,6 +9,10 @@ import type { SearchBarType } from "../../lib/types/search-bar.type"
 // React icons
 import { IoSearch } from "react-icons/io5";
 
+// Filter component
+import { FilterTransactions } from "./molecules/FilterTransactions";
+import { FilterGoals } from "./molecules/FilterGoals";
+
 const SearchBar : React.FC<SearchBarType> = (props) => {
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -37,17 +41,11 @@ const SearchBar : React.FC<SearchBarType> = (props) => {
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                 </form>
-                <div className="filter">
-                    <select
-                        className="font-lexend"
-                        id="filter-categories"
-                        defaultValue={0}
-                    >
-                        <option value="All" key="All">Todas las categorías</option>
-                        <option value="Incomes" key="Incomes">Ingresos</option>
-                        <option value="Expenses" key="Expenses">Gastos</option>
-                    </select>
-                </div>
+                {props.module === "Transactions" ? (
+                    <FilterTransactions filter={props.filter} setFilter={props.setFilter} />
+                ) : (
+                    <FilterGoals filter={props.filter} setFilter={props.setFilter} />
+                )}
             </div>
         </section>
     )
