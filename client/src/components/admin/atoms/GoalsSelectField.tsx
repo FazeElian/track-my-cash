@@ -10,6 +10,7 @@ import { useFetchAllGoals } from "../../../services/goals/queries";
 
 const GoalsSelectField = ({ label, labelFor, error, ...rest }: SelectFieldProps) => {
     const { data: goalsList, isLoading } = useFetchAllGoals() 
+    const goals : Goal[] = [] // Initialize array
 
     if (isLoading) return "Cargando..."
     
@@ -25,15 +26,22 @@ const GoalsSelectField = ({ label, labelFor, error, ...rest }: SelectFieldProps)
         )
     }
 
+    // Select only the goals that are not completed
+    goalsList.forEach(goal => {
+        if(goal.state !== "Completed") {
+            goals.push(goal)
+        }
+    });
+
     return (
         <div className="item-form-double-group form-group">
             <label htmlFor={labelFor}>{label}</label>
-            {(goalsList?.length ?? 0) > 0 ? (
-                <select {...rest} className="font-lexend">
+            {(goals?.length ?? 0) > 0 ? (
+                <select {...rest} className="font-lexend" defaultValue="">
                     <option value="" key="">
                         🚫 Ninguna
                     </option>
-                    {goalsList!.map((goal: Goal) => (
+                    {goals!.map((goal: Goal) => (
                         <option value={goal.id} key={goal.id}>
                             {goal.title}
                         </option>
