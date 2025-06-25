@@ -164,7 +164,7 @@ export class TransactionController {
                 // Mark as completed if the current amount is equal or higher than the target amount
                 if (goal.currentAmount >= goal.targetAmount) {
                     goal.state = "Completed";
-                    // goal.currentAmount = goal.targetAmount;
+                    goal.currentAmount = goal.targetAmount;
                 } else {
                     goal.state = "InProgress"
                 }
