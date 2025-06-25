@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Sequelize } from "sequelize";
 
 // Model
 import Goal from "../models/Goal";
@@ -13,6 +14,15 @@ export class GoalController {
             const goals = await Goal.findAll({
                 where: { userId },
                 order: [
+                    [Sequelize.literal(
+                        `CASE 
+                            WHEN state = 'InProgress' THEN 0
+                            WHEN state = 'Expired' THEN 1
+                            WHEN state = 'Completed' THEN 2
+                            ELSE 3
+                            END`
+                        ), "ASC"
+                    ],
                     ["priorityLevel", "DESC"],
                     ["deadline", "DESC"]
                 ]
@@ -22,6 +32,7 @@ export class GoalController {
             res.json(goals)
         } catch (error) {
             res.status(500).json({ error: "Error getting all the goals" })
+            console.log(error)
         }
     }
 
