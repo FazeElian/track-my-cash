@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 // Models
 import Transaction from "../models/Transaction";
 import Goal from "../models/Goal";
+import Notification from "../models/Notification";
 
 export class TransactionController {
     // Get a list with all the transactions registered
@@ -52,8 +53,18 @@ export class TransactionController {
                     goal.currentAmount += transaction.amount;
 
                     if (goal.currentAmount >= goal.targetAmount) {
-                        goal.state = "Completed"
-                        goal.currentAmount = goal.targetAmount
+                        // Mark goal as completed
+                        goal.state = "Completed";
+                        goal.currentAmount = goal.targetAmount; // Make it with the same value for %
+                        
+                        // Create new notificaion
+                        await Notification.create({
+                            userId: req.user.id,
+                            title: "¡Meta completada! 🎉",
+                            type: "Goal",
+                            description: `Has alcanzado tu meta "${goal.title}". ¡Excelente trabajo!`,
+                            read: false
+                        })
                     }
                     await goal.save();
                 }
@@ -112,7 +123,7 @@ export class TransactionController {
             }
         }
 
-        // If the transaction is associated with a goal or if it's type is an income or if it's not completed
+        // If the transaction is associated with a goal
         if (newTransaction.goalId) {
             // If the user change the value of the amount but is NOT the same goal
             if (newTransaction.goalId !== oldTransaction.goalId) {
@@ -138,8 +149,19 @@ export class TransactionController {
 
                         // Mark as completed if the current amount is equal or higher than the target amount
                         if (newGoal.currentAmount >= newGoal.targetAmount) {
+                            // Mark goal as completed
                             newGoal.state = "Completed";
-                            // newGoal.currentAmount = newGoal.targetAmount;
+                            newGoal.currentAmount = newGoal.targetAmount; // Make it with the same value for %
+                            
+                            // Create new notificaion
+                            await Notification.create({
+                                userId: req.user.id,
+                                title: "¡Meta completada! 🎉",
+                                type: "Goal",
+                                description: `Has alcanzado tu meta "${newGoal.title}". ¡Excelente trabajo!`,
+                                read: false
+                            })
+
                         } else {
                             newGoal.state = "InProgress"
                         }
@@ -163,8 +185,18 @@ export class TransactionController {
 
                 // Mark as completed if the current amount is equal or higher than the target amount
                 if (goal.currentAmount >= goal.targetAmount) {
+                    // Mark goal as completed
                     goal.state = "Completed";
-                    goal.currentAmount = goal.targetAmount;
+                    goal.currentAmount = goal.targetAmount; // Make it with the same value for %
+                    
+                    // Create new notificaion
+                    await Notification.create({
+                        userId: req.user.id,
+                        title: "¡Meta completada! 🎉",
+                        type: "Goal",
+                        description: `Has alcanzado tu meta "${goal.title}". ¡Excelente trabajo!`,
+                        read: false
+                    })
                 } else {
                     goal.state = "InProgress"
                 }
@@ -199,7 +231,7 @@ export class TransactionController {
                 // Mark as completed if the current amount is equal or higher than the target amount
                 if (goal.currentAmount >= goal.targetAmount) {
                     goal.state = "Completed";
-                    // goal.currentAmount = goal.targetAmount;
+                    goal.currentAmount = goal.targetAmount;
                 } else {
                     goal.state = "InProgress"
                 }
