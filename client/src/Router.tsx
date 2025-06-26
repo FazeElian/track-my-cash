@@ -23,7 +23,7 @@ const ResetPasswordView = lazy(() => import("./views/auth/ResetPasswordView"))
 const DashboardView = lazy(() => import("./views/admin/DashboardView"))
 const TransactionsView = lazy(() => import("./views/admin/transactions/TransactionsView"))
 const GoalsView = lazy(() => import("./views/admin/goals/GoalsView"))
-const NotificationsView = lazy(() => import("./views/admin/NotificationsView"))
+const NotificationsView = lazy(() => import("./views/admin/notifications/NotificationsView"))
 const AccountView = lazy(() => import("./views/admin/account/AccountView"))
 const EditAccountInfoView = lazy(() => import("./views/admin/account/EditAccountInfoView"))
 
