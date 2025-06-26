@@ -5,7 +5,21 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { TopViewModule } from "../../../components/admin/TopTitle"
 import { NotificationsTable } from "./NotificationsTable";
 
+// Query
+import { useFetchAllNotifications } from "../../../services/notifications/queries";
+
 const NotificationsView = () => {
+    const { data: notificationsList, isLoading } = useFetchAllNotifications()
+
+    let loadingState = false
+
+    // If is loading
+    if (isLoading) {
+        loadingState = true
+    }
+
+    const notifications = Array.isArray(notificationsList) ? notificationsList : [];
+
     return (
         <main className="content-page--admin">
             <TopViewModule
@@ -19,7 +33,10 @@ const NotificationsView = () => {
                 quickState3Value={""}
                 onSearchSubmit={() => console.log()}
             />
-            <NotificationsTable />
+            <NotificationsTable
+                notifications={notifications}
+                loadingState={loadingState}
+            />
         </main>
     )
 }
