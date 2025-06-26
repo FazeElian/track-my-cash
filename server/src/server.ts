@@ -14,6 +14,7 @@ import authRouter from "./routes/authRouter";
 import adminRouter from "./routes/adminRouter";
 import transactionRouter from "./routes/transactionRouter";
 import goalRouter from "./routes/goalRouter";
+import notificationRouter from "./routes/notificationRouter";
 
 async function connectDB () {
     try {
@@ -37,7 +38,8 @@ app.use("/api/auth/", authRouter);
 app.use("/api/admin/",
     adminRouter,
     transactionRouter,
-    goalRouter
+    goalRouter,
+    notificationRouter
 );
 
 export default app
