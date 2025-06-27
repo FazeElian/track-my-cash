@@ -45,6 +45,11 @@ export class TransactionController {
                 return;
             }
 
+            // Transaction doesn't include a goal
+            if (!transaction.goalId) {
+                transaction.goalId === null
+            }
+
             // If the transaction is associated with a goal
             const goalId = transaction.goalId; // Get goal id from transaction
             if (goalId) {
@@ -78,7 +83,7 @@ export class TransactionController {
 
         } catch (error) {
             res.status(500).json({ error: "Error adding the transaction" })
-            // console.log(error)
+            console.log(error)
         }
     }
 

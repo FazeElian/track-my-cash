@@ -84,6 +84,10 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
                         maxLength: {
                             value: 50,
                             message: "El nombre no puede superar los 50 caracteres"
+                        },
+                        minLength: {
+                            value: 5,
+                            message: "El nombre debe tener almenos 5 caracteres"
                         }
                     })}
                 />

@@ -23,7 +23,7 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
             title: "",
             amount: 0,
             type: "",
-            goalId: 0,
+            goalId: null,
             date: "",
             state: "",
             notes: "",
@@ -70,6 +70,10 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
                         maxLength: {
                             value: 50,
                             message: "El nombre no puede superar los 50 caracteres"
+                        },
+                        minLength: {
+                            value: 5,
+                            message: "El nombre debe tener almenos 5 caracteres"
                         }
                     })}
                 />

@@ -3,7 +3,7 @@ export type Transaction = {
     title: string
     amount: number
     type: string
-    goalId?: number
+    goalId?: number | null
     date: string
     state: string
     notes: string
