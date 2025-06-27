@@ -31,4 +31,27 @@ export class NotificationController {
             res.status(500).json({ error: "Error getting all the notifications" })
         }
     }
+
+    static markAsRead = async (req: Request, res: Response) => {
+        try {
+            const notificationId = req.notification.id;
+            const userId = req.user.id;
+
+            // Get notification
+            const notification = await Notification.findOne({
+                where: {
+                    userId: userId,
+                    id: notificationId
+                }
+            });
+
+            // Mark notification as read
+            notification.read = true
+            await notification.save() // Save changes
+
+            res.status(201).json("Notificación marcada como leída.")
+        } catch (error) {
+            res.status(500).json({ error: "Error marking notification as read" })
+        }
+    }
 }

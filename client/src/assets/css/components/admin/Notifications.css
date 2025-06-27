@@ -22,6 +22,12 @@
         text-decoration: none;
         color: var(--color-dark-blue);
         justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .item-read-notifications {
+        opacity: .5;
+        cursor: default;
     }
 
     .content-item-notificactions {

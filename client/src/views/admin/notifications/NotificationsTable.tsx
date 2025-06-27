@@ -13,6 +13,9 @@ import { FaCheckCircle } from "react-icons/fa";
 // Type
 import type { Notification } from '../../../lib/types/services/notification.type';
 
+// Mutation
+import { useMarkAsReadMutation } from '../../../services/notifications/mutations';
+
 interface NotificationsTableProps {
     notifications: Notification[];
     loadingState: boolean
@@ -20,6 +23,11 @@ interface NotificationsTableProps {
 }
 
 const NotificationsTable = ({ notifications, loadingState } : NotificationsTableProps) => {
+    const markAsReadMutation = useMarkAsReadMutation()
+    const handleMarkAsRead = (id: number) => {
+        markAsReadMutation.mutate(id)
+    }
+
     // If is loading
     if (loadingState == true) return <ModuleLoading />    
 
@@ -35,11 +43,10 @@ const NotificationsTable = ({ notifications, loadingState } : NotificationsTable
     return (
         <section className="notifications">
             {notifications.map((notification) => (
-                <motion.a
+                <motion.div
                     key={notification.id}
-                    href={`/${notification.id}`}
-                    className="item-notifications"
-                    whileHover={{ scale: 1.025 }}
+                    className={`item-notifications ${notification.read === false ? "" : "item-read-notifications"}`}
+                    whileHover={notification.read === false ? { scale: 1.025 } : ""}
                     transition={{
                         duration: .25,
                     }}
@@ -55,13 +62,19 @@ const NotificationsTable = ({ notifications, loadingState } : NotificationsTable
                             </p>
                         </div>
                     </div>
-                    <div className="options-item-notifications">
-                        <button className="btn-item-notifications font-lexend">
-                            <FaCheckCircle />
-                            Marcar como leído
-                        </button>
-                    </div>
-                </motion.a>
+                    {notification.read === false ? (
+                        <div className="options-item-notifications">
+                            <button
+                                type="button"
+                                className="btn-item-notifications font-lexend"
+                                onClick={() => handleMarkAsRead(notification.id)}
+                            >
+                                <FaCheckCircle />
+                                Marcar como leído
+                            </button>
+                        </div>
+                    ) : ""}
+                </motion.div>
             ))}
         </section>
     )
