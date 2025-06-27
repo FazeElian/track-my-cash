@@ -2,10 +2,9 @@
 import "../../../assets/css/components/admin/DashboardStats.css";
 
 // React icons
-import { MdOutlineArrowOutward } from "react-icons/md";
+import { MdOutlineArrowOutward, MdOutlineTrendingUp, MdOutlineTrendingDown } from "react-icons/md";
 import { RiWallet3Line } from "react-icons/ri";
 import { IoCalendarNumberOutline } from "react-icons/io5";
-import { LiaPiggyBankSolid } from "react-icons/lia";
 
 // Query
 import { useGetStats } from "../../../services/admin/queries";
@@ -31,10 +30,10 @@ const DashboardStats = () => {
                 </div>
                 <div className="btm-item-dashboard-stats">
                     <div className="caption-btm-item-dashboard-stats">
-                        <RiWallet3Line />
-                        Promedio diario:
+                        <MdOutlineTrendingUp />
+                        Promedio mensual:
                     </div>
-                    $141.67
+                    {formatAmount(stats.averageIncomesAmountTransaction)}
                 </div>
             </div>
 
@@ -51,10 +50,10 @@ const DashboardStats = () => {
                 </div>
                 <div className="btm-item-dashboard-stats">
                     <div className="caption-btm-item-dashboard-stats">
-                        <IoCalendarNumberOutline />
-                        Movimientos:
+                        <MdOutlineTrendingDown />
+                        Promedio mensual:
                     </div>
-                    24 este mes
+                    {formatAmount(stats.averageExpensesAmountTransaction)}
                 </div>
             </div>
     
@@ -71,10 +70,10 @@ const DashboardStats = () => {
                 </div>
                 <div className="btm-item-dashboard-stats">
                     <div className="caption-btm-item-dashboard-stats">
-                        <LiaPiggyBankSolid />
-                        Tasa de ahorro:
+                        <IoCalendarNumberOutline />
+                        Movimientos:
                     </div>
-                    64%
+                    {stats.transactionsAmount} este mes
                 </div>
             </div>
         </section>

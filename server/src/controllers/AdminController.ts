@@ -22,13 +22,16 @@ export class AdminController {
             const transactions = await Transaction.findAll({
                 where: {
                     userId,
-                    type: "Income",
+                    // type: "Income",
                     state: "Completed",
                     date: {
                         [Op.between] : [startDate, endDate]
                     }
                 }
             })
+
+            // Amount of transactions in month
+            const transactionsAmount = transactions.length
 
             const expenses = await Transaction.findAll({
                 where: {
@@ -56,6 +59,30 @@ export class AdminController {
                     state: "Completed"
                 }
             })
+
+            // Get total of all incomes
+            let totalIncomesAmountTransaction = 0
+            allIncomes.forEach(transaction => {
+                totalIncomesAmountTransaction += transaction.amount;
+            });
+
+            // Get amount of incomes
+            const incomesAmount = allIncomes.length
+
+            // Get total of all expenses
+            let totalExpensesAmountTransaction = 0
+            allExpenses.forEach(transaction => {
+                totalExpensesAmountTransaction += transaction.amount;
+            });
+
+            // Get amount of expenses
+            const expensesAmount = allExpenses.length
+
+            // Average amount value per transaction (incomes)
+            const averageIncomesAmountTransaction = totalIncomesAmountTransaction / incomesAmount;
+
+            // Average amount value per transaction (expenses)
+            const averageExpensesAmountTransaction = totalExpensesAmountTransaction / expensesAmount;
 
             // Total value in transactions
             let totalIncomes = 0 // Initialize value
@@ -89,7 +116,14 @@ export class AdminController {
             const totalBalance = allIncomesTotal - allExpensesTotal
 
             // Return values for the dashboard
-            res.json({ totalIncomes, totalExpenses, totalBalance })
+            res.json({
+                totalIncomes,
+                totalExpenses,
+                totalBalance,
+                transactionsAmount,
+                averageIncomesAmountTransaction,
+                averageExpensesAmountTransaction
+            })
         } catch (error) {
             res.status(500).json({ error: "Error getting total incomes of the user" })
         }
