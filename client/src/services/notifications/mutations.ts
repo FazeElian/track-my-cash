@@ -25,9 +25,7 @@ export const useMarkAsReadMutation = () => {
             refetch()
 
             // Invalidate queries
-            queryClient.invalidateQueries({
-                queryKey: ["notifications"]
-            })
+            queryClient.refetchQueries({ queryKey: ["notifications"] })
         },
         onError: (error: Error) => {
             const message = error.message;

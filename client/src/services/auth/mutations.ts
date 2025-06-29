@@ -1,4 +1,4 @@
-import { QueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -30,7 +30,7 @@ import { useFetchUser } from "./queries";
 // Register user mutation
 export const useRegisterMutation = () => {
     // Query client
-    const queryClient = new QueryClient()
+    const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: (data: RegisterUser) => registerUser(data),
@@ -53,7 +53,7 @@ export const useRegisterMutation = () => {
 // Login mutation
 export const useLoginMutation = () => {
     // Query client
-    const queryClient = new QueryClient()
+    const queryClient = useQueryClient()
 
     // Redirection
     const redirect = useNavigate()
@@ -63,14 +63,14 @@ export const useLoginMutation = () => {
         onSuccess: (response) => {
             // Save JWT on localStorage
             localStorage.setItem("AUTH_TOKEN", response);
-    
-            // Redirect to admin dashboard
-            redirect("/admin/dashboard")
 
             // Invalidate queries
             queryClient.invalidateQueries({
                 queryKey: ["users"]
             })
+
+            // Redirect to admin dashboard
+            redirect("/admin/dashboard")
         },
         onError: (error: Error) => {
             const message = error.message;
@@ -81,19 +81,11 @@ export const useLoginMutation = () => {
 
 // Confirm user account
 export const useConfirmAccountMutation = () => {
-    // Query client
-    const queryClient = new QueryClient()
-
     return useMutation({
         mutationFn: (data: ConfirmUserAccount) => confirmAccount(data),
         onSuccess: (response) => {
             // Sucess toast
             toast.success(response)
-
-            // Invalidate queries
-            queryClient.invalidateQueries({
-                queryKey: ["users"]
-            })
         },
         onError: (error: Error) => {
             const message = error.message;
@@ -104,19 +96,11 @@ export const useConfirmAccountMutation = () => {
 
 // Forgot password
 export const useForgotPasswordMutation = () => {
-    // Query client
-    const queryClient = new QueryClient()
-
     return useMutation({
         mutationFn: (data: ForgotPassword) => forgotPassword(data),
         onSuccess: (response) => {
             // Sucess toast
             toast.success(response)
-
-            // Invalidate queries
-            queryClient.invalidateQueries({
-                queryKey: ["users"]
-            })
         },
         onError: (error: Error) => {
             const message = error.message;
@@ -127,9 +111,6 @@ export const useForgotPasswordMutation = () => {
 
 // Forgot password
 export const useValidateCodeMutation = () => {
-    // Query client
-    const queryClient = new QueryClient()
-
     // Redirection
     const redirect = useNavigate()
 
@@ -138,11 +119,6 @@ export const useValidateCodeMutation = () => {
         onSuccess: (code) => {
             // Redirection
             redirect(`/auth/reset-password/${code}`)
-
-            // Invalidate queries
-            queryClient.invalidateQueries({
-                queryKey: ["users"]
-            })
         },
         onError: (error: Error) => {
             const message = error.message;
@@ -154,7 +130,7 @@ export const useValidateCodeMutation = () => {
 // Reset Password
 export const useResetPasswordMutation = (code: string) => {
     // Query client
-    const queryClient = new QueryClient()
+    const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: (data: ResetPassword) => resetPassword(data, code),

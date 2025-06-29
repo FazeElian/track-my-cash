@@ -1,4 +1,4 @@
-import { QueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 // Types
@@ -7,16 +7,10 @@ import type { TransactionForm } from "../../lib/types/services/transaction.type"
 // API Calls
 import { deleteTransaction, newTransaction, updateTransaction } from "./api";
 
-// Query
-import { useFetchAllTransactions } from "./queries";
-
 // Register new transaction mutation
 export const useNewTransactionMutation = () => {
     // Query client
-    const queryClient = new QueryClient()
-
-    // Refetch transactions list
-    const { refetch } = useFetchAllTransactions()
+    const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: (data: TransactionForm) => newTransaction(data),
@@ -24,13 +18,8 @@ export const useNewTransactionMutation = () => {
             // Sucess toast
             toast.success(response);
         
-            // Get the transactions list updated
-            refetch()
-
-            // Invalidate queries
-            queryClient.invalidateQueries({
-                queryKey: ["transactions"]
-            })
+            // Refetch transactions list
+            queryClient.refetchQueries({ queryKey: ["transactions"] })
         },
         onError: (error: Error) => {
             const message = error.message;
@@ -42,24 +31,21 @@ export const useNewTransactionMutation = () => {
 // Update transaction mutation
 export const useUpdateTransactionMutation = (id: number) => {
     // Query client
-    const queryClient = new QueryClient()
-
-    // Refetch categories list
-    const { refetch } = useFetchAllTransactions()
+    const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: (data: TransactionForm) => updateTransaction(data, id),
         onSuccess: (response) => {
-            // Sucess toast
-            toast.success(response);
-
             // Invalidate queries
             queryClient.invalidateQueries({
                 queryKey: ["transaction", id],
             });
 
-            // Get the transactions list updated
-            refetch()
+            // Refetch transactions list
+            queryClient.refetchQueries({ queryKey: ["transactions"] });
+
+            // Sucess toast
+            toast.success(response);
         },
         onError: (error: Error) => {
             const message = error.message;
@@ -71,24 +57,16 @@ export const useUpdateTransactionMutation = (id: number) => {
 // Delete transaction mutation
 export const useDeleteTransactionMutation = () => {
     // Query client
-    const queryClient = new QueryClient()
-
-    // Refetch transactions list
-    const { refetch } = useFetchAllTransactions()
+    const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: (id: number) => deleteTransaction(id),
         onSuccess: (response) => {
+            // Invalidate queries
+            queryClient.refetchQueries({ queryKey: ["transactions"] });
+
             // Sucess toast
             toast.success(response);
-            
-            // Invalidate queries
-            queryClient.refetchQueries({
-                queryKey: ["transactions"]
-            });
-
-            // Get the transactions list updated
-            refetch()
         },
         onError: (error: Error) => {
             const message = error.message;
