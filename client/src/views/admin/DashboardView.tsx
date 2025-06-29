@@ -6,7 +6,13 @@ import { TopViewModule } from "../../components/admin/TopTitle"
 import { DashboardStats } from "../../components/admin/molecules/DashboardStats"
 import { DashboardCharts } from "../../components/admin/molecules/DashboardCharts"
 
+// Title hook
+import { useDocumentTitle } from "../..//lib/hooks/useDocumentTitle";
+
 const DashboardView = () => {
+    // Title
+    useDocumentTitle("Panel Principal - Track My Cash")
+
     return (
         <main className="content-page--admin">
             <TopViewModule

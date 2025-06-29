@@ -16,7 +16,13 @@ import type { ForgotPassword } from "../../lib/types/services/user.type";
 // Error message component for fields validation
 import { ErrorMessageValidation } from "../../components/company/ErrorMessageValidation";
 
+// Title hook
+import { useDocumentTitle } from "../../lib/hooks/useDocumentTitle";
+
 const LoginView = () => {
+    // Title
+    useDocumentTitle("Recuperar Contraseña - Track My Cash")
+
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ForgotPassword> ({
         defaultValues: {
             email: "",

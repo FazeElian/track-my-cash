@@ -13,7 +13,13 @@ import { TransactionsTable } from "./TransactionsTable"
 // Query
 import { useFetchAllTransactions } from "../../../services/transactions/queries"
 
+// Title hook
+import { useDocumentTitle } from "../../../lib/hooks/useDocumentTitle";
+
 const TransactionsView = () => {
+    // Title
+    useDocumentTitle("Movimientos - Track My Cash")
+
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const [editTransactionId, setEditTransactionId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);

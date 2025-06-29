@@ -8,7 +8,13 @@ import { NotificationsTable } from "./NotificationsTable";
 // Query
 import { useFetchAllNotifications } from "../../../services/notifications/queries";
 
+// Title hook
+import { useDocumentTitle } from "../../../lib/hooks/useDocumentTitle";
+
 const NotificationsView = () => {
+    // Title
+    useDocumentTitle("Notificaciones - Track My Cash")
+
     const { data: notificationsList, isLoading } = useFetchAllNotifications()
 
     let loadingState = false

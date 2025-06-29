@@ -13,7 +13,13 @@ import NewGoalForm from "./NewGoalForm";
 // Query
 import { useFetchAllGoals } from "../../../services/goals/queries";
 
+// Title hook
+import { useDocumentTitle } from "../../../lib/hooks/useDocumentTitle";
+
 const GoalsView = () => {
+    // Title
+    useDocumentTitle("Metas - Track My Cash")
+
     const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const [editGoalId, setEditGoalId] = useState<number | null>(null);
     const formRef = useRef<HTMLFormElement>(null);

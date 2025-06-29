@@ -20,7 +20,13 @@ import type { UpdateBasicInfo } from "../../../lib/types/services/user.type";
 // Mutation
 import { useUpdateBasicInfoMutation } from "../../../services/auth/mutations";
 
+// Title hook
+import { useDocumentTitle } from "../../../lib/hooks/useDocumentTitle";
+
 const EditAccountInfoView = () => {
+    // Title
+    useDocumentTitle("Cuenta - Track My Cash")
+
     // Get user
     const { user } = useUser();
 

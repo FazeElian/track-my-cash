@@ -17,7 +17,13 @@ import type { ResetPassword } from "../../lib/types/services/user.type";
 // Error message component for fields validation
 import { ErrorMessageValidation } from "../../components/company/ErrorMessageValidation";
 
+// Title hook
+import { useDocumentTitle } from "../../lib/hooks/useDocumentTitle";
+
 const ResetPasswordView = () => {
+    // Title
+    useDocumentTitle("Reestablecer Contraseña - Track My Cash")
+
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ResetPassword> ({
         defaultValues: {
             password: ""

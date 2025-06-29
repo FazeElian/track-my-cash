@@ -16,7 +16,13 @@ import { BiEdit } from 'react-icons/bi';
 // Get user from auth context
 import { useUser } from "../../../services/auth/context";
 
+// Title hook
+import { useDocumentTitle } from "../../../lib/hooks/useDocumentTitle";
+
 const AccountView = () => {
+    // Title
+    useDocumentTitle("Cuenta - Track My Cash")
+
     // Get user
     const { user } = useUser();
 

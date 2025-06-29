@@ -17,7 +17,13 @@ import type { RegisterUser } from "../../lib/types/services/user.type";
 // Error message component for fields validation
 import { ErrorMessageValidation } from "../../components/company/ErrorMessageValidation";
 
+// Title hook
+import { useDocumentTitle } from "../../lib/hooks/useDocumentTitle";
+
 const RegisterView = () => {
+    // Title
+    useDocumentTitle("Crea tu cuenta - Track My Cash")
+
     const { register, handleSubmit, reset, formState: { errors } } = useForm<RegisterUser> ({
         defaultValues: {
             email: "",

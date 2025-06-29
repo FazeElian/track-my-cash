@@ -17,7 +17,13 @@ import type { LoginUser } from "../../lib/types/services/user.type";
 // Error message component for fields validation
 import { ErrorMessageValidation } from "../../components/company/ErrorMessageValidation";
 
+// Title hook
+import { useDocumentTitle } from "../../lib/hooks/useDocumentTitle";
+
 const LoginView = () => {
+    // Title
+    useDocumentTitle("Iniciar Sesión - Track My Cash")
+
     const { register, handleSubmit, reset, formState: { errors } } = useForm<LoginUser> ({
         defaultValues: {
             email: "",
