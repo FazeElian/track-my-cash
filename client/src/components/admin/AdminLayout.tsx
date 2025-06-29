@@ -14,12 +14,15 @@ import { IoMdSwap, IoIosMenu } from "react-icons/io";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdOutlineLogout, MdArrowForward } from "react-icons/md";
 import { GoGoal } from "react-icons/go";
+import { VscBellDot } from "react-icons/vsc";
 
-// Query
+// Queries
 import { useGetAuthenticatedUser } from "../../services/auth/queries";
+import { useFetchAllNotifications } from "../../services/notifications/queries";
 
-// Type
+// Types
 import type { User } from "../../lib/types/services/user.type";
+import type { Notification } from "../../lib/types/services/notification.type";
 
 // Loadint component
 import Loading from "./Loading";
@@ -44,6 +47,22 @@ const AdminLayout = () => {
 
     const location = useLocation();
     const navigate = useNavigate()
+
+    // Check if there's notifications that are not read
+    const { data: notifications } = useFetchAllNotifications()
+
+    // Notifications with read === true
+    const notReadNotifications : Notification[] = []
+
+    if (Array.isArray(notifications)) {
+        notifications.forEach(notification => {
+            if(notification.read === false) {
+                notReadNotifications.push(notification)
+            }
+        });
+    }
+
+    console.log(notReadNotifications)
 
     // get authenticated user result from query
     const { data: userResult, isError, isLoading } = useGetAuthenticatedUser();
@@ -111,7 +130,11 @@ const AdminLayout = () => {
                                 `}
                                 onClick={() => setSideBar(false)}
                             >
-                                <IoNotificationsOutline />
+                                {notReadNotifications.length > 0 ? (
+                                    <VscBellDot />
+                                ) : (
+                                    <IoNotificationsOutline />
+                                )}
                                 Notificaciones
                             </Link>
                             <button
