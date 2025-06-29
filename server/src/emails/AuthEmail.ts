@@ -1,4 +1,6 @@
 import { transport } from './../config/nodemailer';
+import fs from "fs";
+import path from 'path';
 
 type EmailType = {
     userName: string,
@@ -8,40 +10,60 @@ type EmailType = {
 
 export class AuthEmail {
     static sendConfirmationEmail = async (user: EmailType) => {
+        const templatePath = path.join(__dirname, "templates", "confirm-account.html");
+        let htmlTemplate = fs.readFileSync(templatePath, "utf8");
+        const url = `${process.env.VITE_URL_PROD}/auth/confirm-account`
+
+        htmlTemplate = htmlTemplate
+            .replace("{{ userName }}", user.userName)
+            .replace("{{ code }}", user.code)
+            .replace("{{ ConfirmAccountURL }}", url);
+
         const email = await transport.sendMail({
             from: "Track My Cash",
             to: user.email,
             subject: "Track My Cash - Confirma tu cuenta",
-            html: `
-                <h2> Hola ${user.userName}, </h2>
-                <br />
+            // html: `
+            //     <h2> Hola ${user.userName}, </h2>
+            //     <br />
 
-                <h2>¡Bienvenido a Track My Cash! Confirma tu correo electrónico para activar tu cuenta.</h2>
-                <p>Haz clic en el enlace de abajo e introduce el código para completar tu registro:</p>
-                <br />
+            //     <h2>¡Bienvenido a Track My Cash! Confirma tu correo electrónico para activar tu cuenta.</h2>
+            //     <p>Haz clic en el enlace de abajo e introduce el código para completar tu registro:</p>
+            //     <br />
 
-                <p><b>Código:: </b> ${user.code} </p>
-                <a href="#"> Confirmar mi cuenta </a>
-            `
+            //     <p><b>Código:: </b> ${user.code} </p>
+            //     <a href="#"> Confirmar mi cuenta </a>
+            // `
+            html: htmlTemplate
         })
         console.log(email)
     }
 
     static sendForgotPasswordEmail = async (user: EmailType) => {
+        const templatePath = path.join(__dirname, "templates", "forgot-password.html");
+        let htmlTemplate = fs.readFileSync(templatePath, "utf8");
+        const url = `${process.env.VITE_URL_PROD}/auth/validate-code`
+
+        htmlTemplate = htmlTemplate
+            .replace("{{ userName }}", user.userName)
+            .replace("{{ code }}", user.code)
+            .replace("{{ ValidateCodeURL }}", url);
+
         const email = await transport.sendMail({
             from: "Track My Cash",
             to: user.email,
             subject: "Track My Cash - Reestablece tu contraseña",
-            html: `
-                <h2> Hola ${user.userName}, </h2>
-                <br />
+            // html: `
+            //     <h2> Hola ${user.userName}, </h2>
+            //     <br />
 
-                <h2>Recientemente solicitaste restablecer tu contraseña para tu cuenta de Track My Cash. Usa el código a continuación para restablecerla:</h2>
-                <br />
+            //     <h2>Recientemente solicitaste restablecer tu contraseña para tu cuenta de Track My Cash. Usa el código a continuación para restablecerla:</h2>
+            //     <br />
 
-                <p><b>Código: </b> ${user.code} </p>
-                <a href="#"> Reestablece tu contraseña </a>
-            `
+            //     <p><b>Código: </b> ${user.code} </p>
+            //     <a href="#"> Reestablece tu contraseña </a>
+            // `
+            html: htmlTemplate
         })
         console.log(email)
     }
