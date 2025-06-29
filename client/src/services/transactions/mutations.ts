@@ -20,6 +20,9 @@ export const useNewTransactionMutation = () => {
         
             // Refetch transactions list
             queryClient.refetchQueries({ queryKey: ["transactions"] })
+
+            // Refetch notifications list
+            queryClient.refetchQueries({ queryKey: ["notifications"] })
         },
         onError: (error: Error) => {
             const message = error.message;
@@ -44,6 +47,9 @@ export const useUpdateTransactionMutation = (id: number) => {
             // Refetch transactions list
             queryClient.refetchQueries({ queryKey: ["transactions"] });
 
+            // Refetch notifications list
+            queryClient.refetchQueries({ queryKey: ["notifications"] })
+
             // Sucess toast
             toast.success(response);
         },
@@ -64,6 +70,9 @@ export const useDeleteTransactionMutation = () => {
         onSuccess: (response) => {
             // Invalidate queries
             queryClient.refetchQueries({ queryKey: ["transactions"] });
+            
+            // Refetch notifications list
+            queryClient.refetchQueries({ queryKey: ["notifications"] })
 
             // Sucess toast
             toast.success(response);
