@@ -118,8 +118,10 @@ export class GoalController {
 
             // Change deadline
             const now = new Date();
+            const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            tomorrow.setDate(tomorrow.getDate() + 1);
 
-            goal.deadline = String(now)
+            goal.deadline = String(tomorrow)
             goal.state = "InProgress";
 
             // Save changes
