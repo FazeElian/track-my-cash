@@ -24,7 +24,9 @@
     }
 
         .img-detail-feature img {
-            width: 280px;
+            width: 285px;
+            border-radius: 12px;
+            filter: drop-shadow(0 -2px 7px var(--color-green));
         }
 
     .info-detail-feature {

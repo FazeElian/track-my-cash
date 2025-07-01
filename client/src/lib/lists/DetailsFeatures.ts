@@ -1,23 +1,28 @@
+// Images
+import ScreenPhoto1 from "../../assets/img/ScreenPhoto1.jpg";
+import ScreenPhoto2 from "../../assets/img/ScreenPhoto2.jpg";
+import ScreenPhoto3 from "../../assets/img/ScreenPhoto3.jpg";
+
 export const DetailsFeatures = [
     {
         id: 1,
-        title: "Tu dinero, clasificado sin esfuerzo",
+        title: "Tu Resumen Financiero Mensual",
         stylesClass: "detail-feature",
-        image: "",
-        description: "Olvídate de registrar manualmente cada compra. Esta función analiza tus movimientos y los organiza automáticamente, para que tengas el control sin tener que pensar en ello. Visualiza en qué estás gastando más y detecta patrones para tomar decisiones con confianza.",
+        image: ScreenPhoto1,
+        description: "Recibe un resumen instantáneo de tu estado financiero: consulta tus ingresos y gastos del mes, compara con tu promedio histórico y revisa tu saldo acumulado. Todo en una sola pantalla para que controles tu dinero sin complicaciones.",
     },
     {
         id: 2,
-        title: "Haz cálculos como un pro, sin serlo",
+        title: "Consulta Todos Tus Ingresos y Gastos",
         stylesClass: "detail-feature detail-feature--inverted",
-        image: "",
-        description: "Ya sea que estés pensando en un préstamo, ahorro o interés compuesto, esta función te brinda herramientas sencillas para hacer simulaciones precisas y tomar mejores decisiones.",
+        image: ScreenPhoto2,
+        description: "Gestiona y filtra cada transacción: busca por título, revisa cuántos movimientos registraste, cuántos completaste y cuántos quedan pendientes. Añade nuevos movimientos con un solo clic y mantén tu historial siempre al día.",
     },
     {
         id: 3,
-        title: "Tu mes financiero, resumido sin complicaciones",
+        title: "Define, Visualiza y Avanza Hacia Tus Objetivos",
         stylesClass: "detail-feature",
-        image: "",
-        description: "Cada mes, recibe un informe visual con todo lo que necesitas saber sobre tu situación financiera. Con gráficos claros y consejos útiles, podrás mejorar mes a mes sin complicaciones.",
+        image: ScreenPhoto3,
+        description: "Define y sigue tus objetivos de ahorro: ve cuántas metas creaste, cuántas completaste y cuántas están vencidas. Crea nuevas metas, edítalas o reactívalas fácilmente para alcanzar tus proyectos más importantes.",
     },
 ]
