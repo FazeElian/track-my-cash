@@ -87,6 +87,37 @@ export class GoalController {
         res.json("Meta actualizada con éxito.");
     }
 
+    // Re activate goal
+    static reActivateGoal = async (req: Request, res: Response) => {
+        try {
+            // Get goal id
+            const goalId = req.goal.id;
+
+            // Get goal
+            const goal = await Goal.findByPk(goalId);
+            
+            // Check if the goal status is not expired
+            if(goal.state !== "Expired") {
+                const error = new Error("Esta meta está activada o completada.");
+                res.status(409).json({ error: error.message });
+                return;
+            }
+
+            // Change deadline
+            const now = new Date();
+
+            goal.deadline = String(now)
+            goal.state = "InProgress";
+
+            // Save changes
+            goal.save()
+
+            res.status(201).json(`Meta reactivada: ${goal.title}`)
+        } catch (error) {
+            res.status(500).json({ error: "Error reactivating the goal" })
+        }
+    }
+
     // Delete goal with it's id
     static deleteById = async (req: Request, res: Response) => {
         // Delete

@@ -38,6 +38,11 @@ router.put("/goals/:goalId",
     GoalController.updateById
 );
 
+router.put("/goals/reactivate/:goalId",
+    authenticate,
+    GoalController.reActivateGoal
+);
+
 router.post("/goals/new",
     validateGoalInput,
     handleInputErrors,
