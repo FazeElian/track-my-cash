@@ -28,6 +28,17 @@ export class GoalController {
                 ]
             });
 
+            // Check if any goal is expired
+            const now = new Date()
+            goals.forEach(goal => {
+                const deadline = new Date(goal.deadline)
+                if(deadline < now) {
+                    goal.state === "Expired"; // Change status
+                    goal.save()
+                }
+                goal.state === "InProgress"
+            });
+
             // Send goals
             res.json(goals)
         } catch (error) {
