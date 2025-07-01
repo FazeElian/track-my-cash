@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Toaster } from "sonner";
+import { useEffect } from "react";
+import { toast, Toaster } from "sonner";
 
 // Styles for this view
 import "../../assets/css/components/company/auth/Forms.css";
@@ -23,6 +24,12 @@ import { useDocumentTitle } from "../../lib/hooks/useDocumentTitle";
 const LoginView = () => {
     // Title
     useDocumentTitle("Iniciar Sesión - Track My Cash")
+
+    useEffect(() => {
+        toast.info('Usa el correo: "demo@mail.com" y la contraseña: "demo-user" para ingresar a la demo', {
+            duration: 6000
+        });
+    }, []);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<LoginUser> ({
         defaultValues: {
