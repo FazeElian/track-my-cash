@@ -21,6 +21,7 @@ import type { Goal } from '../../../lib/types/services/goal.type';
 
 // Delete mutation
 import { useDeleteGoalMutation } from '../../../services/goals/mutations';
+import { formatDueDate } from '../../../lib/utils/formatDueDate';
 
 const GoalCard : React.FC<Goal> = (props) => {
     // Calc % for progress
@@ -132,7 +133,7 @@ const GoalCard : React.FC<Goal> = (props) => {
                 <div className="item-btm-item-goals-gallery item-time-btm-item-goals-gallery">
                     <WiTime4 />
                     <h2>
-                        3 meses
+                        {formatDueDate(props.deadline)}
                     </h2>
                 </div>
             </div>
