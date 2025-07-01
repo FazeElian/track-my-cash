@@ -45,6 +45,19 @@ export async function newGoal (goalData: GoalForm) {
     }
 }
 
+export async function reActivate (id: number) {
+    try {
+        const { data } = await api.put(`/admin/goals/reactivate/${id}`);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            const message = error.response.data.error;
+            throw new Error(message);
+        }
+        return new Error(`${error}`)
+    }
+}
+
 export async function updateGoal (goalData: GoalForm, id: number) {
     try {
         const { data } = await api.put(`/admin/goals/${id}`, goalData);

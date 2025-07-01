@@ -7,6 +7,8 @@ import { TbPointFilled } from 'react-icons/tb';
 import { BiEdit } from 'react-icons/bi';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import { FaCheckCircle } from "react-icons/fa";
+import { RiEmotionSadLine } from "react-icons/ri";
+import { CgRedo } from "react-icons/cg";
 
 // Utils
 import { truncateText } from "../../../lib/utils/truncateText";
@@ -20,7 +22,7 @@ import { categoriesMap } from '../../../lib/lists/Categories';
 import type { Goal } from '../../../lib/types/services/goal.type';
 
 // Delete mutation
-import { useDeleteGoalMutation } from '../../../services/goals/mutations';
+import { useDeleteGoalMutation, useReActivateGoalMutation } from '../../../services/goals/mutations';
 import { formatDueDate } from '../../../lib/utils/formatDueDate';
 
 const GoalCard : React.FC<Goal> = (props) => {
@@ -46,23 +48,50 @@ const GoalCard : React.FC<Goal> = (props) => {
         });
     }
 
+    // Re activate mutation
+    const reActivateMutation = useReActivateGoalMutation()
+    const handleGoalReactivation = (id: number) => {
+        reActivateMutation.mutate(id)
+    }
+
     return (
         <motion.div
-            className={`item-goals-gallery ${props.state === "Completed" ? "item-completed-goals-gallery" : ""}`}
+            className={`item-goals-gallery
+                ${props.state === "Completed" ? "item-completed-goals-gallery"
+                    : props.state === "Expired" ? "item-expired-goals-gallery"
+                    : ""
+                }
+            `}
             key={props.id}
             whileHover={{ scale: 1.05 }}
             transition={{
                 duration: .25,
             }}
         >
-            <div 
-                className={`txt-completed-item-completed-goals-gallery
-                ${props.state === "Completed" ? "txt-completed-item-completed-goals-gallery-visible" : ""}`}
-            >
-                <FaCheckCircle />
-                <br/>
-                Completada!
-            </div>
+            {props.state === "Completed" ? (
+                <div
+                    className="txt-completed-item-completed-goals-gallery txt-completed-item-completed-goals-gallery-visible">
+                    <FaCheckCircle />
+                    <br/>
+                    Completada!
+                </div>
+            ) : props.state === "Expired" ? (
+                <div
+                    className="txt-expired-item-expired-goals-gallery txt-expired-item-expired-goals-gallery-visible">
+                    <RiEmotionSadLine />
+                    <br/>
+                    Meta vencida sin completar
+                    <button
+                        type="button"
+                        onClick={() => handleGoalReactivation(props.id)}
+                        className="btn-expired-item-expired-goals-gallery font-lexend"
+                    >
+                        <CgRedo />
+                        Reactivar meta
+                    </button>
+                </div>
+            ) : ("")}
+
             <div className="top-item-goals-gallery">
                 <div
                     className={`icon-top-item-goals-gallery ${colorClassMap[props.color]}`}

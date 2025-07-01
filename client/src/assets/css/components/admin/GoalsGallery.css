@@ -68,6 +68,73 @@
                     width: 60px;
                     height: 60px;
                 }
+        
+        .item-expired-goals-gallery::after {
+            position: absolute;
+            content: "";
+            opacity: .4;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-white);
+            opacity: .85;
+            z-index: 1;
+            pointer-events: none;
+            padding: 0;
+            border: 1px solid var(--color-orange);
+            border-radius: 8px;
+        }
+
+            .txt-expired-item-expired-goals-gallery {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                z-index: 2;
+                color: var(--color-orange);
+                font-weight: 500;
+                font-size: 22px;
+                display: none;
+                text-align: center;
+            }
+
+                .txt-expired-item-expired-goals-gallery-visible {
+                    display: flex;
+                }
+
+                .txt-expired-item-expired-goals-gallery svg {
+                    width: 65px;
+                    height: 65px;
+                }
+
+                .btn-expired-item-expired-goals-gallery {
+                    display: flex;
+                    width: auto;
+                    height: auto;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    gap: 4px;
+                    background-color: var(--color-white);
+                    border-radius: 8px;
+                    border: 1px solid var(--color-green);
+                    cursor: pointer;
+                    color: var(--color-green);
+                    font-size: 16px;
+                    padding: 10px 22px 10px;
+                    margin-top: 1rem;
+                }
+
+                    .btn-expired-item-expired-goals-gallery svg {
+                        width: 30px;
+                        height: 30px;
+                    }
 
         .top-item-goals-gallery {
             display: flex;
@@ -368,13 +435,32 @@
         height: 10px;
     }
 
-    .txt-completed-item-completed-goals-gallery {
+    .txt-completed-item-completed-goals-gallery,
+    .txt-expired-item-expired-goals-gallery {
         font-size: 18px;
+    }
+
+    .txt-expired-item-expired-goals-gallery {
+        padding: 0 2rem 0;
     }
 
     .txt-completed-item-completed-goals-gallery svg {
         width: 50px;
         height: 50px;
+    }
+
+    .txt-expired-item-expired-goals-gallery svg {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .btn-expired-item-expired-goals-gallery {
+        font-size: 15px;
+    }
+
+    .btn-expired-item-expired-goals-gallery svg {
+        width: 24px;
+        height: 24px;
     }
 }
 

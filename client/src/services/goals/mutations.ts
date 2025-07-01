@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import type { GoalForm } from "../../lib/types/services/goal.type";
 
 // API Calls
-import { deleteGoal, newGoal, updateGoal } from "./api";
+import { deleteGoal, newGoal, reActivate, updateGoal } from "./api";
 
 // Register new goal mutation
 export const useNewGoalMutation = () => {
@@ -27,6 +27,28 @@ export const useNewGoalMutation = () => {
         },
     })
 }
+
+// Re activate goal mutation
+export const useReActivateGoalMutation = () => {
+    // Query client
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: (id: number) => reActivate(id),
+        onSuccess: (response) => {
+            // Refetch goals list
+            queryClient.refetchQueries({ queryKey: ["goals"] })
+
+            // Sucess toast
+            toast.success(response);
+        },
+        onError: (error: Error) => {
+            const message = error.message;
+            toast.error(message);
+        },
+    })
+}
+
 
 // Update goal mutation
 export const useUpdateGoalMutation = (id: number) => {

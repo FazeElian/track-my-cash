@@ -33,7 +33,6 @@ const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }
     // Mutation
     const newTransactionMutation = useNewTransactionMutation()
     const handleNewTransaction = (formData: TransactionForm) => {
-        console.log(formData)
         newTransactionMutation.mutate(formData, {
             onSuccess: () => {
                 reset()
