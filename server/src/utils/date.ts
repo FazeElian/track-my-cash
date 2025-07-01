@@ -1,3 +1,8 @@
+export const getNowDateOnly = () => {
+    const now = new Date()
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
 export const getCurrentMonth = async () => {
     // Get the current date
     const now = new Date();

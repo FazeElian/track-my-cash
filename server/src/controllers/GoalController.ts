@@ -4,6 +4,9 @@ import { Sequelize } from "sequelize";
 // Model
 import Goal from "../models/Goal";
 
+// Utils
+import { getNowDateOnly } from "../utils/date";
+
 export class GoalController {
     // Get all the goals
     static getAll = async (req: Request, res: Response) => {
@@ -29,14 +32,24 @@ export class GoalController {
             });
 
             // Check if any goal is expired
-            const now = new Date()
-            goals.forEach(goal => {
-                const deadline = new Date(goal.deadline)
-                if(deadline < now) {
-                    goal.state === "Expired"; // Change status
-                    goal.save()
+            const now = getNowDateOnly();
+            goals.forEach((goal: Goal) => {
+                const deadline = new Date(goal.deadline);
+                // console.log("Now:", now)
+                // console.log("Deadline", deadline)
+
+                if (deadline < now) {
+                    goal.state = "Expired"; // Change status
+                    goal.save();
+                } else if (deadline >= now) {
+                    if (goal.state !== "Completed") {
+                        if (goal.currentAmount === goal.targetAmount) {
+                            goal.state = "Completed"; // Change status
+                        }
+                        goal.state = "InProgress"; // Change status
+                        goal.save()
+                    }
                 }
-                goal.state === "InProgress"
             });
 
             // Send goals
