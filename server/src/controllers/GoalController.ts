@@ -6,6 +6,7 @@ import Goal from "../models/Goal";
 
 // Utils
 import { getNowDateOnly } from "../utils/date";
+import Notification from "../models/Notification";
 
 export class GoalController {
     // Get all the goals
@@ -33,13 +34,32 @@ export class GoalController {
 
             // Check if any goal is expired
             const now = getNowDateOnly();
-            goals.forEach((goal: Goal) => {
+            goals.forEach(async (goal: Goal) => {
                 const deadline = new Date(goal.deadline);
                 // console.log("Now:", now)
                 // console.log("Deadline", deadline)
 
                 if (deadline < now) {
                     goal.state = "Expired"; // Change status
+
+                    const notification = await Notification.findOne({
+                        where: {
+                            description: `La meta "${goal.title}" ha vencido sin ser alcanzada. Puedes reactivarla e intentarlo de nuevo. ¡Tú puedes!`,
+                            read: false
+                        }
+                    });
+
+                    // Create new notificaion
+                    if (!notification) {
+                        await Notification.create({
+                            userId: req.user.id,
+                            title: "Meta vencida ⏳",
+                            type: "GoalExpired",
+                            description: `La meta "${goal.title}" ha vencido sin ser alcanzada. Puedes reactivarla e intentarlo de nuevo. ¡Tú puedes!`,
+                            read: false
+                        });
+                    }
+
                     goal.save();
                 } else if (deadline >= now) {
                     if (goal.state !== "Completed") {

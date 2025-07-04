@@ -66,7 +66,7 @@ export class TransactionController {
                         await Notification.create({
                             userId: req.user.id,
                             title: "¡Meta completada! 🎉",
-                            type: "Goal",
+                            type: "GoalCompleted",
                             description: `Has alcanzado tu meta "${goal.title}". ¡Excelente trabajo!`,
                             read: false
                         })
@@ -162,7 +162,7 @@ export class TransactionController {
                             await Notification.create({
                                 userId: req.user.id,
                                 title: "¡Meta completada! 🎉",
-                                type: "Goal",
+                                type: "GoalCompleted",
                                 description: `Has alcanzado tu meta "${newGoal.title}". ¡Excelente trabajo!`,
                                 read: false
                             })
@@ -198,7 +198,7 @@ export class TransactionController {
                     await Notification.create({
                         userId: req.user.id,
                         title: "¡Meta completada! 🎉",
-                        type: "Goal",
+                        type: "GoalCompleted",
                         description: `Has alcanzado tu meta "${goal.title}". ¡Excelente trabajo!`,
                         read: false
                     })

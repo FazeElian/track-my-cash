@@ -26,7 +26,7 @@ class Notification extends Model {
     // Description
     @AllowNull(false)
     @Column({
-        type: DataType.STRING(100)
+        type: DataType.STRING(200)
     })
     declare description: string
     
@@ -34,7 +34,8 @@ class Notification extends Model {
     @AllowNull(false)
     @Column({
         type: DataType.ENUM(
-            "Goal",
+            "GoalCompleted",
+            "GoalExpired",
             "Transaction",
             "Reminder",
             "System"
