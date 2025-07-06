@@ -10,8 +10,7 @@ import { useFetchAllGoals } from "../../../services/goals/queries";
 
 const GoalsSelectField = ({ label, labelFor, error, ...rest }: SelectFieldProps) => {
     const { data: goalsList, isLoading } = useFetchAllGoals() 
-    const goals : Goal[] = [] // Initialize array
-
+    const selectedGoalId = rest.defaultValue || rest.value; // Get the current id
     if (isLoading) return "Cargando..."
     
     if (!Array.isArray(goalsList)) {
@@ -27,11 +26,9 @@ const GoalsSelectField = ({ label, labelFor, error, ...rest }: SelectFieldProps)
     }
 
     // Select only the goals that are not completed
-    goalsList.forEach(goal => {
-        if(goal.state !== "Completed") {
-            goals.push(goal)
-        }
-    });
+    const goals: Goal[] = goalsList.filter(goal => 
+        goal.state || goal.id === selectedGoalId
+    );
 
     return (
         <div className="item-form-double-group form-group">

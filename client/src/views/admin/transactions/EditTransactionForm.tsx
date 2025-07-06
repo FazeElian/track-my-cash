@@ -135,6 +135,7 @@ const EditTransactionForm : React.FC<ModalEditFormPropsType> = ({ id, modalRef, 
                         label="Meta (opcional)"
                         labelFor="goalId"
                         error={errors.goalId}
+                        defaultValue=""
                         {...register("goalId", {
                             valueAsNumber: true
                         })}
