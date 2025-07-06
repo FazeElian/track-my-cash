@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 // Types
@@ -12,6 +13,9 @@ export const useNewTransactionMutation = () => {
     // Query client
     const queryClient = useQueryClient()
 
+    // Redirection
+    const redirect = useNavigate()
+
     return useMutation({
         mutationFn: (data: TransactionForm) => newTransaction(data),
         onSuccess: (response) => {
@@ -23,6 +27,9 @@ export const useNewTransactionMutation = () => {
 
             // Refetch notifications list
             queryClient.refetchQueries({ queryKey: ["notifications"] })
+
+            // Redirection to main view
+            redirect("/admin/transactions")
         },
         onError: (error: Error) => {
             const message = error.message;
