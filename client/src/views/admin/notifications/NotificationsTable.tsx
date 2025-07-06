@@ -6,10 +6,12 @@ import "../../../assets/css/components/admin/Notifications.css";
 // Loading component
 import { ModuleLoading } from '../../../components/admin/ModuleLoading';
 
-// React icons
-import { GoGoal } from "react-icons/go";
-import { FaCheckCircle } from "react-icons/fa";
-import { TbBellCheck } from "react-icons/tb";
+// Lucide react icons
+import {
+    CheckIcon,
+    GoalIcon,
+    NotificationsCheckIcon
+} from '../../../lib/lists/Icons';
 
 // Type
 import type { Notification } from '../../../lib/types/services/notification.type';
@@ -44,7 +46,7 @@ const NotificationsTable = ({ notifications, loadingState } : NotificationsTable
     if (!hasNotifications) {
         return (
             <div className="no-notifications">
-                <TbBellCheck />
+                <NotificationsCheckIcon />
                 <h1>¡Todo está al día!</h1>
                 <h2>No tienes notificaciones pendientes.</h2>
             </div>
@@ -64,7 +66,7 @@ const NotificationsTable = ({ notifications, loadingState } : NotificationsTable
                 >
                     <div className="content-item-notificactions">
                         <div className="icon-item-notifications">
-                            <GoGoal />
+                            <GoalIcon />
                         </div>
                         <div className="txt-item-notifications">
                             <h1>{notification.title}</h1>
@@ -80,7 +82,7 @@ const NotificationsTable = ({ notifications, loadingState } : NotificationsTable
                                 className="btn-item-notifications font-lexend"
                                 onClick={() => handleMarkAsRead(notification.id)}
                             >
-                                <FaCheckCircle />
+                                <CheckIcon />
                                 Marcar como leído
                             </button>
                         </div>

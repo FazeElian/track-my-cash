@@ -6,8 +6,8 @@ import "../../assets/css/components/admin/SearchBar.css";
 // Type
 import type { SearchBarType } from "../../lib/types/search-bar.type"
 
-// React icons
-import { IoSearch } from "react-icons/io5";
+// Lucide react icons
+import { SearchIcon } from "lucide-react";
 
 // Filter component
 import { FilterTransactions } from "./molecules/FilterTransactions";
@@ -30,7 +30,7 @@ const SearchBar : React.FC<SearchBarType> = (props) => {
                     method="POST"
                     onSubmit={handleSearchSubmit}
                 >
-                    <IoSearch />
+                    <SearchIcon />
                     <input
                         className="font-lexend"
                         value={searchQuery}

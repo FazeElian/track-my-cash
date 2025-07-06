@@ -5,10 +5,10 @@ import { TopViewModule } from "../../../components/admin/TopTitle"
 import { SearchBar } from "../../../components/admin/SearchBar"
 import NewTransactionForm from "./NewTransactionForm"
 import EditTransactionForm from "./EditTransactionForm"
-
-// React icons
-import { IoMdSwap } from "react-icons/io"
 import { TransactionsTable } from "./TransactionsTable"
+
+// Lucide react icons
+import { MovementsIcon } from "../../../lib/lists/Icons"
 
 // Query
 import { useFetchAllTransactions } from "../../../services/transactions/queries"
@@ -105,7 +105,7 @@ const TransactionsView = () => {
         <main className="content-page--admin">
             <TopViewModule
                 title="Mis Movimientos"
-                icon={IoMdSwap}
+                icon={MovementsIcon}
                 txtBtnAdd="Registrar movimiento"
                 txtBtnAddShort="Registrar"
                 btnAddOnClick={() => setModalForm("new")}

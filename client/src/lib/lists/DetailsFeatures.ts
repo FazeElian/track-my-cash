@@ -1,7 +1,7 @@
 // Images
-import ScreenPhoto1 from "../../assets/img/ScreenPhoto1.jpg";
-import ScreenPhoto2 from "../../assets/img/ScreenPhoto2.jpg";
-import ScreenPhoto3 from "../../assets/img/ScreenPhoto3.jpg";
+import ScreenPhoto1 from "../../assets/img/ScreenPhoto1.webp";
+import ScreenPhoto2 from "../../assets/img/ScreenPhoto2.webp";
+import ScreenPhoto3 from "../../assets/img/ScreenPhoto3.webp";
 
 export const DetailsFeatures = [
     {

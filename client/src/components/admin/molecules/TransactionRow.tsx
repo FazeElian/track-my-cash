@@ -1,9 +1,13 @@
 import { toast } from 'sonner';
 
-// React icons
-import { FaCheckCircle } from "react-icons/fa";
-import { MdOutlineDeleteOutline, MdOutlineWatchLater, MdOutlineArrowOutward } from "react-icons/md";
-import { BiEdit } from "react-icons/bi";
+// Lucide react icons
+import {
+    CheckIcon,
+    PendingIcon,
+    EditIcon,
+    DeleteIcon,
+    ArrowMovementIcon
+} from "../../../lib/lists/Icons";
 
 // Type
 import type { Transaction } from "../../../lib/types/services/transaction.type";
@@ -49,14 +53,14 @@ const TransactionRow : React.FC<Transaction> = (props) => {
             {props.type == "Income" ? (
                 <td className="td td-title-transaction">
                     <div className="icon-title-transaction icon-income-title-transaction">
-                        <MdOutlineArrowOutward />
+                        <ArrowMovementIcon />
                     </div>
                     {props.title}
                 </td>
             ): (
                 <td className="td td-title-transaction">
                     <div className="icon-title-transaction icon-expense-title-transaction">
-                        <MdOutlineArrowOutward />
+                        <ArrowMovementIcon />
                     </div>
                     {props.title}
                 </td>
@@ -83,12 +87,12 @@ const TransactionRow : React.FC<Transaction> = (props) => {
             <td className="td td-state-transaction">
                 {props.state === "Completed" ? (
                     <div className="state-transaction state-completed">
-                        <FaCheckCircle />
+                        <CheckIcon />
                         Completada
                     </div>
                 ):(
                     <div className="state-transaction state-pending">
-                        <MdOutlineWatchLater />
+                        <PendingIcon />
                         Pendiente
                     </div>
                 )}
@@ -99,14 +103,14 @@ const TransactionRow : React.FC<Transaction> = (props) => {
                     className="btn-td btn-td-edit"
                     onClick={() => props.editForm(props.id)}
                 >
-                    <BiEdit />
+                    <EditIcon />
                 </button>
                 <button
                     type="button"
                     className="btn-td btn-td-delete"
                     onClick={() => handleDeleteTransaction(props.id)}
                 >
-                    <MdOutlineDeleteOutline />
+                    <DeleteIcon />
                 </button>
             </td>
         </tr>

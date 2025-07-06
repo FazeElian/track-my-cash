@@ -1,5 +1,5 @@
-// React icons
-import { IoNotificationsOutline } from "react-icons/io5";
+// Lucide react icons
+import { NotificationsIcon } from "../../../lib/lists/Icons";
 
 // Components for this view
 import { TopViewModule } from "../../../components/admin/TopTitle"
@@ -30,7 +30,7 @@ const NotificationsView = () => {
         <main className="content-page--admin">
             <TopViewModule
                 title="Notificaciones"
-                icon={IoNotificationsOutline}
+                icon={NotificationsIcon}
                 txtBtnAdd={""}
                 txtBtnAddShort={""}
                 btnAddOnClick={() => console.log()}

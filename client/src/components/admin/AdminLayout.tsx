@@ -8,13 +8,17 @@ import "../../assets/css/components/admin/AdminLayout.css";
 // Logo
 import Logo from "../../assets/img/Logo.webp";
 
-// React icons
-import { TbLayoutDashboard } from "react-icons/tb";
-import { IoMdSwap, IoIosMenu } from "react-icons/io";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { MdOutlineLogout, MdArrowForward } from "react-icons/md";
-import { GoGoal } from "react-icons/go";
-import { VscBellDot } from "react-icons/vsc";
+// Lucide react icons
+import {
+    DashboardIcon,
+    MovementsIcon,
+    GoalIcon,
+    NotificationsIcon,
+    UnreadNotificationsIcon,
+    LogOutIcon,
+    MenuIcon,
+    ArrowToRightIcon
+} from "../../lib/lists/Icons";
 
 // Queries
 import { useGetAuthenticatedUser } from "../../services/auth/queries";
@@ -62,8 +66,6 @@ const AdminLayout = () => {
         });
     }
 
-    console.log(notReadNotifications)
-
     // get authenticated user result from query
     const { data: userResult, isError, isLoading } = useGetAuthenticatedUser();
 
@@ -88,7 +90,7 @@ const AdminLayout = () => {
                             type="button"
                             onClick={handleSideBar}
                         >
-                            <IoIosMenu />
+                            <MenuIcon />
                         </button>
                     </div>
                     <nav className={`nav-side-bar ${sideBar ? "active" : ""}`}>
@@ -100,7 +102,7 @@ const AdminLayout = () => {
                                 `}
                                 onClick={() => setSideBar(false)}
                             >
-                                <TbLayoutDashboard />
+                                <DashboardIcon />
                                 Panel
                             </Link>
                             <Link
@@ -110,7 +112,7 @@ const AdminLayout = () => {
                                 `}
                                 onClick={() => setSideBar(false)}
                             >
-                                <IoMdSwap />
+                                <MovementsIcon />
                                 Movimientos
                             </Link>
                             <Link
@@ -120,7 +122,7 @@ const AdminLayout = () => {
                                 `}
                                 onClick={() => setSideBar(false)}
                             >
-                                <GoGoal />
+                                <GoalIcon />
                                 Metas
                             </Link>
                             <Link
@@ -131,9 +133,9 @@ const AdminLayout = () => {
                                 onClick={() => setSideBar(false)}
                             >
                                 {notReadNotifications.length > 0 ? (
-                                    <VscBellDot />
+                                    <UnreadNotificationsIcon />
                                 ) : (
-                                    <IoNotificationsOutline />
+                                    <NotificationsIcon />
                                 )}
                                 Notificaciones
                             </Link>
@@ -142,7 +144,7 @@ const AdminLayout = () => {
                                 className="item-nav-list-side-bar item-logout-list-side-bar font-lexend"
                                 onClick={logOut}
                             >
-                                <MdOutlineLogout />
+                                <LogOutIcon />
                                 Cerrar Sesión
                             </button>
                         </ul>
@@ -153,7 +155,7 @@ const AdminLayout = () => {
                                     <h1>{user.userName}</h1>
                                     <h2>{truncateText(user.email, 18)}</h2>
                                 </div>
-                                <MdArrowForward />
+                                <ArrowToRightIcon />
                             </button>
                         </Link>
                     </nav>

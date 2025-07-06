@@ -1,11 +1,18 @@
 // Icons for category
-import { FaCarSide, FaPlaneDeparture } from "react-icons/fa";
-import { FaBurger, FaGift } from "react-icons/fa6";
-import { IoHome, IoGameController, IoBriefcaseOutline } from "react-icons/io5";
-import { IoIosPricetag, IoMdCart } from "react-icons/io";
-import { BsCapsule } from "react-icons/bs";
-import { RiBookShelfFill } from "react-icons/ri";
-import { LiaBirthdayCakeSolid } from "react-icons/lia";
+import {
+    CarIcon,
+    CartIcon,
+    FoodIcon,
+    HomeIcon,
+    EducationIcon,
+    HealthIcon,
+    JobIcon,
+    TravelIcon,
+    EntertaimentIcon,
+    EventsIcon,
+    GiftIcon,
+    OtherIcon
+} from "./Icons";
 
 export const Categories = [
     {
@@ -83,16 +90,16 @@ export const Categories = [
 ];
 
 export const categoriesMap: Record<string, React.ComponentType> = {
-    Compras: IoMdCart,
-    Auto: FaCarSide,
-    Comida: FaBurger,
-    Hogar: IoHome,
-    Salud: BsCapsule,
-    Educacion: RiBookShelfFill,
-    Trabajo: IoBriefcaseOutline,
-    Viajes: FaPlaneDeparture,
-    Entretenimiento: IoGameController,
-    Eventos: LiaBirthdayCakeSolid,
-    Regalo: FaGift,
-    Otro: IoIosPricetag
+    Compras: CartIcon,
+    Auto: CarIcon,
+    Comida: FoodIcon,
+    Hogar: HomeIcon,
+    Salud: HealthIcon,
+    Educacion: EducationIcon,
+    Trabajo: JobIcon,
+    Viajes: TravelIcon,
+    Entretenimiento: EntertaimentIcon,
+    Eventos: EventsIcon,
+    Regalo: GiftIcon,
+    Otro: OtherIcon
 };

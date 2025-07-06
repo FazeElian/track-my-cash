@@ -1,0 +1,33 @@
+export { LayoutPanelLeft as DashboardIcon } from "lucide-react";
+export { ArrowRightLeft as MovementsIcon } from "lucide-react";
+export { Goal as GoalIcon } from "lucide-react";
+export { Bell as NotificationsIcon } from "lucide-react";
+export { BellDot as UnreadNotificationsIcon } from "lucide-react";
+export { Check as NotificationsCheckIcon } from "lucide-react";
+export { LogOut as LogOutIcon } from "lucide-react";
+export { AlignJustify as MenuIcon } from "lucide-react";
+export { ArrowRight as ArrowToRightIcon } from "lucide-react";
+export { SquarePen as EditIcon } from "lucide-react";
+export { Trash as DeleteIcon } from "lucide-react";
+export { CircleCheckBig as CheckIcon } from "lucide-react";
+export { Clock as PendingIcon } from "lucide-react";
+export { ArrowUpRight as ArrowMovementIcon } from "lucide-react";
+export { Plus as AddIcon } from "lucide-react";
+export { Search as SearchIcon } from "lucide-react";
+export { LayoutGrid as FeaturesIcon } from "lucide-react";
+export { CalendarDays as CalendarIcon } from "lucide-react";
+export { Wallet as WalletIcon } from "lucide-react";
+
+// Categories for objectives
+export { Car as CarIcon } from "lucide-react";
+export { ShoppingCart as CartIcon } from "lucide-react";
+export { Hamburger as FoodIcon } from "lucide-react";
+export { House as HomeIcon } from "lucide-react";
+export { Pill as HealthIcon } from "lucide-react";
+export { GraduationCap as EducationIcon } from "lucide-react";
+export { BriefcaseBusiness as JobIcon } from "lucide-react";
+export { PlaneTakeoff as TravelIcon } from "lucide-react";
+export { Gamepad2 as EntertaimentIcon } from "lucide-react";
+export { Cake as EventsIcon } from "lucide-react";
+export { Gift as GiftIcon } from "lucide-react";
+export { Tags as OtherIcon } from "lucide-react";

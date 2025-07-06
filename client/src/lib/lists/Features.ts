@@ -1,14 +1,17 @@
-// Icons
-import { MdOutlineTimeline, MdOutlineSubscriptions } from "react-icons/md";
-import { FiTarget } from "react-icons/fi";
-import { PiCalculatorFill } from "react-icons/pi";
-import { AiOutlineLineChart } from "react-icons/ai";
-import { TbReport } from "react-icons/tb";
+// Lucide react icons
+import {
+    TrendingUp,
+    LineChart,
+    Goal,
+    ListTodo,
+    Calculator,
+    ClipboardList
+} from "lucide-react";
 
 export const Features = [
     {
         id: 1,
-        icon: MdOutlineTimeline,
+        icon: TrendingUp,
         colorClass: "feat-color-green",
         itemColorClass: "item-feat-color-green",
         name: "Seguimiento Inteligente",
@@ -16,7 +19,7 @@ export const Features = [
     },
     {
         id: 2,
-        icon: AiOutlineLineChart,
+        icon: LineChart,
         colorClass: "feat-color-greenblue",
         itemColorClass: "item-feat-color-greenblue",
         name: "Presupuestos Inteligentes",
@@ -24,7 +27,7 @@ export const Features = [
     },
     {
         id: 3,
-        icon: FiTarget,
+        icon: Goal,
         colorClass: "feat-color-purple",
         itemColorClass: "item-feat-color-purple",
         name: "Objetivos Financieros",
@@ -32,7 +35,7 @@ export const Features = [
     },
     {
         id: 4,
-        icon: MdOutlineSubscriptions,
+        icon: ListTodo,
         colorClass: "feat-color-blue",
         itemColorClass: "item-feat-color-blue",
         name: "Gestión de Suscripciones",
@@ -40,7 +43,7 @@ export const Features = [
     },
     {
         id: 5,
-        icon: PiCalculatorFill,
+        icon: Calculator,
         colorClass: "feat-color-green",
         itemColorClass: "item-feat-color-green",
         name: "Calculadora Financiera",
@@ -48,7 +51,7 @@ export const Features = [
     },
     {
         id: 6,
-        icon: TbReport,
+        icon: ClipboardList,
         colorClass: "feat-color-orange",
         itemColorClass: "item-feat-color-orange",
         name: "Informe Mensual Automático",

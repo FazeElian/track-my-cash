@@ -4,8 +4,8 @@ import "../../assets/css/components/admin/TopViewModule.css";
 // Type
 import type { TopViewModuleType } from "../../lib/types/top-view-module";
 
-// React icons
-import { IoMdAdd } from "react-icons/io";
+// Lucide react icons
+import { AddIcon } from "../../lib/lists/Icons";
 
 const TopViewModule : React.FC<TopViewModuleType> = (props) => {
     return (
@@ -26,7 +26,7 @@ const TopViewModule : React.FC<TopViewModuleType> = (props) => {
                                 className="btn-actions-top-title-view-module font-lexend"
                                 onClick={props.btnAddOnClick}
                             >
-                                <IoMdAdd />
+                                <AddIcon />
                                 <h2>{props.txtBtnAddShort}</h2>
                                 {props.txtBtnAdd}
                             </button>
@@ -51,7 +51,7 @@ const TopViewModule : React.FC<TopViewModuleType> = (props) => {
                         className="btn-add-mobile btn-actions-top-title-view-module font-lexend"
                         onClick={props.btnAddOnClick}
                     >
-                        <IoMdAdd />
+                        <AddIcon />
                         {props.txtBtnAdd}
                     </button>
                 )}

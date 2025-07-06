@@ -11,11 +11,11 @@ import type { TransactionForm } from '../../../lib/types/services/transaction.ty
 import { InputField } from '../../../components/admin/atoms/InputField'
 import { TransactionTypeField } from '../../../components/admin/atoms/TransactionTypeField';
 import { GoalsSelectField } from '../../../components/admin/atoms/GoalsSelectField';
+import { TransactionStateSelectField } from '../../../components/admin/atoms/TransactionStateSelectField';
+import { TextAreaField } from '../../../components/admin/atoms/TextAreaField';
 
 // Mutation
 import { useNewTransactionMutation } from "../../../services/transactions/mutations";
-import { TransactionStateSelectField } from '../../../components/admin/atoms/TransactionStateSelectField';
-import { TextAreaField } from '../../../components/admin/atoms/TextAreaField';
 
 const NewTransactionForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<TransactionForm>({

@@ -8,10 +8,12 @@ import "../../assets/css/components/company/Header.css";
 // Logo
 import Logo from "../../assets/img/Logo.webp";
 
-// React icons
-import { IoIosMenu } from "react-icons/io";
-import { FiHome } from "react-icons/fi";
-import { RiFunctionLine } from "react-icons/ri";
+// Lucide react icons
+import {
+    HomeIcon,
+    MenuIcon,
+    FeaturesIcon
+} from "../../lib/lists/Icons";
 
 const Header = () => {
     const [menu, setMenu] = useState(false)
@@ -46,7 +48,7 @@ const Header = () => {
                             className="item-nav-header"
                             onClick={() => setMenu(false)}
                         >
-                        <FiHome />
+                        <HomeIcon />
                             Inicio
                         </Link>
                         <LinkScroll
@@ -57,7 +59,7 @@ const Header = () => {
                             offset={-150}
                             onClick={() => setMenu(false)}
                         >
-                            <RiFunctionLine />
+                            <FeaturesIcon strokeWidth={2.1} />
                             Características
                         </LinkScroll>
                         <Link
@@ -79,7 +81,7 @@ const Header = () => {
                         onClick={handleMenu}
                         type="button"
                     >
-                        <IoIosMenu />
+                        <MenuIcon />
                     </button>
                 </nav>
             </header>

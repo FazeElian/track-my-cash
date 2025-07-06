@@ -1,5 +1,5 @@
-// React icons
-import { TbLayoutDashboard } from "react-icons/tb"
+// Lucide react icons
+import { DashboardIcon } from "../../lib/lists/Icons";
 
 // Components for this view
 import { TopViewModule } from "../../components/admin/TopTitle"
@@ -17,7 +17,7 @@ const DashboardView = () => {
         <main className="content-page--admin">
             <TopViewModule
                 title="Panel Principal"
-                icon={TbLayoutDashboard}
+                icon={DashboardIcon}
                 txtBtnAdd="Registrar movimiento"
                 txtBtnAddShort="Registrar"
                 btnAddOnClick={() => console.log()}

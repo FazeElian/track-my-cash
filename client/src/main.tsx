@@ -16,7 +16,8 @@ createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Router />
-      <ReactQueryDevtools />
+      {/* Show react query tools if the app is not in production -> development environment */}
+      {import.meta.env.APP_ENV && <ReactQueryDevtools />}
     </BrowserRouter>
   </QueryClientProvider>
 )

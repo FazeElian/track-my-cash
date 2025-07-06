@@ -1,10 +1,14 @@
 // Styles for this component
 import "../../../assets/css/components/admin/DashboardStats.css";
 
-// React icons
-import { MdOutlineArrowOutward, MdOutlineTrendingUp, MdOutlineTrendingDown } from "react-icons/md";
-import { RiWallet3Line } from "react-icons/ri";
-import { IoCalendarNumberOutline } from "react-icons/io5";
+// Lucide react icons
+import {
+    ArrowMovementIcon,
+    CalendarIcon,
+    WalletIcon,
+} from "../../../lib/lists/Icons";
+
+import { TrendingUp, TrendingDown } from "lucide-react";
 
 // Query
 import { useGetStats } from "../../../services/admin/queries";
@@ -25,12 +29,12 @@ const DashboardStats = () => {
                         <h2>{formatAmount(stats.totalIncomes)}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
-                        <MdOutlineArrowOutward />
+                        <ArrowMovementIcon />
                     </div>
                 </div>
                 <div className="btm-item-dashboard-stats">
                     <div className="caption-btm-item-dashboard-stats">
-                        <MdOutlineTrendingUp />
+                        <TrendingUp />
                         Promedio mensual:
                     </div>
                     {formatAmount(stats.averageIncomesAmountTransaction)}
@@ -45,12 +49,12 @@ const DashboardStats = () => {
                         <h2>{formatAmount(stats.totalExpenses)}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
-                        <MdOutlineArrowOutward />
+                        <ArrowMovementIcon />
                     </div>
                 </div>
                 <div className="btm-item-dashboard-stats">
                     <div className="caption-btm-item-dashboard-stats">
-                        <MdOutlineTrendingDown />
+                        <TrendingDown />
                         Promedio mensual:
                     </div>
                     {formatAmount(stats.averageExpensesAmountTransaction)}
@@ -65,12 +69,12 @@ const DashboardStats = () => {
                         <h2>{formatAmount(stats.totalBalance)}</h2>
                     </div>
                     <div className="icon-item-dashboard-stats">
-                        <RiWallet3Line />
+                        <WalletIcon />
                     </div>
                 </div>
                 <div className="btm-item-dashboard-stats">
                     <div className="caption-btm-item-dashboard-stats">
-                        <IoCalendarNumberOutline />
+                        <CalendarIcon />
                         Movimientos:
                     </div>
                     {stats.transactionsAmount} este mes
