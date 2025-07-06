@@ -17,6 +17,9 @@ export { Search as SearchIcon } from "lucide-react";
 export { LayoutGrid as FeaturesIcon } from "lucide-react";
 export { CalendarDays as CalendarIcon } from "lucide-react";
 export { Wallet as WalletIcon } from "lucide-react";
+export { RotateCw as RetryIcon } from "lucide-react";
+export { Frown as SadFaceIcon } from "lucide-react";
+export { Dot as DotIcon } from "lucide-react";
 
 // Categories for objectives
 export { Car as CarIcon } from "lucide-react";

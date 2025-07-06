@@ -5,10 +5,10 @@ import { SearchBar } from "../../../components/admin/SearchBar"
 import { TopViewModule } from "../../../components/admin/TopTitle"
 import { GoalsGallery } from "./GoalsGallery";
 import { EditGoalForm } from "./EditGoalForm";
+import NewGoalForm from "./NewGoalForm";
 
 // React icons
-import { GoGoal } from "react-icons/go";
-import NewGoalForm from "./NewGoalForm";
+import { GoalIcon } from "../../../lib/lists/Icons";
 
 // Query
 import { useFetchAllGoals } from "../../../services/goals/queries";
@@ -101,7 +101,7 @@ const GoalsView = () => {
         <main className="content-page--admin">
             <TopViewModule
                 title="Mis Metas Financieras"
-                icon={GoGoal}
+                icon={GoalIcon}
                 txtBtnAdd="Añadir meta"
                 txtBtnAddShort="Añadir"
                 btnAddOnClick={() => setModalForm("new")}

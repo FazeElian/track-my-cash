@@ -2,13 +2,16 @@ import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 
 // React icons
-import { WiTime4 } from "react-icons/wi";
-import { TbPointFilled } from 'react-icons/tb';
-import { BiEdit } from 'react-icons/bi';
-import { MdOutlineDeleteOutline } from 'react-icons/md';
-import { FaCheckCircle } from "react-icons/fa";
-import { RiEmotionSadLine } from "react-icons/ri";
-import { CgRedo } from "react-icons/cg";
+import {
+    EditIcon,
+    DeleteIcon,
+    RetryIcon,
+    SadFaceIcon,
+    PendingIcon,
+    CheckIcon,
+    DotIcon
+} from "../../../lib/lists/Icons";
+
 
 // Utils
 import { truncateText } from "../../../lib/utils/truncateText";
@@ -71,14 +74,14 @@ const GoalCard : React.FC<Goal> = (props) => {
             {props.state === "Completed" ? (
                 <div
                     className="txt-completed-item-completed-goals-gallery txt-completed-item-completed-goals-gallery-visible">
-                    <FaCheckCircle />
+                    <CheckIcon />
                     <br/>
                     Completada!
                 </div>
             ) : props.state === "Expired" ? (
                 <div
                     className="txt-expired-item-expired-goals-gallery txt-expired-item-expired-goals-gallery-visible">
-                    <RiEmotionSadLine />
+                    <SadFaceIcon />
                     <br/>
                     Meta vencida sin completar
                     <button
@@ -86,7 +89,7 @@ const GoalCard : React.FC<Goal> = (props) => {
                         onClick={() => handleGoalReactivation(props.id)}
                         className="btn-expired-item-expired-goals-gallery font-lexend"
                     >
-                        <CgRedo />
+                        <RetryIcon strokeWidth={2.5} />
                         Reactivar meta
                     </button>
                 </div>
@@ -102,17 +105,17 @@ const GoalCard : React.FC<Goal> = (props) => {
                     <h1>{props.title}</h1>
                     {props.priorityLevel === "High" ? (
                         <div className="priority-top-item-goals-gallery high-priority-top-item-goals-gallery">
-                            <TbPointFilled />
+                            <DotIcon />
                             Alta
                         </div>
                     ) : props.priorityLevel === "Medium" ? (
                         <div className="priority-top-item-goals-gallery mid-priority-top-item-goals-gallery">
-                            <TbPointFilled />
+                            <DotIcon />
                             Media
                         </div>
                     ) : (
                         <div className="priority-top-item-goals-gallery low-priority-top-item-goals-gallery">
-                            <TbPointFilled />
+                            <DotIcon />
                             Baja
                         </div>
                     )}
@@ -122,14 +125,14 @@ const GoalCard : React.FC<Goal> = (props) => {
                     className="btn-options-top-item-goals-gallery btn-edit-top-item-goals-gallery"
                     onClick={() => props.editForm(props.id)}
                 >
-                    <BiEdit />
+                    <EditIcon />
                 </button>
                 <button
                     type="button"
                     className="btn-options-top-item-goals-gallery btn-delete-top-item-goals-gallery"
                     onClick={() => handleDeleteGoal(props.id)}
                 >
-                    <MdOutlineDeleteOutline />
+                    <DeleteIcon />
                 </button>
             </div>
             <ul className="center-item-goals-gallery">
@@ -160,7 +163,7 @@ const GoalCard : React.FC<Goal> = (props) => {
                     </h2>
                 </div>
                 <div className="item-btm-item-goals-gallery item-time-btm-item-goals-gallery">
-                    <WiTime4 />
+                    <PendingIcon />
                     <h2>
                         {formatDueDate(props.deadline)}
                     </h2>

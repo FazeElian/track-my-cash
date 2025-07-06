@@ -5,8 +5,10 @@ import { Toaster } from "sonner";
 // Styles for this component
 import "../../assets/css/components/admin/AdminLayout.css";
 
-// Logo
-import Logo from "../../assets/img/Logo.webp";
+// Images
+import Logo from "../../assets/img/Logo_Opt.jpg";
+// import Logo from "../../assets/img/Logo.webp";
+import UserPhoto from "../../assets/img/UserPhoto.png";
 
 // Lucide react icons
 import {
@@ -150,7 +152,7 @@ const AdminLayout = () => {
                         </ul>
                         <Link to="/admin/account" className="user-side-bar">
                             <button className="btn-user-side-bar">
-                                <img src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png" alt="" />
+                                <img src={UserPhoto} alt="" />
                                 <div className="txt-user-side-var font-lexend">
                                     <h1>{user.userName}</h1>
                                     <h2>{truncateText(user.email, 18)}</h2>
