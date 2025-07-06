@@ -87,12 +87,12 @@ const TransactionRow : React.FC<Transaction> = (props) => {
             <td className="td td-state-transaction">
                 {props.state === "Completed" ? (
                     <div className="state-transaction state-completed">
-                        <CheckIcon />
+                        <CheckIcon strokeWidth={2.5} />
                         Completada
                     </div>
                 ):(
                     <div className="state-transaction state-pending">
-                        <PendingIcon />
+                        <PendingIcon strokeWidth={2.5} />
                         Pendiente
                     </div>
                 )}
@@ -103,14 +103,14 @@ const TransactionRow : React.FC<Transaction> = (props) => {
                     className="btn-td btn-td-edit"
                     onClick={() => props.editForm(props.id)}
                 >
-                    <EditIcon />
+                    <EditIcon strokeWidth={2.5} />
                 </button>
                 <button
                     type="button"
                     className="btn-td btn-td-delete"
                     onClick={() => handleDeleteTransaction(props.id)}
                 >
-                    <DeleteIcon />
+                    <DeleteIcon strokeWidth={2.5} />
                 </button>
             </td>
         </tr>

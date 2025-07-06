@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 
-// React icons
-import { MdOutlineSecurity } from "react-icons/md";
+// Lucide react icons
+import { SecurityIcon } from "../../lib/lists/Icons";
 
 // Input components
 import { InputField } from "../admin/atoms/InputField";
@@ -40,7 +40,7 @@ const UpdatePasswordForm = () => {
             onSubmit={handleSubmit(handleUpdatePassword)}
         >
             <h1>
-                <MdOutlineSecurity />
+                <SecurityIcon strokeWidth={2.5} />
                 Seguridad de la Cuenta
             </h1>
 
@@ -104,7 +104,7 @@ const UpdatePasswordForm = () => {
                     type="submit"
                     className="btn-edit-profile font-lexend"
                 >
-                    <MdOutlineSecurity />
+                    <SecurityIcon strokeWidth={2.5} />
                     Actualizar contraseña
                 </button>
             </div>

@@ -19,7 +19,8 @@ export { CalendarDays as CalendarIcon } from "lucide-react";
 export { Wallet as WalletIcon } from "lucide-react";
 export { RotateCw as RetryIcon } from "lucide-react";
 export { Frown as SadFaceIcon } from "lucide-react";
-export { Dot as DotIcon } from "lucide-react";
+export { User as UserIcon } from "lucide-react";
+export { LockKeyhole as SecurityIcon } from "lucide-react";
 
 // Categories for objectives
 export { Car as CarIcon } from "lucide-react";

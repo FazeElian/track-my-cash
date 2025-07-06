@@ -188,8 +188,8 @@
                 }
 
                 .icon-top-item-goals-gallery svg {
-                    width: 25px;
-                    height: 25px;
+                    width: 28px;
+                    height: 28px;
                 }
 
                 .bar-blue-top-item-goals-gallery {
@@ -238,23 +238,26 @@
                     font-size: 15px;
                     align-items: center;
                     margin-top: 2px;
-                    gap: 4px;
+                    gap: 6px;
                 }
 
-                    .priority-top-item-goals-gallery svg {
-                        width: 20px;
-                        height: 20px;
+                    .dot-priority-goal {
+                        display: flex;
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
                     }
 
-                    .high-priority-top-item-goals-gallery svg {
-                        color: var(--color-red);
+                    .dot-high-priority-goal {
+                        background-color: var(--color-red);
                     }
 
-                    .mid-priority-top-item-goals-gallery svg {
-                        color: var(--color-yellow);
+                    .dot-medium-priority-goal {
+                        background-color: var(--color-yellow);
                     }
-                    .low-priority-top-item-goals-gallery svg {
-                        color: var(--color-green);
+
+                    .dot-low-priority-goal {
+                        background-color: var(--color-green);
                     }
 
             .btn-options-top-item-goals-gallery {
@@ -279,8 +282,8 @@
                 }
 
                 .btn-options-top-item-goals-gallery svg {
-                    width: 22px;
-                    height: 22px;
+                    width: 19px;
+                    height: 19px;
                 }
 
                 .btn-options-top-item-goals-gallery:hover {
@@ -419,8 +422,8 @@
     }
     
     .btn-options-top-item-goals-gallery svg {
-        width: 18px;
-        height: 18px;
+        width: 17px;
+        height: 17px;
         margin-top: 3px;
     }
 

@@ -9,7 +9,6 @@ import {
     SadFaceIcon,
     PendingIcon,
     CheckIcon,
-    DotIcon
 } from "../../../lib/lists/Icons";
 
 
@@ -105,17 +104,17 @@ const GoalCard : React.FC<Goal> = (props) => {
                     <h1>{props.title}</h1>
                     {props.priorityLevel === "High" ? (
                         <div className="priority-top-item-goals-gallery high-priority-top-item-goals-gallery">
-                            <DotIcon />
+                            <div className="dot-priority-goal dot-high-priority-goal" />
                             Alta
                         </div>
                     ) : props.priorityLevel === "Medium" ? (
                         <div className="priority-top-item-goals-gallery mid-priority-top-item-goals-gallery">
-                            <DotIcon />
+                            <div className="dot-priority-goal dot-medium-priority-goal" />
                             Media
                         </div>
                     ) : (
                         <div className="priority-top-item-goals-gallery low-priority-top-item-goals-gallery">
-                            <DotIcon />
+                            <div className="dot-priority-goal dot-low-priority-goal" />
                             Baja
                         </div>
                     )}
@@ -125,14 +124,14 @@ const GoalCard : React.FC<Goal> = (props) => {
                     className="btn-options-top-item-goals-gallery btn-edit-top-item-goals-gallery"
                     onClick={() => props.editForm(props.id)}
                 >
-                    <EditIcon />
+                    <EditIcon strokeWidth={2.5} />
                 </button>
                 <button
                     type="button"
                     className="btn-options-top-item-goals-gallery btn-delete-top-item-goals-gallery"
                     onClick={() => handleDeleteGoal(props.id)}
                 >
-                    <DeleteIcon />
+                    <DeleteIcon strokeWidth={2.5} />
                 </button>
             </div>
             <ul className="center-item-goals-gallery">

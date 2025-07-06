@@ -11,8 +11,8 @@ import { TopViewModule } from "../../../components/admin/TopTitle";
 // User context
 import { useUser } from "../../../services/auth/context";
 
-// React icons
-import { FaRegUser } from "react-icons/fa6";
+// Lucide react icons
+import { UserIcon } from "../../../lib/lists/Icons";
 
 // Type
 import type { UpdateBasicInfo } from "../../../lib/types/services/user.type";
@@ -54,7 +54,7 @@ const EditAccountInfoView = () => {
         <main className="content-page--admin">
             <TopViewModule
                 title="Editar Información"
-                icon={FaRegUser}
+                icon={UserIcon}
                 txtBtnAdd={""}
                 txtBtnAddShort={""}
                 btnAddOnClick={() => console.log()}

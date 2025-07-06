@@ -9,9 +9,8 @@ import { TopViewModule } from "../../../components/admin/TopTitle"
 import { InputField } from "../../../components/admin/atoms/InputField";
 import { UpdatePasswordForm } from "../../../components/company/UpdatePasswordForm";
 
-// React icons
-import { FaRegUser } from "react-icons/fa";
-import { BiEdit } from 'react-icons/bi';
+// Lucide react icons
+import { EditIcon, UserIcon } from "../../../lib/lists/Icons";
 
 // Get user from auth context
 import { useUser } from "../../../services/auth/context";
@@ -33,7 +32,7 @@ const AccountView = () => {
         <main className="content-page--admin">
             <TopViewModule
                 title="Mi Cuenta"
-                icon={FaRegUser}
+                icon={UserIcon}
                 txtBtnAdd={""}
                 txtBtnAddShort={""}
                 btnAddOnClick={() => console.log()}
@@ -101,7 +100,7 @@ const AccountView = () => {
 
                     <div className="btm-item-profile">
                         <Link to="edit" className="btn-edit-profile">
-                            <BiEdit />
+                            <EditIcon />
                             Editar información
                         </Link>
                     </div>

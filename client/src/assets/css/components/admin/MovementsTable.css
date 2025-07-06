@@ -68,7 +68,7 @@
             .state-transaction {
                 display: flex;
                 align-items: center;
-                gap: 3px;
+                gap: 6px;
             }
 
                 .state-transaction svg {
@@ -167,8 +167,8 @@
         }
 
             .btn-td svg {
-                width: 21px;
-                height: 21px;
+                width: 18px;
+                height: 18px;
             }
 
             .btn-td:hover {
@@ -202,9 +202,9 @@
         gap: 10px;
     }
 
-    btn-td svg {
-        width: 18px;
-        height: 18px;
+    .btn-td svg {
+        width: 16px;
+        height: 16px;
     }
 }
 
