@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Toaster } from "sonner";
 
 // Styles for this component
@@ -46,10 +46,44 @@ const AdminLayout = () => {
     }
 
     const [sideBar, setSideBar] = useState(false)
+    const sideBarRef = useRef<HTMLDivElement>(null)
 
     const handleSideBar = () => {
         setSideBar(!sideBar)
     }
+
+    // Close sidebar when user clicks outside the container
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (sideBarRef.current && !sideBarRef.current.contains(event.target as Node)) {
+                setSideBar(false);
+            }
+        };
+
+        if (sideBar) {
+            document.addEventListener("mousedown", handleClickOutside);
+
+            // Remove scroll on body
+            // document.body.classList.add("no-scroll");
+            // return () => document.body.classList.remove("no-scroll");
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        const handleScrollSideBar = () => {
+            const scrollThreshold = 150; // Scroll Amount
+            if (window.scrollY > scrollThreshold && sideBar) {
+                setSideBar(false);
+            }
+        };
+        
+        window.addEventListener('scroll', handleScrollSideBar); // Adding Scroll Event
+        
+        return () => {
+            window.removeEventListener('scroll', handleScrollSideBar);
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [sideBar]);
 
     const location = useLocation();
     const navigate = useNavigate()
@@ -84,7 +118,7 @@ const AdminLayout = () => {
     if (user) {
         return (
             <UserContext.Provider value={{ user }}>
-                <aside className="side-bar">
+                <aside className="side-bar" ref={sideBarRef}>
                     <div className="top-side-bar">
                         <img src={Logo} alt="Track my cash logo" />
                         <button
@@ -151,7 +185,7 @@ const AdminLayout = () => {
                             </button>
                         </ul>
                         <Link to="/admin/account" className="user-side-bar">
-                            <button className="btn-user-side-bar">
+                            <button className="btn-user-side-bar" onClick={() => setSideBar(false)}>
                                 <img src={UserPhoto} alt="" />
                                 <div className="txt-user-side-var font-lexend">
                                     <h1>{user.userName}</h1>

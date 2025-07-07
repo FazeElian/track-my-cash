@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 // Components for this view
 import { SearchBar } from "../../../components/admin/SearchBar"
@@ -13,16 +13,15 @@ import { GoalIcon } from "../../../lib/lists/Icons";
 // Query
 import { useFetchAllGoals } from "../../../services/goals/queries";
 
-// Title hook
+// Hooks
 import { useDocumentTitle } from "../../../lib/hooks/useDocumentTitle";
+import { useHandleModalForm } from "../../../lib/hooks/useHandleModalForm";
 
 const GoalsView = () => {
     // Title
     useDocumentTitle("Metas - Track My Cash")
 
-    const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
     const [editGoalId, setEditGoalId] = useState<number | null>(null);
-    const formRef = useRef<HTMLFormElement>(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [filter, setFilter] = useState("All");
 
@@ -43,28 +42,16 @@ const GoalsView = () => {
         ? goals.filter((goal) => goal.state === "Expired").length
         : 0;
 
-    // Close the modal when user clicks outside the form
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (formRef.current && !formRef.current.contains(event.target as Node)) {
-                setModalForm(null);
-            }
-        };
+    // Modal form state & ref
+    const [modalForm, setModalForm] = useState<"new" | `edit ${number}` | null>(null);
+    const formRef = useRef<HTMLFormElement>(null) as React.RefObject<HTMLFormElement>;
 
-        if (modalForm) {
-            document.addEventListener("mousedown", handleClickOutside);
-
-            // Remove scroll on body
-            document.body.classList.add("no-scroll");
-            return () => document.body.classList.remove("no-scroll");
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [modalForm]);
+    // Custom hook to handle modal form
+    useHandleModalForm({
+        modalForm,
+        setModalForm,
+        formRef
+    });
 
     let loadingState = false
 
