@@ -95,7 +95,7 @@ const AccountView = () => {
                         labelFor="phoneNumber"
                         id="phoneNumber"
                         type="text"
-                        placeholder={"+57 345 3453454"}
+                        placeholder={user.phoneNumber ?? "Ninguno"}
                     />
 
                     <div className="btm-item-profile">

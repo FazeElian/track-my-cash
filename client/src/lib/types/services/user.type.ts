@@ -7,6 +7,7 @@ export type User = {
     code: string
     lastName: string
     profilePhoto: string
+    phoneNumber: string
 }
 
 export type RegisterUser = Pick<User, "userName" | "email" | "password">
@@ -20,4 +21,4 @@ export type UpdatePassword = {
     newPassword: string
     confirmPassword: string
 }
-export type UpdateBasicInfo = Pick<User, "name" | "lastName" | "userName">
+export type UpdateBasicInfo = Pick<User, "name" | "lastName" | "userName" | "phoneNumber">

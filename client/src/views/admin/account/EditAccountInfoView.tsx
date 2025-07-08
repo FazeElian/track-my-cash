@@ -36,6 +36,7 @@ const EditAccountInfoView = () => {
             name: user?.name,
             lastName: user?.lastName,
             userName: user?.userName,
+            phoneNumber: user?.phoneNumber
         }
     });
 
@@ -123,14 +124,23 @@ const EditAccountInfoView = () => {
                     />
 
                     {/* Phone number */}
-                    {/* <InputField
+                    <InputField
                         label="Número de teléfono"
                         labelFor="phoneNumber"
                         id="phoneNumber"
                         type="text"
-                        value={"+1 3333333333"}
-                        placeholder="Ej: +1 3333333333"
-                    /> */}
+                        placeholder="Ej: +[código] número"
+                        {...register("phoneNumber", {
+                            minLength: {
+                                value: 10,
+                                message: "Debe tener al menos 10 dígitos",
+                            },
+                            pattern: {
+                                value: /^\+?\d{1,4}[\s-]?\d{7,12}$/,
+                                message: "Número inválido. Usa formato internacional: +57 300 1234567",
+                            }
+                        })}
+                    />
 
                     <div className="btm-item-profile">
                         <button

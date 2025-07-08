@@ -50,6 +50,12 @@ class User extends Model {
     })
     declare profilePhoto: string
 
+    @AllowNull(true)
+    @Column({
+        type: DataType.STRING
+    })
+    declare phoneNumber: string
+
     @Column({
         type: DataType.STRING(6)
     })
