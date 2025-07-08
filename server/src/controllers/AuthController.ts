@@ -42,8 +42,8 @@ export class AuthController {
 
             res.status(201).json("Has creado tu cuenta con éxito.")
         } catch (error) {
-            res.status(500).json({ error: "Error creating the user" })
-            // console.log(error)
+            res.status(500).json({ error: "Ha ocurrido un error al crear tu cuenta, inténtalo más tarde." })
+            console.log("Error creating account: ", error)
         }
     }
 
@@ -195,8 +195,8 @@ export class AuthController {
 
             res.json("Información actualizada con éxito.");
         } catch (error) {
-            res.status(500).json({ error: "Error updating user basic info" })
-            console.log(error)
+            res.status(500).json({ error: "Ha ocurrido un error al actualizar su información, inténtelo más tarde." })
+            console.log("Error updating user basic info: ", error)
         }
     }
 }
