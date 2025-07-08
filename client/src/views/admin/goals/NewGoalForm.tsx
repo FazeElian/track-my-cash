@@ -24,6 +24,8 @@ import { PriorityLevelSelectField } from "../../../components/admin/atoms/Priori
 
 const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
     const [color, setColor] = useState<Color>(Colors[0]);
+    const today = new Date().toISOString().split("T")[0];
+    console.log(today)
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<GoalForm> ({
         defaultValues: {
@@ -51,6 +53,7 @@ const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
                 onClose()
             }
         });
+        console.log(formData)
     }
 
     return (
@@ -75,8 +78,12 @@ const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
                     {...register("title", {
                         required: "El nombre de la meta es un dato obligatorio.",
                         pattern: {
-                            value: /^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s-]+$/,
-                            message: "Solo se permiten letras, números y guiones."
+                            value: /^[a-zA-Z0-9áéííóúüñÁÉÍÓÚÜÑ\s\-_,.!¡¿?():]+$/,
+                            message: "Solo se permiten letras, números y ciertos caracteres como . , - _ ! ¿ ? ( )"
+                        },
+                        minLength: {
+                            value: 5,
+                            message: "El nombre debe tener al menos 5 caracteres"
                         },
                         maxLength: {
                             value: 50,
@@ -107,6 +114,7 @@ const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
                         error={errors.deadline}
                         {...register("deadline", {
                             required: "La fecha límite para la meta es un dato obligatorio.",
+                            validate: value => value > today || "La fecha límite no puede anterior a hoy o hoy"
                         })}
                     />
                 </div>
@@ -117,7 +125,12 @@ const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
                     labelFor="description"
                     id="description"
                     placeholder="Añade una descripción a la meta"
-                    {...register("description")}
+                    {...register("description", {
+                        pattern: {
+                            value: /^[a-zA-Z0-9áéííóúüñÁÉÍÓÚÜÑ\s\-_,.!¡¿?():]+$/,
+                            message: "Solo se permiten letras, números y ciertos caracteres como . , - _ ! ¿ ? ( )"
+                        },
+                    })}
                 />
                 
                 {/* Color */}
@@ -144,7 +157,11 @@ const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
                                 value: 0,
                                 message: "La cantidad objetivo no puede ser negativa."
                             },
-                            validate: value => value !== 0 || "La cantidad objetivo es obligatoria.",
+                            max: {
+                                value: 1000000000,
+                                message: "La cantidad no puede superar los $1.000.000.000.",
+                            },
+                            validate: value => value > 0 || "La cantidad objetivo debe ser mayor a cero.",
                         })}
                     />
                     <PriorityLevelSelectField

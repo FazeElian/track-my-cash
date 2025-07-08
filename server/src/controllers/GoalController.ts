@@ -39,7 +39,7 @@ export class GoalController {
                 // console.log("Now:", now)
                 // console.log("Deadline", deadline)
 
-                if (deadline < now) {
+                if (deadline <= now) {
                     goal.state = "Expired"; // Change status
 
                     const notification = await Notification.findOne({
@@ -61,7 +61,7 @@ export class GoalController {
                     }
 
                     goal.save();
-                } else if (deadline >= now) {
+                } else if (deadline > now) {
                     if (goal.state !== "Completed") {
                         if (goal.currentAmount === goal.targetAmount) {
                             goal.state = "Completed"; // Change status
