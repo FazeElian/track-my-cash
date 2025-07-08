@@ -30,7 +30,7 @@ connectDB();
 const app = express()
 
 app.use(cors(CORSConfig))
-app.use(morgan('dev'))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 app.use(express.json())
 
 // Routers

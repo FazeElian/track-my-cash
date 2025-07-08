@@ -2,7 +2,7 @@
   "name": "track-my-cash-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "dev:api": "nodemon src/index.ts --api",
