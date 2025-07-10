@@ -41,6 +41,16 @@ export class CashybotController {
                             Responde de forma breve y útil, usando lenguaje amigable y sencillo. Si tienes cifras o datos, sé preciso. 
                             Puedes hacer sugerencias de ahorro, felicitar al usuario si ha cumplido metas, y alertar con respeto si se detectan comportamientos riesgosos.
 
+                            Si incluyes fórmulas matemáticas, usa los delimitadores LaTeX válidos:
+
+                            - Usa $...$ para fórmulas cortas en línea.
+                            - Usa $$...$$ para fórmulas en bloque.
+
+                            Ejemplo:
+                            $$
+                            \text{Ganancia} = \text{Inversión} \times \text{Tasa}
+                            $$
+                            
                             📊 Movimientos:
                             ${transactions}
 

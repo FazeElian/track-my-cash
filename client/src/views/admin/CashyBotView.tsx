@@ -1,4 +1,14 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { SyncLoader } from "react-spinners";
+
+// Formaters
+import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css"; // Styles for math formulas
 
 // Styles
 import "../../assets/css/components/admin/CashyBot.css";
@@ -7,11 +17,38 @@ import "../../assets/css/components/admin/CashyBot.css";
 import BotImg  from "../../assets/img/Bot.png";
 import { SendIcon } from "../../lib/lists/Icons";
 
-const CashyBotView = () => {
-    const [welcomeElement, setWelcomeElement] = useState(true)
+// Mutation
+import { useNewMessageMutation } from "../../services/cashybot/mutations";
 
-    const onFormSubmit = () => {
-        setWelcomeElement(false)
+type CashyBotFormType = {
+    prompt: string
+}
+
+const CashyBotView = () => {
+    // Elements states
+    const [welcomeElement, setWelcomeElement] = useState(true)
+    const [botResponse, setBotResponse] = useState("")
+    const [prompt, setPrompt] = useState("")
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<CashyBotFormType> ({
+        defaultValues: {
+            prompt: ""
+        }
+    })
+
+    // Mutation
+    const newMessageMutation = useNewMessageMutation()
+    const handleNewMessage = (formData: CashyBotFormType) => {
+        setPrompt(formData.prompt) // Add prompt sent by the user to view
+        setBotResponse("") // Clear response
+        setWelcomeElement(false) // Remove welcome element from view
+        reset() // Clear input
+
+        newMessageMutation.mutate(formData.prompt, {
+            onSuccess: (response) => {
+                setBotResponse(response)
+            }
+        })
     }
 
     return (
@@ -22,12 +59,62 @@ const CashyBotView = () => {
                     <h1>Hola! Soy <b>Cashy</b>, tu asistente financiero inteligente</h1>
                     <h2>Resuelve tus dudas y mejora tus decisiones al instante.</h2>
                 </div>
-                <form method="POST" className="cashybot-input" onSubmit={onFormSubmit}>
+                <section className="cashybot-chat">
+                    {/* Show user prompt */}
+                    {prompt && (
+                        <div className="cashybot-prompt">
+                            <h2>Tu mensaje: </h2>
+                            {prompt}
+                        </div>
+                    )}
+
+                    {/* Loader */}
+                    {newMessageMutation.isPending && (
+                        <section
+                            className="loading"
+                            style={{
+                                display: "flex",
+                                width: "100%",
+                                height: "100vh",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}
+                        >
+                            <SyncLoader
+                                size={20}
+                                color="#24BF67"
+                            />
+                        </section>
+                    )}
+
+                    {/* Response by cashy */}
+                    {botResponse &&
+                        <div className="cashybot-response">
+                            <div className="cashybot-response-top">
+                                <img src={BotImg} alt="Cashy bot" />
+                                <h2>Cashy:</h2>
+                            </div>
+                            <ReactMarkdown
+                                remarkPlugins={[remarkBreaks, remarkMath]}
+                                rehypePlugins={[rehypeKatex]}
+                            >
+                                {botResponse ? botResponse : "No hay respuesta de Cashy"}
+                            </ReactMarkdown>
+                        </div>
+                    }
+                </section>
+                <form method="POST" className="cashybot-input" onSubmit={handleSubmit(handleNewMessage)}>
                     <textarea
                         className="font-lexend"
                         rows={4}
                         placeholder="Pregunta lo que quieras"
+                        {...register("prompt", {
+                            required: "Escribe tu pregunta para que Cashy pueda ayudarte."
+                        })}
                     />
+                    {errors.prompt && 
+                        toast(`${errors.prompt?.message}]`)
+                    }
                     <button
                         type="submit" 
                         className="font-lexend"

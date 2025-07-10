@@ -25,7 +25,6 @@ import { PriorityLevelSelectField } from "../../../components/admin/atoms/Priori
 const NewGoalForm : React.FC<ModalFormPropsType> = ({ modalRef, onClose }) => {
     const [color, setColor] = useState<Color>(Colors[0]);
     const today = new Date().toISOString().split("T")[0];
-    console.log(today)
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<GoalForm> ({
         defaultValues: {

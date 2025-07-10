@@ -10,21 +10,23 @@ export const getModulesStats = (allGoals: Goal[], allTransactions: Transaction[]
     }).join("\n") || "No tiene transacciones registradas.";
     
     const goals = allGoals?.map(goal => {
-        return `
-            • ${
+    return `
+        • Meta: "${goal.title}" (${
                 goal.priorityLevel === "Low" ? "Baja"
                 : goal.priorityLevel === "Medium" ? "Media"
                 : "Alta"
-            }
-            su título es ${goal.title}, describida como ${goal.description} con fecha límite $${goal.deadline}, categoría ${goal.category}
-            de $${goal.targetAmount} y el usuario ha acumulado ${goal.currentAmount},
-            su estado es ${
+            } prioridad)  
+            Descripción: ${goal.description}  
+            Categoría: ${goal.category}  
+            Fecha límite: ${goal.deadline}  
+            Meta total: $${goal.targetAmount.toLocaleString()}  
+            Monto acumulado: $${goal.currentAmount.toLocaleString()}  
+            Estado: ${
                 goal.state === "Completed" ? "Completada"
                 : goal.state === "InProgress" ? "En progreso"
                 : "Vencida"
-            }
-        `;
-    }).join("\n") || "No tiene transacciones registradas.";
+            }`;
+    }).join("\n\n") || "No tiene metas registradas.";
 
     return { transactions, goals };
 }
