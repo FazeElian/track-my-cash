@@ -180,6 +180,12 @@ export class AuthController {
             return;
         }
 
+        if (req.user.email === "demo@mail.com") {
+            const error = new Error("Este es el usuario de la demo, no puedes cambiar su contraseña");
+            res.status(401).json({ error: error.message });
+            return;
+        }
+
         // New password hashing
         user.password = await hashPassword(newPassword)
         await user.save();
