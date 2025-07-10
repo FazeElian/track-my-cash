@@ -21,6 +21,7 @@ export { RotateCw as RetryIcon } from "lucide-react";
 export { Frown as SadFaceIcon } from "lucide-react";
 export { User as UserIcon } from "lucide-react";
 export { LockKeyhole as SecurityIcon } from "lucide-react";
+export { Send as SendIcon } from "lucide-react";
 
 // Categories for objectives
 export { Car as CarIcon } from "lucide-react";

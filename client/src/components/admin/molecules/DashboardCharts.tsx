@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 // Styles for this component
 import "../../../assets/css/components/admin/DashboardCharts.css";
 
@@ -21,9 +23,9 @@ const DashboardCharts = () => {
                 <h2>Habla con <b>Cashy</b> sobre tus ingresos, metas y gastos.
                     Resuelve tus dudas y mejora tus decisiones al instante.
                 </h2>
-                <button type="button" className="font-lexend">
+                <Link to="/admin/cashybot" className="font-lexend">
                     Hablar con Cashy
-                </button>
+                </Link>
             </div>
         </section>
     )

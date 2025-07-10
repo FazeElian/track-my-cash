@@ -26,6 +26,7 @@ const GoalsView = lazy(() => import("./views/admin/goals/GoalsView"))
 const NotificationsView = lazy(() => import("./views/admin/notifications/NotificationsView"))
 const AccountView = lazy(() => import("./views/admin/account/AccountView"))
 const EditAccountInfoView = lazy(() => import("./views/admin/account/EditAccountInfoView"))
+const CashyBotView = lazy(() => import("./views/admin/CashyBotView"))
 
 export default function Router() {
   return (
@@ -52,6 +53,7 @@ export default function Router() {
           <Route path="notifications" element={<NotificationsView />} />
           <Route path="account" element={<AccountView />} />
           <Route path="account/edit" element={<EditAccountInfoView />} />
+          <Route path="cashybot" element={<CashyBotView />} />
         </Route>
       </Routes>
     </Suspense>
