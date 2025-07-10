@@ -9,6 +9,10 @@
     flex-direction: column;
 }
 
+body {
+    overflow: hidden;
+}
+
 .cashybot-welcome {
     display: flex;
     width: auto;
@@ -197,10 +201,6 @@
 
 /* Responsive 1024px */
 @media (max-width: 1024px) {
-    body {
-        overflow: hidden;
-    }
-
     .cashybot-input {
         width: 85%;
         bottom: 6%;
