@@ -81,13 +81,6 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
 }
 
-.content-page--admin-cashybot {
-    display: flex;
-    width: auto;
-    height: 100vh;
-    overflow: hidden;
-}
-
 option {
     cursor: pointer;
 }
@@ -189,5 +182,9 @@ option {
 @media (max-width: 425px) {
     .content-page--admin {
         padding: 32px;
+    }
+
+    .content-page--admin-cashybot {
+        padding: 32px 10px 32px;
     }
 }

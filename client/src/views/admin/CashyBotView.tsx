@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { SyncLoader } from "react-spinners";
 
 // Formaters
@@ -30,7 +29,7 @@ const CashyBotView = () => {
     const [botResponse, setBotResponse] = useState("")
     const [prompt, setPrompt] = useState("")
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<CashyBotFormType> ({
+    const { register, handleSubmit, reset } = useForm<CashyBotFormType> ({
         defaultValues: {
             prompt: ""
         }
@@ -67,32 +66,31 @@ const CashyBotView = () => {
                             {prompt}
                         </div>
                     )}
-
                     {/* Loader */}
                     {newMessageMutation.isPending && (
                         <section
-                            className="loading"
+                            className="loading loader-cashybot"
                             style={{
                                 display: "flex",
                                 width: "100%",
-                                height: "100vh",
+                                height: "auto",
                                 alignItems: "center",
                                 justifyContent: "center"
                             }}
                         >
                             <SyncLoader
-                                size={20}
+                                size={15}
                                 color="#24BF67"
                             />
+                            Cashy está pensando...
                         </section>
                     )}
-
                     {/* Response by cashy */}
                     {botResponse &&
                         <div className="cashybot-response">
                             <div className="cashybot-response-top">
                                 <img src={BotImg} alt="Cashy bot" />
-                                <h2>Cashy:</h2>
+                                <h2>Cashy dice:</h2>
                             </div>
                             <ReactMarkdown
                                 remarkPlugins={[remarkBreaks, remarkMath]}
@@ -108,13 +106,9 @@ const CashyBotView = () => {
                         className="font-lexend"
                         rows={4}
                         placeholder="Pregunta lo que quieras"
-                        {...register("prompt", {
-                            required: "Escribe tu pregunta para que Cashy pueda ayudarte."
-                        })}
+                        {...register("prompt")}
+                        required
                     />
-                    {errors.prompt && 
-                        toast(`${errors.prompt?.message}]`)
-                    }
                     <button
                         type="submit" 
                         className="font-lexend"
