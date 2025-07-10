@@ -112,7 +112,7 @@
     align-items: flex-end;
     flex-direction: column;
     overflow: auto;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     gap: 1.5rem;
     justify-content: flex-start;
     color: var(--color-dark-blue);
@@ -286,6 +286,10 @@
 
     .cashybot-prompt {
         width: 75%;
+    }
+
+    .cashybot-welcome {
+        padding: 0 3rem 0;
     }
 }
 
