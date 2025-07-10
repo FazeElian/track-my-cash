@@ -38,7 +38,10 @@ export class GoalController {
                 const deadline = new Date(goal.deadline);
                 // console.log("Now:", now)
                 // console.log("Deadline", deadline)
-
+                if (goal.currentAmount === goal.targetAmount) {
+                    goal.state = "Completed"; // Change status
+                }
+                
                 if (deadline <= now) {
                     goal.state = "Expired"; // Change status
 
