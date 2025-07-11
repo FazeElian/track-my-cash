@@ -2,7 +2,11 @@ import { CorsOptions } from "cors";
 
 export const CORSConfig : CorsOptions = {
     origin: function (origin, callback) {
-        const whiteList = [process.env.VITE_URL]
+        const whiteList = [
+            process.env.VITE_URL,
+            process.env.VITE_NETLIFY_URL,
+            process.env.VITE_CUSTOM_URL
+        ]
 
         if (process.argv[2] === "--api"){
             whiteList.push(undefined);
