@@ -18,6 +18,17 @@ export class AdminController {
             const { startDate, endDate } = await getCurrentMonth()
             // console.log(startDate, endDate)
 
+            // All transactions
+            const allTransactions = await Transaction.findAll({
+                where: {
+                    userId,
+                    state: "Completed",
+                    date: {
+                        [Op.between] : [startDate, endDate]
+                    }
+                }
+            })
+
             // Get the list of transactions & expenses by user
             const transactions = await Transaction.findAll({
                 where: {
@@ -31,7 +42,7 @@ export class AdminController {
             })
 
             // Amount of transactions in month
-            const transactionsAmount = transactions.length
+            const allTransactionsAmount = allTransactions.length
 
             const expenses = await Transaction.findAll({
                 where: {
@@ -120,7 +131,7 @@ export class AdminController {
                 totalIncomes,
                 totalExpenses,
                 totalBalance,
-                transactionsAmount,
+                allTransactionsAmount,
                 averageIncomesAmountTransaction,
                 averageExpensesAmountTransaction
             })

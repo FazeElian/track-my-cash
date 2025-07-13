@@ -77,7 +77,7 @@ const DashboardStats = () => {
                         <CalendarIcon />
                         Movimientos:
                     </div>
-                    {stats.transactionsAmount} este mes
+                    {stats.allTransactionsAmount} completados este mes
                 </div>
             </div>
         </section>
