@@ -12,7 +12,7 @@ export class AuthEmail {
     static sendConfirmationEmail = async (user: EmailType) => {
         // const templatePath = path.join(__dirname, "templates", "confirm-account.html");
         // let htmlTemplate = fs.readFileSync(templatePath, "utf8");
-        const url = `${process.env.VITE_CUSTOM_URL}auth/confirm-account`
+        const url = `${process.env.VITE_CUSTOM_URL}/auth/confirm-account`
         const domain = process.env.EMAIL_DOMAIN;
 
         // htmlTemplate = htmlTemplate
@@ -71,7 +71,7 @@ export class AuthEmail {
     static sendForgotPasswordEmail = async (user: EmailType) => {
         // const templatePath = path.join(__dirname, "templates", "forgot-password.html");
         // let htmlTemplate = fs.readFileSync(templatePath, "utf8");
-        const url = `${process.env.VITE_CUSTOM_URL}auth/validate-code`
+        const url = `${process.env.VITE_CUSTOM_URL}/auth/validate-code`
         const domain = process.env.EMAIL_DOMAIN;
 
         // htmlTemplate = htmlTemplate
